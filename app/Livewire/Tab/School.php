@@ -16,6 +16,7 @@ use App\Models\Exam;
 use App\Models\ExamSubject;
 use App\Models\Set;
 use App\Models\SetExam;
+use App\Models\UserSet;
 use App\Models\UserSubject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +42,37 @@ class School extends Component
     public $cormfirm_delete = false;
     public $questions_file, $students_file;
     public $result_exam_id;
+    public $student_id;
+    public function remove_from_set($id)
+    {
+        $student_set = UserSet::where('user_id', $id)->where('set_id', $this->set->id)->first();
+        if (!$student_set) {
+            $this->alert('info', "Student not found in this set");
+            return;
+        } else {
+            $student_set->delete();
+            $this->alert('success', "Student removed from set");
+        }
+        $this->load_sets();
+    }
+    public function add_student()
+    {
+        if (UserSet::where('user_id', $this->student_id)->where('set_id', $this->set->id)->first()) {
+            $this->alert('info', "Student already added to this set");
+        } else {
+            $student_set = new UserSet();
+            $student_set->user_id = $this->student_id;
+            $student_set->set_id = $this->set->id;
+            $student_set->save();
+            $this->alert('success', "Student Added Successfully!");
+        }
+    }
+    public function add_students($id)
+    {
+        $this->set = Set::find($id);
+        $this->new_model = true;
+        $this->model = 'Add Students';
+    }
     public function view_students($id)
     {
         $this->set = Set::find($id);
@@ -65,11 +97,11 @@ class School extends Component
 
         $set_id = $this->set->id;
         $exam_id = $this->result_exam_id;
-        
+
         $exam = Exam::find($exam_id);
         $this->new_model = false;
         $this->model = 'Set';
-        return Excel::download(new ExamResultsExport($set_id, $exam_id), 'Exam_Result-['. $this->set->name . ' ' . $exam->title . '].xlsx');
+        return Excel::download(new ExamResultsExport($set_id, $exam_id), 'Exam_Result-[' . $this->set->name . ' ' . $exam->title . '].xlsx');
     }
     public function toggle_mock()
     {
@@ -466,7 +498,7 @@ class School extends Component
         $this->new_set_name = '';
         if ($this->model == 'View Set') {
             $this->model = 'Set';
-        } elseif ($this->model == 'Result') {
+        } elseif ($this->model == 'Result' || 'Add Students') {
             $this->model = 'Set';
         } elseif ($this->model == 'Asign Subject') {
             $this->model = 'Staff';

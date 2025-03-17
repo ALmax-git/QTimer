@@ -23,6 +23,11 @@ class School extends Model
         'server_is_up',
     ];
 
+    public function students()
+    {
+        return $this->hasMany(User::class)->where('is_staff', false);
+    }
+
     public function admin()
     {
         return $this->belongsTo(User::class, 'user_id');

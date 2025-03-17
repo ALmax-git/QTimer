@@ -388,12 +388,44 @@
                               <div class="row" style="padding: 5px !important; text-align: left !important;">
                                 <div class="col-1">{{ $user->id }}</div>
                                 <div class="col-6">{{ $user->name }} </div>
-                                <div class="col-5">{{ $user->id_number }} </div>
+                                <div class="col-5 d-flex" style="justify-content: space-between;">
+                                  <div>{{ $user->id_number }}</div>
+                                  <div>
+                                    <button class="btn btn-sm btn-outline-danger" wire:click='remove_from_set("{{$user->id}}")'><i class="bi bi-trash"></i></button>
+                                  </div>
+                                </div>
 
                               </div>
                             </div>
                           </div>
                         @endforeach
+                      @break
+
+                      @case('Add Students')
+                        <h1 class="text-center text-white">{{ $set->name }}</h1>
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="student_id">Students</label>
+                          </div>
+                          <select class="form-control" type="email" value=""
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='student_id'>
+                            <option value="">Select Student</option>
+                            @foreach (Auth::user()->school->students as $student)
+                              <option value="{{ $student->id }}">{{ $student->name }}</option>
+                            @endforeach
+                          </select>
+                        </div>
+
+                        <br>
+
+                        <button class="c-button" style="margin: auto;" wire:click='add_student'>
+                          <span class="c-main">
+                            <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
+                            Add Student
+                          </span>
+                        </button>
                       @break
 
                       @default
@@ -693,6 +725,9 @@
                               </svg>
                               Upload Students
                             </button>
+                            <button class="btn btn-sm btn-outline-info ms-1"
+                              wire:click='add_students("{{ $set->id }}")'><strong><i
+                                  class="bi bi-plus"></i></strong></button>
                             <button class="btn btn-sm btn-outline-primary ms-1"
                               wire:click='view_students("{{ $set->id }}")'>View</button>
                             <button class="btn btn-sm btn-outline-success ms-1"
