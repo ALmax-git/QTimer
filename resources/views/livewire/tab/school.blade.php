@@ -391,7 +391,9 @@
                                 <div class="col-5 d-flex" style="justify-content: space-between;">
                                   <div>{{ $user->id_number }}</div>
                                   <div>
-                                    <button class="btn btn-sm btn-outline-danger" wire:click='remove_from_set("{{$user->id}}")'><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"
+                                      wire:click='remove_from_set("{{ $user->id }}")'><i
+                                        class="bi bi-trash"></i></button>
                                   </div>
                                 </div>
 
@@ -628,7 +630,7 @@
                     <div class="cardh">
                       <div class="cardi">
                         <div class="d-flex p-1" style="justify-content: space-between;">
-                          <div class="d-flex" style="justify-content: space-between; width: 70%;">
+                          <div class="d-flex" style="justify-content: space-between; width: 66%;">
                             <div class="text-left">
                               <h3>{{ $subject->title }}</h3>
                             </div>
@@ -662,6 +664,8 @@
                               Upload Questions
                               {{-- <input class="" name="text" type="file" /> --}}
                             </button>
+                            <button class="btn btn-sm btn-outline-info ms-2"><i class="bi bi-plus"></i></button>
+                            <button class="btn btn-sm btn-outline-primary ms-2">View</button>
                             <button class="btn btn-sm btn-outline-danger ms-2"
                               wire:click='delete_subject("{{ $subject->id }}")'>Trash</button>
                           </div>

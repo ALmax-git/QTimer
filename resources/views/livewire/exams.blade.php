@@ -171,11 +171,34 @@
                 </div>
                 <div class="col-12">
                   <div style="display: flex; justify-content: space-between; margin-top: 10px; margin-bottom: 15px;">
-                    <style>
+                    <div class="button-ctl_container">
+                      <button class="button-3d" wire:click='previous'>
+                        <div class="button-top">
+                          <span class="material-icons">❮</span>
+                        </div>
+                        <div class="button-bottom"></div>
+                        <div class="button-base"></div>
+                      </button>
+                      <button class="button-3d"
+                        wire:confirm="Are you sure you want to submit this Exam, THIS ACTION CAN NOT BE UNDONE!!!"
+                        wire:click='submit'>
+                        <div class="button-top">
+                          <span class="material-icons">Submit</span>
+                        </div>
+                        <div class="button-bottom"></div>
+                        <div class="button-base"></div>
+                      </button>
+                      <button class="button-3d" wire:click='next'>
+                        <div class="button-top">
+                          <span class="material-icons">❯</span>
+                        </div>
+                        <div class="button-bottom"></div>
+                        <div class="button-base"></div>
+                      </button>
+                    </div>
 
-                    </style>
-                    @if ($can_submit)
-                      <button class="ctl-button" wire:click='submit'>
+                    {{-- @if ($can_submit)
+                      <button class="ctl-button">
                         Submit
                       </button>
                     @else
@@ -185,7 +208,7 @@
                     @endif
                     <button class="ctl-button" wire:click='previous'>
                       Previous
-                    </button>
+                    </button> --}}
                   </div>
                 </div>
               </div>
