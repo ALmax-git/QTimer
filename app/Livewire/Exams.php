@@ -307,7 +307,7 @@ class Exams extends Component
 
         // Fetch exams based on mock exam allowance
         $this->exams = $user->sets->flatMap(function ($set) use ($allowMock) {
-            return $allowMock ? $set->exams->where('is_mock', false)->where('is_visible', true) : $set->exams->where('is_visible', true);
+            return $allowMock ? $set->exams->where('is_visible', true) : $set->exams->where('is_visible', true);
         });
     }
 

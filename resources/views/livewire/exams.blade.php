@@ -20,6 +20,7 @@
 
         </div>
         <div class="col-lg-8">
+          <center>{{ Auth::user()->name }}</center>
           <input class="mode" id="theme-mode" type="checkbox" hidden="" />
           <div class="btn_container">
             <div class="wrap">
@@ -40,7 +41,6 @@
           <strong class="p-2" :class="{ 'text-danger': timeInSeconds <= warningThreshold }">
             <span class="font-bold" x-text="parseInt(secondsLeft / 60)"></span>:
             <span class="font-bold" x-text="parseInt(secondsLeft % 60)"></span>
-            {{-- Time: <span class="font-bold">{{ $minutes_left ?? '00' }} : {{ $seconds_left ?? '00' }} </span> --}}
           </strong>
         </div>
         <div class="row">
@@ -237,6 +237,8 @@
             @if ($exam->is_mock)
               <br>
             @endif
+            Score: {{ $score }}
+            <br>
             Attempt: {{ $attempt_count }}
             <br>
             Question: {{ $question_count }}
@@ -244,9 +246,9 @@
             {{ $exam->title }}
             <br>
             {{-- @if ($exam->is_mock) --}}
-            {{-- <button class="btn btn-success" wire:click='reveil'>View Answers!</button> --}}
+             <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
             {{-- @else --}}
-            <button class="btn btn-success">Thanks you!</button>
+           {{-- <button class="btn btn-success">Thanks you!</button> --}}
             {{-- @endif --}}
           </div>
         </div>

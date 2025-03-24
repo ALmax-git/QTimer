@@ -42,7 +42,8 @@ class ExamResultsExport implements FromCollection, WithHeadings, WithTitle, With
         }
 
         // Define the columns for the Excel sheet
-        $this->columns = ['Name', 'Email', 'ID_Number', 'Status', 'Total (' . $total_question_count . ')'];
+        // $this->columns = ['Name', 'Email', 'ID_Number', 'Status', 'Total (' . $total_question_count . ')', 'Attempts'];
+        $this->columns = ['Name', 'ID_Number', 'Status', 'Total (' . $total_question_count . ')', 'Attempts'];
         foreach ($this->exam->subjects as $subject) {
             $this->columns[] = $subject->title . ' [Q: ' . $subject->questions->count() . ' ]'; // Add subject titles as columns
         }
@@ -54,10 +55,11 @@ class ExamResultsExport implements FromCollection, WithHeadings, WithTitle, With
         $data = [];
         $row = [
             'Name' => "Student Name",
-            'Email' => 'Email',
+            //'Email' => 'Email',
             'ID_Number' => 'ID_Number',
             'Status' => 'Status', // Default status
             'Total (' . $total_question_count . ')' => 'Total (' . $total_question_count . ')', // Default total score
+            'Attempts' => 'Attempts',
         ];
         // Initialize subject-wise scores
         foreach ($this->exam->subjects as $subject) {
@@ -68,10 +70,11 @@ class ExamResultsExport implements FromCollection, WithHeadings, WithTitle, With
         foreach ($set_students as $student) {
             $row = [
                 'Name' => $student->name,
-                'Email' => $student->email,
+                //'Email' => $student->email,
                 'ID_Number' => $student->id_number,
                 'Status' => 'absent', // Default status
                 'Total (' . $total_question_count . ')' => '0', // Default total score
+                'Attempts' => '0',
             ];
 
             // Initialize subject-wise scores
@@ -118,6 +121,7 @@ class ExamResultsExport implements FromCollection, WithHeadings, WithTitle, With
                 // $total_score =  $totalQuestions > 0 ? round(($totalCorrect / $totalQuestions) * 100, 2) : '0';
                 $total_score =  $totalQuestions > 0 ? $totalCorrect : '0';
                 $row['Total (' . $total_question_count . ')'] = '' . $total_score . '';
+                $row['Attempts'] = ''. QuestionAnswer::where('exam_id', $this->exam_id)->where('user_id', $student->id)->count() . '';
                 // dd($this, $row, $result);
             }
 

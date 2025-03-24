@@ -14,11 +14,13 @@ use App\Imports\QuestionsImport;
 use App\Imports\StudentImport;
 use App\Models\Exam;
 use App\Models\ExamSubject;
+use App\Models\Question;
 use App\Models\Set;
 use App\Models\SetExam;
 use App\Models\UserSet;
 use App\Models\UserSubject;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -43,6 +45,104 @@ class School extends Component
     public $questions_file, $students_file;
     public $result_exam_id;
     public $student_id;
+    public Question $question;
+    public $new_question = false, $image;
+
+    public array $questionOptions = [];
+
+    public function new_easay() {}
+
+
+
+    public function submit()
+    {
+        DB::beginTransaction();
+        $this->validate();
+        if ($this->image) {
+            $file_name = $this->image->store('products', 'public') ?? '';
+        }
+        $this->question->image = $file_name ?? '';
+        $this->question->save();
+
+        foreach ($this->questionOptions as $option) {
+            $this->question->que()->create($option);
+        }
+
+        DB::commit();  // Commit transaction if everything is successful
+        return redirect()->route('questions.index');
+    }
+
+    public function addQuestionsOption()
+    {
+        $this->questionOptions[] = [
+            'option' => '',
+            'correct' => false
+        ];
+    }
+
+    public function removeQuestionsOption($index)
+    {
+        unset($this->questionOptions[$index]);
+        $this->questionOptions = array_values(($this->questionOptions));
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'question.question_text' => [
+                'string',
+                'required',
+            ],
+            'question.code_snippet' => [
+                'string',
+                'nullable',
+            ],
+            'question.answer_explanation' => [
+                'string',
+                'nullable',
+            ],
+            'question.more_info_link' => [
+                'string',
+                'nullable',
+            ],
+            'questionOptions' => [
+                'required'
+            ],
+            'questionOptions.*.option' => [
+                'required'
+            ],
+        ];
+    }
+
+    public function new_objective()
+    {
+        $this->new_model = true;
+        $this->new_question = false;
+        $this->model = 'New Objective Question';
+    }
+    public function create_question($id)
+    {
+        $this->new_question = true;
+        $this->subject = Subject::find($id);
+    }
+    public function delete_question($id)
+    {
+        $this->question = Question::find($id);
+        $this->cormfirm_delete = true;
+    }
+
+    public function cormfirm_delete_question()
+    {
+        $this->question->delete();
+        // $this->question = null;
+        $this->cormfirm_delete = false;
+    }
+    public function view_questions($id)
+    {
+        $this->subject = Subject::find($id);
+        $this->new_model = true;
+        $this->model = 'View Questions';
+    }
     public function remove_from_set($id)
     {
         $student_set = UserSet::where('user_id', $id)->where('set_id', $this->set->id)->first();
@@ -498,10 +598,12 @@ class School extends Component
         $this->new_set_name = '';
         if ($this->model == 'View Set') {
             $this->model = 'Set';
-        } elseif ($this->model == 'Result' || 'Add Students') {
+        } elseif ($this->model == 'Result' || $this->model == 'Add Students') {
             $this->model = 'Set';
         } elseif ($this->model == 'Asign Subject') {
             $this->model = 'Staff';
+        } elseif ($this->model == 'View Questions' || $this->model == 'New Objective Question') {
+            $this->model = 'Subject';
         }
         $this->new_model = false;
     }

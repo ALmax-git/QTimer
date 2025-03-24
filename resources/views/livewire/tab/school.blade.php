@@ -430,6 +430,153 @@
                         </button>
                       @break
 
+                      @case('View Questions')
+                        <div class="card-body">
+
+                          @if ($cormfirm_delete)
+                            <div class="d-flex h-full w-full"
+                              style="background-color: #000000a1; z-index: 1000;  justify-content: center;">
+                              <div class="warning_card">
+                                <span>Are you Sure you want to Delete
+                                  <br>
+                                  <strong>{{ $question->text }}</strong>
+                                </span>
+                                <div class="d-flex justify-content-between">
+                                  <button class="btn btn-warning warning" wire:click='cancel_delete'>Cancel</button>
+                                  <button class="btn btn-success delete"
+                                    wire:click='cormfirm_delete_question'>Delete</button>
+                                </div>
+                              </div>
+                            </div>
+                          @endif
+                          <div class="cardh">
+                            <div class="cardi">
+                              <strong>
+                                <div class="row h5" style="padding: 5px !important; text-align: left;">
+                                  <div class="col-5"># Question [{{ count($subject->questions) }}]</div>
+                                  <div class="col-2"></div>
+                                  <div class="col-1">Option A</div>
+                                  <div class="col-1">Option B</div>
+                                  <div class="col-1">Option C</div>
+                                  <div class="col-1">Option D</div>
+                                  <div class="col-1">Action</div>
+                                </div>
+                              </strong>
+                            </div>
+                          </div>
+                          @php
+                            $count = 0;
+                          @endphp
+                          @foreach ($subject->questions as $question)
+                            <div class="cardh">
+                              <div class="cardi">
+                                <div class="row" style="padding: 5px !important; text-align: left;">
+                                  <div class="col-5"><strong>{{ ++$count }} - </strong>{{ $question->text }}</div>
+                                  <div class="col-2"></div>
+                                  @foreach ($question->options as $option)
+                                    <div class="col-1">{{ $option->option }}</div>
+                                  @endforeach
+                                  <div class="col-1">
+
+                                    <button class="btn btn-sm btn-outline-danger ms-2"
+                                      wire:click='delete_question("{{ $question->id }}")'><i
+                                        class="bi bi-trash"></i></button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          @endforeach
+                        </div>
+                      @break
+
+                      @case('New Objective Question')
+                        {{-- <form class="pt-3" wire:submit="submit">
+
+                          <div class="form-group {{ $errors->has('question.question_text') ? 'invalid' : '' }}">
+                            <label class="form-label required" for="question_text">Question</label>
+                            <textarea class="form-control" id="question_text" name="question_text"
+                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);" required
+                              wire:model.live="question.question_text" rows="4"></textarea>
+                            <div class="validation-message">
+                              {{ $errors->first('question.question_text') }}
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            @if ($image)
+                              <img src="{{ $image->temporaryUrl() }}">
+                            @endif
+
+                            <input class="btn btn-secondary ml-4" type="file"
+                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                              wire:model="image">
+
+                            @error('image')
+                              <span class="error">{{ $message }}</span>
+                            @enderror
+
+                          </div>
+                          <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
+                            <label class="form-label required" for="question_text">Option</label>
+                            @foreach ($questionOptions as $index => $questionOption)
+                              <div class="mt-2 flex">
+                                <input class="form-control" id="questions_options_{{ $index }}"
+                                  name="questions_options_{{ $index }}" type="text"
+                                  wire:model.live="questionOptions.{{ $index }}.option" autocomplete="off">
+                                <div class="flex items-center">
+                                  <input class="ml-4 mr-1" type="checkbox"
+                                    wire:model.live="questionOptions.{{ $index }}.correct">
+                                  Correct
+                                  <button class="btn btn-secondary ml-4" type="button"
+                                    wire:click="removeQuestionsOption({{ $index }})">
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                              @error('questionOptions.*')
+                                <div class="validation-message mt-2 text-sm">
+                                  {{ $errors->first('questionOptions.*') }}
+                                </div>
+                              @enderror
+                            @endforeach
+                            @error('questionOptions')
+                              <div class="validation-message">
+                                {{ $errors->first('questionOptions') }}
+                              </div>
+                            @enderror
+
+                            <button class="btn btn-info mt-2" type="button" wire:click="addQuestionsOption">
+                              {{ trans('global.add') }}
+                            </button>
+                          </div>
+
+                          <div class="form-group {{ $errors->has('question.code_snippet') ? 'invalid' : '' }}">
+                            <label class="form-label" for="code_snippet">Code Snippet</label>
+                            <textarea class="form-control" id="code_snippet" name="code_snippet"
+                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                              wire:model.live="question.code_snippet" rows="4"></textarea>
+                            <div class="validation-message">
+                              {{ $errors->first('question.code_snippet') }}
+                            </div>
+                          </div>
+                          <div class="form-group {{ $errors->has('question.answer_explanation') ? 'invalid' : '' }}">
+                            <label class="form-label" for="answer_explanation">Answer Explanation</label>
+                            <textarea class="form-control" id="answer_explanation" name="answer_explanation"
+                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                              wire:model.live="question.answer_explanation" rows="4"></textarea>
+                            <div class="validation-message">
+                              {{ $errors->first('question.answer_explanation') }}
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <button class="btn btn-indigo mr-2" type="submit">
+                              {{ trans('global.save') }}
+                            </button>
+                          </div>
+                        </form> --}}
+                      @break
+
                       @default
                     @endswitch
                   </div>
@@ -626,6 +773,30 @@
                       </div>
                     </div>
                   @endif
+                  @if ($new_question)
+                    <div class="d-flex h-full w-full"
+                      style="background-color: #000000; z-index: 1000;  justify-content: center;">
+                      <div class="warning_card"
+                        style="color: #f7f7f7 !important; border: 2px solid #00ff55 !important;">
+                        <div class="button-ctl_container">
+                          <button class="button-3d" wire:click='new_objective'>
+                            <div class="button-top">
+                              <span class="material-icons" style="color: #f7f7f7 !important; ">Objective</span>
+                            </div>
+                            <div class="button-bottom"></div>
+                            <div class="button-base"></div>
+                          </button>
+                          <button class="button-3d" wire:click='new_easay'>
+                            <div class="button-top">
+                              <span class="material-icons" style="color: #f7f7f7 !important; ">Easay</span>
+                            </div>
+                            <div class="button-bottom"></div>
+                            <div class="button-base"></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  @endif
                   @foreach ($subjects as $subject)
                     <div class="cardh">
                       <div class="cardi">
@@ -664,8 +835,10 @@
                               Upload Questions
                               {{-- <input class="" name="text" type="file" /> --}}
                             </button>
-                            <button class="btn btn-sm btn-outline-info ms-2"><i class="bi bi-plus"></i></button>
-                            <button class="btn btn-sm btn-outline-primary ms-2">View</button>
+                            <button class="btn btn-sm btn-outline-info ms-2"
+                              wire:click='create_question("{{ $subject->id }}")'><i class="bi bi-plus"></i></button>
+                            <button class="btn btn-sm btn-outline-primary ms-2"
+                              wire:click='view_questions("{{ $subject->id }}")'>View</button>
                             <button class="btn btn-sm btn-outline-danger ms-2"
                               wire:click='delete_subject("{{ $subject->id }}")'>Trash</button>
                           </div>
