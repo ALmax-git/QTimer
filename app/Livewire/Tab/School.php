@@ -46,7 +46,7 @@ class School extends Component
     public $result_exam_id;
     public $student_id;
     public Question $question;
-    public $new_question = false, $image, $new_question_text;
+    public $new_question = false, $image, $new_question_text, $new_question_more_info_link, $new_question_answer_explanation, $new_question_code_snippet;
 
     public array $questionOptions = [];
 
@@ -54,29 +54,68 @@ class School extends Component
 
 
 
-    public function submit()
+    public function create_new_obj_question()
     {
         DB::beginTransaction();
-        dd($this);
+        // $this->validate([
+        //     'question.question_text' => [
+        //         'string',
+        //         'required',
+        //     ],
+        //     'question.code_snippet' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'question.answer_explanation' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'question.more_info_link' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'questionOptions' => [
+        //         'required'
+        //     ],
+        //     'questionOptions.*.option' => [
+        //         'required'
+        //     ],
+        // ]);
+        $this->question = new Question();
+        $file_name = '';
         if ($this->image) {
-            $file_name = $this->image->store('products', 'public') ?? '';
+            $file_name = $this->image->store('obj', 'public') ?? '';
         }
+        $this->question->text = $this->new_question_text;
+        $this->question->code_snippet = $this->new_question_code_snippet;
+        $this->question->answer_explanation = $this->new_question_answer_explanation;
+        $this->question->more_info_link = $this->new_question_more_info_link;
         $this->question->image = $file_name ?? '';
+        $this->question->subject_id = $this->subject->id;
         $this->question->save();
 
         foreach ($this->questionOptions as $option) {
-            $this->question->que()->create($option);
+            $this->question->options()->create([
+                'option' => $option['option'],
+                'is_correct' => $option['is_correct']
+            ]);
         }
-
         DB::commit();  // Commit transaction if everything is successful
-        return redirect()->route('questions.index');
+        $this->alert('success', 'Question created successfully!', [
+            'position' => 'top-end',
+            'toast' => true,
+            'timer' => 5000,
+        ]);
+        $this->new_question = false;
+        $this->new_model = false;
+        $this->load_subjects();
     }
 
     public function addQuestionsOption()
     {
         $this->questionOptions[] = [
             'option' => '',
-            'correct' => false
+            'is_correct' => false
         ];
     }
 
@@ -691,28 +730,28 @@ class School extends Component
         $this->subjects = false;
         $this->exams = false;
         $this->sets = false;
-        $this->staffs = User::where('is_staff', true)->orWhere('is_subject_master', true)->where('school_id', Auth::user()->id)->get();
+        $this->staffs = User::where('is_staff', true)->orWhere('is_subject_master', true)->where('school_id', Auth::user()->id)->orderBy('id', 'desc')->get();
     }
     public function load_subjects()
     {
         $this->staffs = false;
         $this->exams = false;
         $this->sets = false;
-        $this->subjects = Auth::user()->school->subjects;
+        $this->subjects = Auth::user()->school->subjects()->orderBy('id', 'desc')->get();
     }
     public function load_exams()
     {
         $this->subjects =  false;
         $this->staffs = false;
         $this->sets = false;
-        $this->exams = Exam::all();
+        $this->exams = Exam::orderBy('id', 'desc')->get();
     }
     public function load_sets()
     {
         $this->subjects =  false;
         $this->staffs = false;
         $this->exams = false;
-        $this->sets = Set::all();
+        $this->sets = Set::orderBy('id', 'desc')->get();
     }
     public function render()
     {

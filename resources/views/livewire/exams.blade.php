@@ -54,6 +54,7 @@
                   {{ $currentQuestion['text'] }}
                 </p>
                 @if ($currentQuestion['code_snippet'])
+                  <hr>
                   <pre class="mb-4 border-2 border-solid p-2">{{ $currentQuestion['code_snippet'] }}</pre>
                 @endif
                 <hr>
@@ -246,9 +247,9 @@
             {{ $exam->title }}
             <br>
             {{-- @if ($exam->is_mock) --}}
-             <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
+            <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
             {{-- @else --}}
-           {{-- <button class="btn btn-success">Thanks you!</button> --}}
+            {{-- <button class="btn btn-success">Thanks you!</button> --}}
             {{-- @endif --}}
           </div>
         </div>

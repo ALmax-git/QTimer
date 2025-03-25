@@ -515,9 +515,10 @@
                                 autocomplete="off">
                               <div
                                 class="flex items-center"style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);">
-                                <input class="ml-4 mr-1" type="checkbox"
-                                  wire:model.live="questionOptions.{{ $index }}.correct">
-                                Correct
+                                <input class="ml-4 mr-1" id="questionOptions.{{ $index }}.correct"
+                                  name="questionOptions.{{ $index }}.is_correct" type="checkbox"
+                                  wire:model.live="questionOptions.{{ $index }}.is_correct">
+                                <label for="questionOptions.{{ $index }}.is_correct">Correct</label>
                                 <button class="btn btn-danger ml-4" type="button"
                                   wire:click="removeQuestionsOption({{ $index }})">
                                   <i class="bi bi-trash"></i>
@@ -553,9 +554,42 @@
                             wire:model.live='image' placeholder="Select Question Image" autocomplete="question">
                         </div>
 
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="new_question_code_snippet">Code Snippet</label>
+                          </div>
+                          <input class="form-control" type="text" value=""
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='new_question_code_snippet' placeholder="Write Code snippet if any"
+                            autocomplete="question">
+                        </div>
+
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="new_question_answer_explanation">Answer Explanation</label>
+                          </div>
+                          <input class="form-control" type="text" value=""
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='new_question_answer_explanation'
+                            placeholder="Write Answer Explanation if any" autocomplete="question">
+                        </div>
+
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="new_question_more_info_link">Usefull Link</label>
+                          </div>
+                          <input class="form-control" type="text" value=""
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='new_question_more_info_link' placeholder="Write more info link if any"
+                            autocomplete="question">
+                        </div>
+
                         <br>
 
-                        <button class="c-button" style="margin: auto;" wire:click='submit'>
+                        <button class="c-button" style="margin: auto;" wire:click='create_new_obj_question'>
                           <span class="c-main">
                             <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
                             Create Question
@@ -824,9 +858,9 @@
                             <button class="btn btn-sm btn-outline-info ms-2"
                               wire:click='create_question("{{ $subject->id }}")'><i class="bi bi-plus"></i></button>
                             <button class="btn btn-sm btn-outline-primary ms-2"
-                              wire:click='view_questions("{{ $subject->id }}")'>View</button>
+                              wire:click='view_questions("{{ $subject->id }}")'><i class="bi bi-eye"></i></button>
                             <button class="btn btn-sm btn-outline-danger ms-2"
-                              wire:click='delete_subject("{{ $subject->id }}")'>Trash</button>
+                              wire:click='delete_subject("{{ $subject->id }}")'><i class="bi bi-trash"></i></button>
                           </div>
                         </div>
                       </div>

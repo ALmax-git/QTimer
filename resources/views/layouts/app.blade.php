@@ -66,12 +66,12 @@
             align-items: center;
           }
 
+          /*
           .container {
             width: 95vw;
             height: 90vh;
             position: relative;
             background: linear-gradient(to bottom, #01263a 0%, #4f94d4 70%, #c5d9ed 100%);
-            /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.697), 0 10px 10px rgba(0, 0, 0, 0.681); */
             border-radius: 80px;
             overflow: hidden;
           }
@@ -300,7 +300,7 @@
           .s10 {
             top: 10px;
             left: 250px;
-          }
+          } */
         </style>
       @endif
     @else
@@ -446,7 +446,7 @@
       @if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master)
         @yield('content')
       @else
-        <div class="container">
+        {{-- <div class="container">
           <div class="disc-1"></div>
           <div class="disc-2"></div>
           <div class="disc-3"></div>
@@ -473,7 +473,7 @@
           <div class="star s8"></div>
           <div class="star s9"></div>
           <div class="star s10"></div>
-        </div>
+        </div> --}}
         <div
           style="position: absolute; background-color: #01263a; margin-top: 50px; margin: auto; width: 90%; height: 90%; padding: 10px; border-radius: 12px;">
           @yield('content')
