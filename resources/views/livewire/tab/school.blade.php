@@ -490,91 +490,77 @@
                       @break
 
                       @case('New Objective Question')
-                        {{-- <form class="pt-3" wire:submit="submit">
+                        <h1 class="text-center text-white">{{ $subject->title }}</h1>
 
-                          <div class="form-group {{ $errors->has('question.question_text') ? 'invalid' : '' }}">
-                            <label class="form-label required" for="question_text">Question</label>
-                            <textarea class="form-control" id="question_text" name="question_text"
-                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);" required
-                              wire:model.live="question.question_text" rows="4"></textarea>
-                            <div class="validation-message">
-                              {{ $errors->first('question.question_text') }}
-                            </div>
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="new_question_text">Question text</label>
                           </div>
-
-                          <div class="form-group">
-                            @if ($image)
-                              <img src="{{ $image->temporaryUrl() }}">
-                            @endif
-
-                            <input class="btn btn-secondary ml-4" type="file"
-                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
-                              wire:model="image">
-
-                            @error('image')
-                              <span class="error">{{ $message }}</span>
-                            @enderror
-
-                          </div>
-                          <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
-                            <label class="form-label required" for="question_text">Option</label>
-                            @foreach ($questionOptions as $index => $questionOption)
-                              <div class="mt-2 flex">
-                                <input class="form-control" id="questions_options_{{ $index }}"
-                                  name="questions_options_{{ $index }}" type="text"
-                                  wire:model.live="questionOptions.{{ $index }}.option" autocomplete="off">
-                                <div class="flex items-center">
-                                  <input class="ml-4 mr-1" type="checkbox"
-                                    wire:model.live="questionOptions.{{ $index }}.correct">
-                                  Correct
-                                  <button class="btn btn-secondary ml-4" type="button"
-                                    wire:click="removeQuestionsOption({{ $index }})">
-                                    Delete
-                                  </button>
-                                </div>
+                          <input class="form-control" type="text" value=""
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='new_question_text' placeholder="Write Question test" autofocus
+                            autocomplete="question">
+                        </div>
+                        <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
+                          <p class="required text-left" style="text-align: left !important; color: #28f100;">
+                            <strong>Question Options</strong>
+                          </p>
+                          @foreach ($questionOptions as $index => $questionOption)
+                            <div class="input-group input-group-lg mb-3">
+                              <input class="form-control" id="questions_options_{{ $index }}"
+                                name="questions_options_{{ $index }}" type="text"
+                                style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                                placeholder="Write Option" wire:model.live="questionOptions.{{ $index }}.option"
+                                autocomplete="off">
+                              <div
+                                class="flex items-center"style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);">
+                                <input class="ml-4 mr-1" type="checkbox"
+                                  wire:model.live="questionOptions.{{ $index }}.correct">
+                                Correct
+                                <button class="btn btn-danger ml-4" type="button"
+                                  wire:click="removeQuestionsOption({{ $index }})">
+                                  <i class="bi bi-trash"></i>
+                                </button>
                               </div>
-                              @error('questionOptions.*')
-                                <div class="validation-message mt-2 text-sm">
-                                  {{ $errors->first('questionOptions.*') }}
-                                </div>
-                              @enderror
-                            @endforeach
-                            @error('questionOptions')
-                              <div class="validation-message">
-                                {{ $errors->first('questionOptions') }}
+                            </div>
+                            @error('questionOptions.*')
+                              <div class="validation-message mt-2 text-sm">
+                                {{ $errors->first('questionOptions.*') }}
                               </div>
                             @enderror
-
-                            <button class="btn btn-info mt-2" type="button" wire:click="addQuestionsOption">
-                              {{ trans('global.add') }}
+                          @endforeach
+                          @error('questionOptions')
+                            <div class="validation-message">
+                              {{ $errors->first('questionOptions') }}
+                            </div>
+                          @enderror
+                          <div class="align-left text-left">
+                            <button class="btn btn-success mb-2 mt-2" type="button" style="text-align: left !important;"
+                              wire:click="addQuestionsOption">
+                              Add Option
                             </button>
                           </div>
+                        </div>
 
-                          <div class="form-group {{ $errors->has('question.code_snippet') ? 'invalid' : '' }}">
-                            <label class="form-label" for="code_snippet">Code Snippet</label>
-                            <textarea class="form-control" id="code_snippet" name="code_snippet"
-                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
-                              wire:model.live="question.code_snippet" rows="4"></textarea>
-                            <div class="validation-message">
-                              {{ $errors->first('question.code_snippet') }}
-                            </div>
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
+                            <label for="image">Question Image</label>
                           </div>
-                          <div class="form-group {{ $errors->has('question.answer_explanation') ? 'invalid' : '' }}">
-                            <label class="form-label" for="answer_explanation">Answer Explanation</label>
-                            <textarea class="form-control" id="answer_explanation" name="answer_explanation"
-                              style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
-                              wire:model.live="question.answer_explanation" rows="4"></textarea>
-                            <div class="validation-message">
-                              {{ $errors->first('question.answer_explanation') }}
-                            </div>
-                          </div>
+                          <input class="form-control" type="file"
+                            style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
+                            wire:model.live='image' placeholder="Select Question Image" autocomplete="question">
+                        </div>
 
-                          <div class="form-group">
-                            <button class="btn btn-indigo mr-2" type="submit">
-                              {{ trans('global.save') }}
-                            </button>
-                          </div>
-                        </form> --}}
+                        <br>
+
+                        <button class="c-button" style="margin: auto;" wire:click='submit'>
+                          <span class="c-main">
+                            <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
+                            Create Question
+                          </span>
+                        </button>
                       @break
 
                       @default

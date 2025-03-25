@@ -46,7 +46,7 @@ class School extends Component
     public $result_exam_id;
     public $student_id;
     public Question $question;
-    public $new_question = false, $image;
+    public $new_question = false, $image, $new_question_text;
 
     public array $questionOptions = [];
 
@@ -57,7 +57,7 @@ class School extends Component
     public function submit()
     {
         DB::beginTransaction();
-        $this->validate();
+        dd($this);
         if ($this->image) {
             $file_name = $this->image->store('products', 'public') ?? '';
         }
