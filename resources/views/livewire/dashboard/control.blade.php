@@ -63,6 +63,7 @@
       </div>
     </div>
   </div>
+  @livewire('dashboard.menu')
   <div class="row">
     <div class="h-100 bg-secondary mt-3 rounded p-4">
       <div class="h2">

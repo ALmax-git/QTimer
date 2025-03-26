@@ -3,13 +3,41 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Tinubu-Legacy-Skills-Training</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+
+    <!-- Primary Meta Tags -->
+    <title>QTimer - Smart CBT Exam System</title>
+    <meta name="title" content="QTimer - Smart CBT Exam System">
+    <meta name="description"
+      content="QTimer is a modern Computer-Based Testing (CBT) system for efficient and secure E-Exams. Supports auto-grading, question banks, and real-time monitoring.">
+
+    <!-- Keywords for SEO -->
+    <meta name="keywords"
+      content="CBT Software, Online Exams, E-Exams, QTimer, Computer-Based Test, Digital Education, Automated Grading">
+
+    <!-- Author Information -->
+    <meta name="author" content="Your Name or Your Company Name">
+
+    <!-- Robots Control -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph Meta Tags (For Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QTimer - Smart CBT Exam System">
+    <meta property="og:description"
+      content="QTimer is a modern CBT system for efficient and secure E-Exams. Supports auto-grading, question banks, and real-time monitoring.">
+    <meta property="og:image" content="{{ asset('css/guest.css') }}">
+    <meta property="og:url" content="https://almax.mn.co">
+
+    <!-- Twitter Card (For Twitter Sharing) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QTimer - Smart CBT Exam System">
+    <meta name="twitter:description"
+      content="QTimer is a modern CBT system for efficient and secure E-Exams. Supports auto-grading, question banks, and real-time monitoring.">
+    <meta name="twitter:image" content="{{ asset('css/guest.css') }}">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link type="image/x-icon" href="{{ asset('QTimer.png') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -30,7 +58,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
     @livewireStyles
   </head>
