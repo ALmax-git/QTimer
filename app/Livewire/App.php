@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class App extends Component
 {
-    public $tab = 'profile';
+    public $tab = 'school';
 
     public function logout()
     {
@@ -21,7 +21,7 @@ class App extends Component
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             exec('taskkill /F /IM firefox.exe');
             exec('taskkill /F /IM php.exe'); // Stop Laravel server
-        } 
+        }
         // Kill Firefox (Linux)
         else {
             exec('pkill firefox');

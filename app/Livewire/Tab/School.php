@@ -20,6 +20,7 @@ use App\Models\SetExam;
 use App\Models\UserSet;
 use App\Models\UserSubject;
 use Carbon\Carbon;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -47,13 +48,19 @@ class School extends Component
     public $student_id;
     public Question $question;
     public $new_question = false, $image, $new_question_text, $new_question_more_info_link, $new_question_answer_explanation, $new_question_code_snippet;
-
+    public $school_name;
     public array $questionOptions = [];
 
     public function new_easay() {}
 
 
-
+    public function update_school_name()
+    {
+        Auth::user()->school->update([
+            'name' => $this->school_name,
+        ]);
+        $this->mount();
+    }
     public function create_new_obj_question()
     {
         DB::beginTransaction();
@@ -649,6 +656,7 @@ class School extends Component
     public function mount()
     {
         $this->school = ModelsSchool::find(Auth::user()->school->id);
+        $this->school_name = $this->school->name;
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;
     }
     public function open_main_model($model)

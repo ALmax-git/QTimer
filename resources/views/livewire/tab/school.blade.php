@@ -213,7 +213,7 @@
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
                             style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
-                            <label for="school_name">Subject Name</label>
+                            <label for="new_subject_name">Subject Name</label>
                           </div>
                           <input class="form-control" type="text" value=""
                             style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
@@ -1068,7 +1068,8 @@
           <label for="school_name">School Name:</label>
         </div>
         <input class="form-control" type="text" value="{{ Auth::user()->school->name }}"
-          style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(0, 0, 0);">
+          style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(0, 0, 0);"
+          wire:model.live='school_name' wire:input='update_school_name'>
       </div>
       <div class="input-group input-group-lg mb-3">
         <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
