@@ -13,7 +13,7 @@
       <div class="sidebar pb-3 pe-4">
         <nav class="navbar bg-secondary navbar-dark">
           <a class="navbar-brand mx-4 mb-3" href="#">
-            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>ALmax</h3>
+            <h3 class="text-primary"><u><i class="fa fa-user-edit me-2"></i>QTimer</u></h3>
           </a>
           <div class="d-flex align-items-center mb-4 ms-4">
             <div class="position-relative">

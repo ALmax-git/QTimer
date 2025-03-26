@@ -40,13 +40,29 @@ class Control extends Component
     {
         $this->resetPage(); // Reset pagination when searching
     }
-
     public function toggle_server()
     {
+        // Toggle the boolean state
         $this->server_is_up = !$this->server_is_up;
+
+        // Store it properly in the school model (ensure it's saved as an integer)
         $this->school->server_is_up = $this->server_is_up ? 1 : 0;
         $this->school->save();
+
+
+        // Debugging Logs
+        // logger("New Server Status: " . $this->server_is_up);
+
+        // Dispatch only one event based on the new state
+        if ($this->server_is_up) {
+            logger("Dispatching server-up event");
+            $this->dispatch('server-up');
+        } else {
+            logger("Dispatching server-down event");
+            $this->dispatch('server-down');
+        }
     }
+
     public function viewStudent($id)
     {
         $this->studentData = User::findOrFail($id)->toArray();

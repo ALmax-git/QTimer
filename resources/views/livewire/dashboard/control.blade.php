@@ -35,8 +35,8 @@
     <div class="col-sm-6 col-xl-3">
       <div class="d-flex align-items-center justify-content-between rounded">
         <div class="empty"></div>
-        <div class="live_container" wire:click='toggle_server()'>
-          <input id="checkbox" type="checkbox" wire:model.live='server_is_up' {{ $server_is_up ? 'checked' : '' }}>
+        <div class="live_container">
+          <input id="checkbox" type="checkbox" wire:click='toggle_server()' {{ $server_is_up ? 'checked' : '' }}>
           <label class="button" for="checkbox">
             <span class="icon">
               <svg viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
@@ -78,13 +78,13 @@
       @endif
 
       <div class="table-responsive">
-        <table class="table-striped table">
-          <thead>
+        <table class="table-striped table-hover table">
+          <thead class="bg-dark text-white">
             <tr>
               <th>Name</th>
               <th>ID Number</th>
               <th>Email</th>
-              <th>Action</th>
+              <th style="text-align: right;">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -94,16 +94,16 @@
                 <td>{{ $student->id_number }}</td>
                 <td>{{ $student->email }}</td>
                 <td>
-                  <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#viewModal"
-                    wire:click="viewStudent({{ $student->id }})">
-                    <i class="bi bi-eye"></i>
+                  <button class="btn btn-sm btn-primary float-end ms-1" wire:click="deleteStudent({{ $student->id }})">
+                    <i class="bi bi-trash"></i>
                   </button>
-                  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal"
-                    wire:click="editStudent({{ $student->id }})">
+                  <button class="btn btn-sm btn-warning float-end ms-1" data-bs-toggle="modal"
+                    data-bs-target="#editModal" wire:click="editStudent({{ $student->id }})">
                     <i class="bi bi-pencil"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger" wire:click="deleteStudent({{ $student->id }})">
-                    <i class="bi bi-trash"></i>
+                  <button class="btn btn-sm btn-info float-end ms-1" data-bs-toggle="modal" data-bs-target="#viewModal"
+                    wire:click="viewStudent({{ $student->id }})">
+                    <i class="bi bi-eye"></i>
                   </button>
                 </td>
               </tr>
@@ -189,8 +189,25 @@
     @endpush
 
   </div>
-  <!-- Flash Messages -->
-  @if (session()->has('message'))
-    <div class="alert alert-success mt-3">{{ session('message') }}</div>
-  @endif
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const clickSound = new Audio("success.mp3");
+
+      Livewire.on("server-up", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+      Livewire.on('server-up', () => {
+        console.log("Server is UP - Playing ON sound");
+        // new Audio('/sounds/on.mp3').play();
+      });
+
+      Livewire.on('server-down', () => {
+        console.log("Server is DOWN - Playing OFF sound");
+        // new Audio('/sounds/off.mp3').play();
+      });
+
+    });
+  </script>
+
 </div>
