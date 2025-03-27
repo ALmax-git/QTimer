@@ -70,7 +70,8 @@
         <h4>Recent Students</h4>
       </div>
 
-      <input class="form-control mb-3" type="text" wire:model.live="search" placeholder="Search students...">
+      <input class="form-control mb-3" type="text" wire:model.live="search"
+        placeholder="Search students... eg. Basma">
 
       @if (session()->has('message'))
         <div class="alert alert-success">
@@ -95,7 +96,10 @@
                 <td>{{ $student->id_number }}</td>
                 <td>{{ $student->email }}</td>
                 <td>
-                  <button class="btn btn-sm btn-primary float-end ms-1" wire:click="deleteStudent({{ $student->id }})">
+                  <button class="btn btn-sm btn-primary float-end ms-1"
+                    wire:confirm="Are you sure you want to Delete this Student, THIS ACTION CAN NOT BE UNDONE!!!"
+                    wire:loading.attr="disabled" wire:target="submitExam({{ $student->id }})"
+                    wire:click="deleteStudent({{ $student->id }})">
                     <i class="bi bi-trash"></i>
                   </button>
                   <button class="btn btn-sm btn-warning float-end ms-1" data-bs-toggle="modal"
@@ -169,7 +173,7 @@
         </div>
       @endif
     </div>
-
+    {{-- <livewire:tab.student /> --}}
     @push('scripts')
       <script>
         window.addEventListener('show-view-modal', event => {
@@ -188,7 +192,6 @@
         });
       </script>
     @endpush
-
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {

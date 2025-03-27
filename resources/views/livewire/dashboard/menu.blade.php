@@ -1,9 +1,6 @@
 <div>
 
   @if ($main_model)
-    {{-- <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable w-100"
-      style="top: 10%; border: 1px solid red; border-radius: 10px; margin: 0; padding: 5px;">
-      <div class="modal-content bg-dark text-white"> --}}
     <div class="modal-dialog modal-xl modal-dialog-scrollable"
       style="position: fixed; top: 10%; background-color: #d1d5db00 !important;">
       <div class="modal-content bg-dark text-white" style="width: 80vw; margin: auto;">
@@ -31,7 +28,7 @@
             @endif
           </div>
         </div>
-        <div class="modal-body h-75 m-3 w-full bg-black p-3"
+        <div class="modal-body w-full bg-black p-3"
           style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202;">
 
           @if ($new_model)
@@ -41,7 +38,7 @@
               <button class="dismiss" type="button" wire:click='dismiss_new'>×</button>
               <div class="header">
 
-                <div class="content">
+                <div class="row">
                   @switch($model)
                     @case('Staff')
                       <div class="input-group input-group-lg mb-3">
@@ -657,7 +654,7 @@
             </div>
           @else
             @if ($staffs)
-              <div class="cards flex flex-wrap">
+              <div class="cards">
 
                 @if ($cormfirm_delete)
                   <div class="d-flex h-full w-full"
@@ -709,7 +706,7 @@
                 @endforeach
               </div>
             @elseif ($subjects)
-              <div class="cards flex flex-wrap" style="justify-content: center !important;">
+              <div class="cards" style="justify-content: center !important;">
 
                 @if ($cormfirm_delete)
                   <div class="d-flex h-full w-full"
@@ -801,7 +798,7 @@
                 @endforeach
               </div>
             @elseif ($sets)
-              <div class="cards flex flex-wrap" style="justify-content: center !important;">
+              <div class="cards" style="justify-content: center !important;">
 
                 @if ($cormfirm_delete)
                   <div class="d-flex h-full w-full"
@@ -871,7 +868,7 @@
                 @endforeach
               </div>
             @elseif ($exams)
-              <div class="cards flex flex-wrap">
+              <div class="cards">
 
                 @if ($cormfirm_delete)
                   <div class="d-flex h-full w-full"

@@ -32,11 +32,11 @@
 
             <span class="nav-item nav-link {{ $tab == 'Dashboard' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Dashboard")'><i class="fa fa-tachometer-alt me-2"></i>Dashboard</span>
-
+            {{-- 
             <span class="nav-item nav-link {{ $tab == 'Students' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Students")'><i class="fa fa-user-graduate me-2"></i>Students</span>
             <span class="nav-item nav-link {{ $tab == 'Class' ? 'active' : '' }}" href="#"
-              wire:click='toggle_tab("Class")'><i class="fa fa-th me-2"></i>Classes</span>
+              wire:click='toggle_tab("Class")'><i class="fa fa-th me-2"></i>Classes</span> --}}
           </div>
         </nav>
       </div>
@@ -108,14 +108,6 @@
         @switch($tab)
           @case('Dashboard')
             <livewire:dashboard.control />
-          @break
-
-          @case('Students')
-            <livewire:student />
-          @break
-
-          @case('Class')
-            @livewire('schoolclass')
           @break
 
           @default

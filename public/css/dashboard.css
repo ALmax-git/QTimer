@@ -22,7 +22,7 @@
     border-radius: 20px;
     transition: 700ms;
     background: linear-gradient(45deg, #000000, #262626);
-    border: 2px solid rgba(0, 248, 8, 0.956);
+    border: 2px solid rgba(248, 29, 0, 0.956);
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
 }
