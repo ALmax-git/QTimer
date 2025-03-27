@@ -30,8 +30,8 @@
       </div>
       <div class="navbar-nav w-100">
 
-        <span class="nav-item nav-link {{ $tab == 'Dashboard' ? 'active' : '' }}" href="#"
-          wire:click='toggle_tab("Dashboard")'><i class="fa fa-tachometer-alt me-2"></i>Dashboard</span>
+        <a class="nav-item nav-link {{ $tab == 'Dashboard' ? 'active' : '' }}" href="/"
+          wire:click='toggle_tab("Dashboard")'><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
         <span class="nav-item nav-link {{ $tab == 'Profile' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Profile")'><i class="fa fa-user-alt me-2"></i>Profile</span>
         <span class="nav-item nav-link {{ $tab == 'Candidates' ? 'active' : '' }}" href="#"
