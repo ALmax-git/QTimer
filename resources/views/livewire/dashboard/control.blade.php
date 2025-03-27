@@ -32,7 +32,16 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6 col-xl-3">
+    <div class="col-sm-3 col-xl-2">
+      <div class="bg-secondary d-flex align-items-center justify-content-between rounded p-4">
+        <i class="fa fa-desktop fa-3x text-primary"></i>
+        <div class="ms-3">
+          <p class="mb-2">Connected</p>
+          <h6 class="mb-0">{{ count(\App\Models\Session::get()) }}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xl-1">
       <div class="d-flex align-items-center justify-content-between rounded">
         <div class="empty"></div>
         <div class="live_container">

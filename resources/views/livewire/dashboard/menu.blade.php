@@ -28,8 +28,8 @@
             @endif
           </div>
         </div>
-        <div class="modal-body w-full bg-black p-3"
-          style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202;">
+        <div class="modal-body bg-secondary w-full p-3"
+          style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202; height: 60vh; padding-bottom: 10px;">
 
           @if ($new_model)
 
@@ -910,12 +910,12 @@
                         <div class="col-4" style="display: flex; justify-content: space-between;">
                           <div></div>
                           <div>
-                            <button class="btn btn-sm btn-outline-success"
+                            <button class="btn btn-sm btn-outline-primary"
                               wire:click='add_subject("{{ $exam->id }}")'>Add Subject</button>
                             <button class="btn btn-sm btn-outline-primary"
                               wire:click='add_five_minute("{{ $exam->id }}")'> +5
                               Min</button>
-                            <button class="btn btn-sm btn-{{ $exam->is_visible ? 'success' : 'secondary' }}"
+                            <button class="btn btn-sm btn-{{ $exam->is_visible ? 'info' : 'secondary' }}"
                               wire:click='toggle_exam_visibility("{{ $exam->id }}")'>
                               <i class="bi bi-eye"></i>
                             </button>

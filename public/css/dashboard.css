@@ -741,7 +741,7 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    background-color: #307750;
+    background-color: #1e0000;
     color: #fff;
     border-style: none;
     padding: 1em 1em;
@@ -770,7 +770,7 @@
     height: 100%;
     width: 0;
     border-radius: 0.5em;
-    background-color: #469b61;
+    background-color: #000000;
     z-index: -1;
     transition: all 350ms;
 }
@@ -784,18 +784,18 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 2px solid rgb(1, 235, 252);
+    border: 2px solid rgb(252, 1, 1);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    box-shadow: 0px 0px 100px rgb(1, 235, 252),
-        inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    box-shadow: 0px 0px 100px rgb(252, 1, 1),
+        inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
     animation: flicker 2s linear infinite;
 }
 
 .icon {
-    color: rgb(1, 235, 252);
+    color: rgb(252, 1, 1);
     font-size: 2rem;
     cursor: pointer;
     animation: iconflicker 2s linear infinite;
@@ -811,9 +811,9 @@
 
 @keyframes flicker {
     0% {
-        border: 2px solid rgb(1, 235, 252);
-        box-shadow: 0px 0px 100px rgb(1, 235, 252),
-            inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+        border: 2px solid rgb(252, 1, 1);
+        box-shadow: 0px 0px 100px rgb(252, 1, 1),
+            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
     }
 
     /* 5% {
@@ -822,9 +822,9 @@
     } */
 
     10% {
-        border: 2px solid rgb(1, 235, 252);
-        box-shadow: 0px 0px 100px rgb(1, 235, 252),
-            inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+        border: 2px solid rgb(252, 1, 1);
+        box-shadow: 0px 0px 100px rgb(252, 1, 1),
+            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
     }
 
     /* 25% {
@@ -833,15 +833,15 @@
     } */
 
     30% {
-        border: 2px solid rgb(1, 235, 252);
-        box-shadow: 0px 0px 100px rgb(1, 235, 252),
-            inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+        border: 2px solid rgb(252, 1, 1);
+        box-shadow: 0px 0px 100px rgb(252, 1, 1),
+            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
     }
 
     100% {
-        border: 2px solid rgb(1, 235, 252);
-        box-shadow: 0px 0px 100px rgb(1, 235, 252),
-            inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+        border: 2px solid rgb(252, 1, 1);
+        box-shadow: 0px 0px 100px rgb(252, 1, 1),
+            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
     }
 }
 
@@ -874,7 +874,7 @@
 .sm_span_btn {
     padding-left: 5px;
     padding-right: 5px;
-    background-color: rgb(2, 153, 153) !important;
+    background-color: rgb(0, 0, 0) !important;
     height: 20px;
     display: flex;
     align-items: center;
@@ -895,7 +895,7 @@
     align-items: center;
     justify-content: center;
     color: white !important;
-    background-color: rgb(2, 153, 153) !important;
+    background-color: rgb(0, 0, 0) !important;
 }
 
 .sm_span_btn .trash {
@@ -1488,7 +1488,7 @@ input:checked+.slider:after {
 .c-button .c-main:hover {
     box-shadow: inset 0px 0px 5px rgba(17, 17, 17, 0.6);
     border: 1px solid rgba(26, 26, 26, 0.5);
-    color: rgb(30, 255, 0);
+    color: rgb(255, 0, 0);
 }
 
 .upload_questions {
@@ -2104,7 +2104,7 @@ filter: blur(10px);
 transform: scale(0.9, 0.9);
 } */
 .cardi {
-    background-color: #25a68c21;
+    background-color: #a6252521;
     width: 95%;
     border-radius: 10px;
     border-top: 2px double rgb(255, 0, 0);
