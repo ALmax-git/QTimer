@@ -404,7 +404,9 @@
                                 <div class="col-5"><strong>{{ ++$count }} - </strong>{{ $question->text }}</div>
                                 <div class="col-2"></div>
                                 @foreach ($question->options as $option)
-                                  <div class="col-1">{{ $option->option }}</div>
+                                  <div class="col-1 {{ $option->is_correct == 1 ? 'text-primary fw-bolder' : '' }}">
+
+                                    {{ $option->option }}</div>
                                 @endforeach
                                 <div class="col-1">
 

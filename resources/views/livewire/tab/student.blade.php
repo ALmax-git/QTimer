@@ -1,11 +1,11 @@
 <div class="h-75 m-3 w-full bg-black"
-  style="border-left: 2px solid #02f417; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #02f417;">
-  <div class="cards flex flex-wrap">
-    <div class="card bg-black">
-      <div class="card-hearder">
-        <h1 style="width: fit-content; border-bottom: 1px solid #02f417;">My Staff and Students</h1>
+  style="border-left: 2px solid #f40202; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #f40202;">
+  <div class="cards bg-black">
+    <div class="bg-black">
+      <div class="bg-black">
+        <h1 style="width: fit-content; border-bottom: 1px solid #f40202;">My Staff and Students</h1>
       </div>
-      <div class="card-body">
+      <div class="bg-black">
 
         @if ($cormfirm_delete)
           <div class="d-flex h-full w-full" style="background-color: #000000a1; z-index: 1000;  justify-content: center;">
@@ -29,13 +29,13 @@
               <div class="col-3">Email</div>
               <div class="col-1">Device</div>
               <div class="col-1">Last Seen</div>
-              <div class="col-1">User Type</div>
+              <div class="col-1">Role</div>
               <div class="col-1">Action</div>
             </div>
           </div>
         </div>
         @php
-        $count = 0;
+          $count = 0;
         @endphp
         @foreach ($sessions as $session)
           @if ($session->user)
@@ -60,18 +60,17 @@
                 </div>
               </div>
             </div>
-	  @else
-
+          @else
             <div class="cardh">
               <div class="cardi">
                 <div class="row" style="padding: 5px !important; text-align: left;">
                   <div class="col-1">{{ ++$count }}</div>
-                  <div class="col-3">{{ "" }}</div>
-                  <div class="col-3">{{ "" }}</div>
+                  <div class="col-3">{{ '' }}</div>
+                  <div class="col-3">{{ '' }}</div>
                   <div class="col-1">{{ $session->ip_address }}</div>
                   <div class="col-1">{{ \Carbon\Carbon::parse($session->last_activity)->format('H:i') }}</div>
                   <div class="col-1">
-                   
+
                   </div>
                   <div class="col-2">
 

@@ -73,6 +73,9 @@
         </div>
       </div>
     </div>
+    <div class="col-sm-12 col-xl-12">
+      <livewire:q-timer-live-progress />
+    </div>
   </div>
   @livewire('dashboard.menu')
   <div class="row">

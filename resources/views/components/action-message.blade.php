@@ -1,6 +1,6 @@
 @props(['on'])
 
-<div style="display: none; background-color: rgba(0, 0, 0, 0) !important; color: rgb(18, 251, 18);"
+<div style="display: none; background-color: rgba(0, 0, 0, 0) !important; color: rgb(251, 18, 18);"
   x-data="{ shown: false, timeout: null }" x-init="@this.on('{{ $on }}', () => {
       clearTimeout(timeout);
       shown = true;
