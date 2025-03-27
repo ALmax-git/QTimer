@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('app');
+    return view('dashboard');
 })->name('app');
 
 Route::post('license', [PaymentController::class, 'buy_license'])->name('buy_license');

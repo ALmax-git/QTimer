@@ -98,8 +98,8 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end bg-secondary rounded-0 rounded-bottom m-0 border-0">
                 <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>
+                <a class="dropdown-item" wire:click='logout'>Log Out</a>
+                <a class="dropdown-item" wire:click='exit_qtimer'>Exit</a>
               </div>
             </div>
           </div>

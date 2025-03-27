@@ -89,6 +89,12 @@ class Control extends Component
         User::findOrFail($id)->delete();
         session()->flash('message', 'Student deleted successfully!');
     }
+    public function sync_all()
+    {
+        // Delete all sessions without a user_id
+        \App\Models\Session::whereNull('user_id')->delete();
+        $this->mount();
+    }
     public function render()
     {
         $recent_students = Auth::user()->school->students()
