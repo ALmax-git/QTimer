@@ -35,6 +35,7 @@ class App extends Component
     }
     public function render()
     {
+        \App\helpers\RequestTracker::track();
         return view('livewire.app');
     }
 }

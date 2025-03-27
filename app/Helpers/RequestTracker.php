@@ -9,16 +9,29 @@ class RequestTracker
 {
     public static function track()
     {
-        // Get current timestamp rounded to nearest 2-minute interval
-        $currentTime = Carbon::now()->startOfMinute()->subMinutes(Carbon::now()->minute % 2);
+        // Get current timestamp rounded down to the nearest 2-minute interval
+        $roundedTime = Carbon::now()->startOfMinute()->subMinutes(Carbon::now()->minute % 2);
 
-        // Find or create a record for the current 2-minute interval
-        $requestData = QTimerRequest::firstOrCreate(
-            ['created_at' => $currentTime],
-            ['count' => 0]
-        );
-        dd($requestData);
+        // Check if a record already exists for the current 2-minute interval
+        $requestData = QTimerRequest::where('rounded_at', $roundedTime)->first();
+
+        if (!$requestData) {
+            // If no record exists, create a new one with count = 1
+            $requestData = new QTimerRequest();
+            $requestData->rounded_at = $roundedTime;
+            $requestData->count = 1;
+            $requestData->save();
+        } else {
+            // If record exists, increment the count
+            $requestData->increment('count');
+        }
+
+
+
         // Increment request count
-        $requestData->increment('count');
+        // Optionally, you can log the request or perform other actions here    
+        // Log::info('Request tracked at ' . $roundedTime . ' with count: ' . $requestData->count);
+        // Return the request data if needed
+        return $requestData;
     }
 }

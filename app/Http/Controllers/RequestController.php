@@ -12,7 +12,7 @@ class RequestController extends Controller
     public function trackRequest()
     {
         $requestData = QTimerRequest::orderBy('created_at', 'desc')
-            ->limit(20)
+            ->limit(15)
             ->get()
             ->reverse() // To display in chronological order
             ->values();

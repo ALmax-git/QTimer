@@ -30,6 +30,7 @@ use Livewire\Component;
 
 class School extends Component
 {
+
     use LivewireAlert;
     use WithFileUploads;
     public $main_model = false, $new_model = false, $questions_upload = false, $students_upload = false;
@@ -655,6 +656,7 @@ class School extends Component
     }
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->school = ModelsSchool::find(Auth::user()->school->id);
         $this->school_name = $this->school->name;
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;

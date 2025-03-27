@@ -656,6 +656,7 @@ class Menu extends Component
     }
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->school = ModelsSchool::find(Auth::user()->school->id);
         $this->school_name = $this->school->name;
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;

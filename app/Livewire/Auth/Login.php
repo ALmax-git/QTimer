@@ -42,6 +42,7 @@ class Login extends Component
     }
     public function render()
     {
+        \App\helpers\RequestTracker::track();
         return view('livewire.auth.login');
     }
 }

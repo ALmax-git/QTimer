@@ -99,6 +99,7 @@ class Subject extends Component
     }
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->staff = User::find(Auth::user()->id);
         $this->currentSubject = $this->staff->subjects->first();
         if (!$this->currentSubject) {

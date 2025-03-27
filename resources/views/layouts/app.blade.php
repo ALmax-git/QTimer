@@ -40,6 +40,8 @@
 
     <!-- Favicon -->
     <link type="image/x-icon" href="{{ asset('QTimer.png') }}" rel="icon">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     @if (Auth::user())
       @if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master)
         <!-- Google Web Fonts -->
@@ -56,9 +58,6 @@
         <!-- Libraries Stylesheet -->
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
@@ -78,16 +77,16 @@
     @yield('content')
 
     @livewireScripts
+    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <x-livewire-alert::scripts />
+
+    <!-- JavaScript Libraries -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     @if (Auth::user())
       @if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master)
-        <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
-        <script src="{{ asset('node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
-        <x-livewire-alert::scripts />
-
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="lib/chart/chart.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/waypoints/waypoints.min.js"></script>

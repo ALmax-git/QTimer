@@ -41,6 +41,7 @@ class Student extends Component
     }
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->sessions = Session::get();
     }
     public function render()

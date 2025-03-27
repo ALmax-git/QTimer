@@ -56,9 +56,99 @@
       <a class="sidebar-toggler flex-shrink-0" href="#">
         <i class="fa fa-bars"></i>
       </a>
-      <form class="d-none d-md-flex ms-4">
+      {{-- <form class="d-none d-md-flex ms-4">
         <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-      </form>
+      </form> --}}
+      <style>
+        .clock {
+          position: relative;
+          /* width: 100%;
+          height: 120px; */
+          background: rgba(116, 100, 100, 0);
+          /* box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1); */
+          z-index: 1000;
+          border-radius: 10px;
+          /* border: 1px solid rgba(255, 255, 255, 0.1); */
+          backdrop-filter: blur(20px);
+        }
+
+        .clock .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          /* height: 100%; */
+        }
+
+        .clock .container h2 {
+          font-size: 2em;
+          color: #f3f3f3;
+        }
+
+        .clock .container h2:nth-child(odd) {
+          padding: 5px;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.04);
+          box-shadow: 0px 14px 24px rgba(0, 0, 0, 0);
+          margin: 0 8px;
+        }
+
+        .clock .container h2#seconds {
+          color: #ff0000;
+        }
+
+        .clock .container span {
+          position: relative;
+          top: -10px;
+          font-size: 0.9em;
+          color: #f3f3f3;
+          font-weight: 700;
+        }
+      </style>
+      <section>
+        <div class="clock">
+          <div class="container">
+            <h2 id="hour">00</h2>
+            <h2 class="dot">:</h2>
+            <h2 id="minute">00</h2>
+            <h2 class="dot">:</h2>
+            <h2 id="seconds">00</h2>
+            <span id="ampm">AM</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCRIPT JAVASCRIPT -->
+      <script type="text/javascript">
+        function clock() {
+          let hour = document.getElementById('hour');
+          let minute = document.getElementById('minute');
+          let seconds = document.getElementById('seconds');
+          let ampm = document.getElementById('ampm');
+
+
+          let h = new Date().getHours();
+          let m = new Date().getMinutes();
+          let s = new Date().getSeconds();
+          var am = 'AM';
+
+          if (h > 12) {
+            h = h - 12;
+            am = 'PM';
+          }
+
+          h = (h < 10) ? '0' + h : h;
+          m = (m < 10) ? '0' + m : m;
+          s = (s < 10) ? '0' + s : s;
+
+          hour.innerHTML = h;
+          minute.innerHTML = m;
+          seconds.innerHTML = s;
+          ampm.innerHTML = am;
+
+        };
+
+        var interval = setInterval(clock, 1000);
+      </script>
       <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">

@@ -6,13 +6,14 @@ use App\Models\School;
 use App\Models\Set;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithPagination;
 use Livewire\Component;
 
 class Control extends Component
 {
 
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     public $studentId;
     public $showViewModal = false;
@@ -26,6 +27,7 @@ class Control extends Component
 
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->school = School::find(Auth::user()->school->id);
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;
     }
@@ -57,10 +59,12 @@ class Control extends Component
         if ($this->server_is_up) {
             logger("Dispatching server-up event");
             $this->dispatch('server-up');
+            $this->alert('success', 'Server is live on' . url('/'));
         } else {
             logger("Dispatching server-down event");
             $this->dispatch('server-down');
         }
+        \App\helpers\RequestTracker::track();
     }
 
     public function viewStudent($id)

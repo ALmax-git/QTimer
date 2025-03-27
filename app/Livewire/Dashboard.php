@@ -34,6 +34,7 @@ class Dashboard extends Component
     }
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->tab = 'Dashboard';
     }
     public function render()

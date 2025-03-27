@@ -11,6 +11,7 @@ class Exams extends Component
     public $exams, $exam;
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $this->load_exams();
     }
 

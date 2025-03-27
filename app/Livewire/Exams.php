@@ -296,6 +296,7 @@ class Exams extends Component
      */
     public function mount()
     {
+        \App\helpers\RequestTracker::track();
         $user = Auth::user();
 
         if (!$user || !$user->sets) {
