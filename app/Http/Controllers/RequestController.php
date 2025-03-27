@@ -10,28 +10,12 @@ use Carbon\Carbon;
 class RequestController extends Controller
 {
     public function trackRequest()
-    { // Find today's record or create a new one
-        $requestData = QTimerRequest::firstOrCreate(
-            ['created_at' => Carbon::today()],
-            ['count' => 0]
-        );
-
-        // Increment request count
-        $requestData->increment('count');
-
-        return response()->json([
-            'timestamp' => Carbon::now()->format('H:i:s'),
-            'request_count' => $requestData->count
-        ]);
-        // Get the current request count
-        // $count = Cache::get('qtimer_request_count', 0);
-
-        // // Update the count in cache
-        // Cache::increment('qtimer_request_count');
-
-        // return response()->json([
-        //     'timestamp' => Carbon::now()->format('H:i:s'),
-        //     'request_count' => $count
-        // ]);
+    {
+        $requestData = QTimerRequest::orderBy('created_at', 'desc')
+            ->limit(20)
+            ->get()
+            ->reverse() // To display in chronological order
+            ->values();
+        return response()->json($requestData);
     }
 }

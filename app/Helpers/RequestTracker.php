@@ -17,7 +17,7 @@ class RequestTracker
             ['created_at' => $currentTime],
             ['count' => 0]
         );
-
+        dd($requestData);
         // Increment request count
         $requestData->increment('count');
     }
