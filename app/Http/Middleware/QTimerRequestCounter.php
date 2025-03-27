@@ -5,7 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Cache;
+use App\Helpers\RequestTracker;
+
 
 class QTimerRequestCounter
 {
@@ -17,7 +18,8 @@ class QTimerRequestCounter
     public function handle(Request $request, Closure $next): Response
     {
 
-        Cache::increment('qtimer_request_count');
+        // Call the helper function to track the request
+        RequestTracker::track();
         return $next($request);
     }
 }

@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class QTimerRequest extends Model
 {
-    //
+
+    protected $fillable = ['count'];
 }
