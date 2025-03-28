@@ -37,7 +37,7 @@
         <i class="fa fa-desktop fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Connected</p>
-          <h6 class="mb-0">{{ count(\App\Models\Session::get()) }} &nbsp;&nbsp;<i class="fa fa-sync text-primary"
+          <h6 class="mb-0">{{ count(\App\Models\Session::get()) }} &nbsp;&nbsp;<i class="fa fa-refresh text-primary"
               style="cursor: pointer;" wire:click='sync_all'></i>
           </h6>
         </div>

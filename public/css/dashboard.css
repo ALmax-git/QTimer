@@ -1501,7 +1501,7 @@ input:checked+.slider:after {
     border-bottom: 2px solid #f40202;
     border-radius: 10px;
     box-shadow: 0 10px 5px -5px rgba(255, 0, 0, 0.398), 0 10px 10px -5px rgba(17, 18, 7, 0.735);
-    background-color: #111311;
+    background-color: #0b0101b7;
 }
 
 .dismiss {
