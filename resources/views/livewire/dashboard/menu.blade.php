@@ -3,7 +3,7 @@
   @if ($main_model)
     <div class="modal-dialog modal-xl modal-dialog-scrollable"
       style="position: fixed; top: 10%; background-color: #d1d5db00 !important;">
-      <div class="modal-content bg-dark text-white" style="width: 80vw; margin: auto;">
+      <div class="modal-content bg-dark text-white" style="width: 80vw; margin: auto; border: 2px solid #f40202;">
         <div class="modal-header d-flex justify-content-between">
           <div class="logo d-flex">
             <h3
@@ -28,8 +28,8 @@
             @endif
           </div>
         </div>
-        <div class="modal-body bg-secondary w-full p-3"
-          style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202; height: 60vh; padding-bottom: 10px;">
+        <div class="modal-body w-full bg-black p-3"
+          style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202; border-bottom: 4px solid  #f40202; height: 65vh; padding-bottom: 10px;">
 
           @if ($new_model)
 
@@ -755,7 +755,7 @@
                       <div class="d-flex p-1" style="justify-content: space-between;">
                         <div class="d-flex" style="justify-content: space-between; width: 66%;">
                           <div class="text-left">
-                            <h3>{{ $subject->title }}</h3>
+                            <b>{{ $subject->title }}</b>
                           </div>
                           <div class="text-center">Questions: {{ count($subject->questions) }}</div>
                         </div>
@@ -823,7 +823,7 @@
                       <div class="d-flex p-1" style="justify-content: space-between;">
                         <div class="d-flex" style="justify-content: space-between; width: 60%;">
                           <div class="text-left">
-                            <h3>{{ $set->name }}</h3>
+                            <b>{{ $set->name }}</b>
                           </div>
                           <div class="text-center">Users: {{ count($set->users) }}</div>
                         </div>

@@ -16,7 +16,7 @@
     </div>
     <div class="col-sm-6 col-xl-3">
       <div class="bg-secondary d-flex align-items-center justify-content-between rounded p-4">
-        <i class="fa fa-chalkboard-teacher fa-3x text-primary"></i>
+        <i class="fa bi-people fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Total Sets</p>
           <h6 class="mb-0">{{ count($school->sets) }}</h6>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-6 col-xl-3">
       <div class="bg-secondary d-flex align-items-center justify-content-between rounded p-4">
-        <i class="fa fa-file-alt fa-3x text-primary"></i>
+        <i class="fa bi-files fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Total Exams</p>
           <h6 class="mb-0">{{ count(\App\Models\Exam::get()) }}</h6>
@@ -209,11 +209,11 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const clickSound = new Audio("success.mp3");
+      const success_sound = new Audio("success.mp3");
 
       Livewire.on("server-up", () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
+        success_sound.currentTime = 0;
+        success_sound.play();
       });
       Livewire.on('server-up', () => {
         console.log("Server is UP - Playing ON sound");

@@ -59,7 +59,7 @@ class Control extends Component
         if ($this->server_is_up) {
             logger("Dispatching server-up event");
             $this->dispatch('server-up');
-            $this->alert('success', 'Server is live on' . url('/'));
+            $this->alert('success', 'Server is live on ' . url('/'));
         } else {
             logger("Dispatching server-down event");
             $this->dispatch('server-down');

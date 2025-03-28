@@ -1,4 +1,4 @@
-<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 5000);">
+<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 15000);">
   @php
     use Illuminate\Support\Facades\Auth;
   @endphp
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="col-lg-2">
-          <strong class="p-2" :class="{ 'text-danger': timeInSeconds <= warningThreshold }">
+          <strong class="p-2" :class="{ 'text-danger': secondsLeft / 60 < 3 }">
             <span class="font-bold" x-text="parseInt(secondsLeft / 60)"></span>:
             <span class="font-bold" x-text="parseInt(secondsLeft % 60)"></span>
           </strong>
@@ -288,7 +288,8 @@
                         Minutes
                         {{-- {{ (\Carbon\Carbon::parse($exam->finish_time)->timestamp - \Carbon\Carbon::parse($exam->start_time)->timestamp) % 60 }} --}}
                       </p>
-                      <button class="start_x" wire:click='start_x("{{ write($exam->id) }}")'>
+                      <button class="start_x" onclick="enterFullScreen()"
+                        wire:click='start_x("{{ write($exam->id) }}")'>
                         S t a r t
                         <div id="clip">
                           <div class="corner" id="leftTop"></div>
@@ -324,4 +325,61 @@
     <h1 style="text-align: center; font-weight: bold; color: whitesmoke;"></h1>
   @endif
 
+  <script>
+    const alert_sound = new Audio("alert.mp3");
+    document.addEventListener("keydown", function(event) {
+      if (
+        event.key === "F11" || // Disable F11 (exit fullscreen)
+        event.key === "Escape" || // Disable ESC (exit fullscreen)
+        (event.ctrlKey && event.key === "Tab") || // Disable Ctrl+Tab (switch tabs)
+        (event.altKey && event.key === "Tab") || // Disable Alt+Tab (switch windows)
+        (event.ctrlKey && event.key === "w") || // Disable Ctrl+W (close tab)
+        (event.metaKey && event.key === "q") || // Disable Cmd+Q (Mac quit)
+        (event.ctrlKey && event.shiftKey && event.key === "I") // Disable Ctrl+Shift+I (Dev Tools)
+      ) {
+        event.preventDefault();
+        alert_sound.currentTime = 0;
+        alert_sound.play();
+      }
+    });
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    function enterFullScreen() {
+      let elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { // Firefox
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE/Edge
+        elem.msRequestFullscreen();
+      }
+    }
+
+    // Trigger full-screen mode
+
+
+    // Prevent F11 and Escape key from exiting full-screen
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "F11" || event.key === "Escape") {
+        event.preventDefault();
+      }
+    });
+
+    // Detect if user exits full-screen and force re-entry
+    document.addEventListener("fullscreenchange", function() {
+      if (!document.fullscreenElement) {
+        enterFullScreen();
+      }
+    });
+
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) {
+        alert_sound.currentTime = 0;
+        alert_sound.play();
+      }
+    });
+    // });
+  </script>
 </div>

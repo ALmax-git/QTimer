@@ -224,23 +224,16 @@ class Exams extends Component
         $q_and_a = QuestionAnswer::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->pluck('question_id');
 
         $this->attemptedQuestions = $q_and_a->toArray();
-        $this->check_for_submit();
+        \App\helpers\RequestTracker::track();
     }
 
-    public function check_for_submit()
-    {
-        if ($this->currentSubjectIndex === count($this->subjects) - 1 && $this->currentQuestionIndex === count($this->questions) - 1) {
-            $this->can_submit = true;
-        } else {
-            $this->can_submit = false;
-        }
-    }
 
     public function reveil()
     {
         $this->start = true;
         $this->can_review = true;
         $this->finished = false;
+        \App\helpers\RequestTracker::track();
     }
     public function submit()
     {
@@ -278,6 +271,7 @@ class Exams extends Component
         $Result->update([
             'result' => $result,
         ]);
+        \App\helpers\RequestTracker::track();
     }
     // Handle the countdown logic for the remaining time
     public function updateCountdown()
@@ -319,6 +313,7 @@ class Exams extends Component
     {
 
         $this->server_is_live = Auth::user()->school->server_is_up;
+        \App\helpers\RequestTracker::track();
     }
     public function render()
     {

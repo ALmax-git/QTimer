@@ -52,8 +52,9 @@
           rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="{{ asset('vendor/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+
+        <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -62,6 +63,7 @@
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/icons.css') }}" rel="stylesheet">
       @else
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
       @endif
@@ -73,7 +75,7 @@
 
   </head>
 
-  <body>
+  <body class="noselect">
     @yield('content')
 
     @livewireScripts
@@ -84,7 +86,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     @if (Auth::user())
       @if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master)
         <script src="lib/chart/chart.min.js"></script>

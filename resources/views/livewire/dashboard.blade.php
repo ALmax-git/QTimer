@@ -13,7 +13,7 @@
   <div class="sidebar pb-3 pe-4">
     <nav class="navbar bg-secondary navbar-dark">
       <a class="navbar-brand mx-4 mb-3" href="#">
-        <h3 class="text-primary"><u><i class="fa fa-user-edit me-2"></i>QTimer</u></h3>
+        <h3 class="text-primary"><u><i class="fa bi-pen me-2"></i>QTimer</u></h3>
       </a>
       <div class="d-flex align-items-center mb-4 ms-4">
         <div class="position-relative">
@@ -31,11 +31,11 @@
       <div class="navbar-nav w-100">
 
         <a class="nav-item nav-link {{ $tab == 'Dashboard' ? 'active' : '' }}" href="/"
-          wire:click='toggle_tab("Dashboard")'><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+          wire:click='toggle_tab("Dashboard")'><i class="fa bi-bar-chart me-2"></i>Dashboard</a>
         <span class="nav-item nav-link {{ $tab == 'Profile' ? 'active' : '' }}" href="#"
-          wire:click='toggle_tab("Profile")'><i class="fa fa-user-alt me-2"></i>Profile</span>
+          wire:click='toggle_tab("Profile")'><i class="fa bi-person me-2"></i>Profile</span>
         <span class="nav-item nav-link {{ $tab == 'Candidates' ? 'active' : '' }}" href="#"
-          wire:click='toggle_tab("Candidates")'><i class="fa fa-user-graduate me-2"></i>Candidates</span>
+          wire:click='toggle_tab("Candidates")'><i class="fa fa-users me-2"></i>Candidates</span>
         {{-- 
             <span class="nav-item nav-link {{ $tab == 'Students' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Students")'><i class="fa fa-user-graduate me-2"></i>Students</span>
@@ -150,13 +150,13 @@
         var interval = setInterval(clock, 1000);
       </script>
       <div class="navbar-nav align-items-center ms-auto">
-        <div class="nav-item dropdown">
+        {{-- <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
             <i class="fa fa-envelope me-lg-2"></i>
             <span class="d-none d-lg-inline-flex">Message</span>
           </a>
           <div class="dropdown-menu dropdown-menu-end bg-secondary rounded-0 rounded-bottom m-0 border-0">
-            {{-- <a class="dropdown-item" href="#">
+           <a class="dropdown-item" href="#">
                   <div class="d-flex align-items-center">
                     <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                     <div class="ms-2">
@@ -164,11 +164,11 @@
                       <small>15 minutes ago</small>
                     </div>
                   </div>
-                </a> --}}
+                </a> -
             <hr class="dropdown-divider">
             <a class="dropdown-item text-center" href="#">Comming Soon</a>
           </div>
-        </div>
+        </div> --}}
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
             <i class="fa fa-bell me-lg-2"></i>
