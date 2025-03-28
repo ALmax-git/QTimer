@@ -12,7 +12,12 @@ class Result extends Model
         'exam_id',
         'result',
         'time_spent',
-        'question_count',
+        'total_question_count',
+        'attempt_question_count',
+        'status',
+        'started_at',
+        'submitted_at',
+        'last_seen_at'
     ];
 
     public function user()

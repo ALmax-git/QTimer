@@ -184,11 +184,11 @@
                             <div class="input-group input-group-lg mb-3">
                               <div class="input-group-text"
                                 style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
-                                <label for="new_exam_description">Exam Description</label>
+                                <label for="new_exam_description">Exam Intruction</label>
                               </div>
                               <textarea class="form-control" type="text" value=""
                                 style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
-                                wire:model.live='new_exam_description' placeholder="Write Exam Description in full" autocomplete="description"></textarea>
+                                wire:model.live='new_exam_description' placeholder="Write Exam Intruction in full" autocomplete="Intruction"></textarea>
                             </div>
                           </div>
                           <div class="col-12">

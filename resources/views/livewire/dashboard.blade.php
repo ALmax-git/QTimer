@@ -36,6 +36,8 @@
           wire:click='toggle_tab("Profile")'><i class="fa bi-person me-2"></i>Profile</span>
         <span class="nav-item nav-link {{ $tab == 'Candidates' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Candidates")'><i class="fa fa-users me-2"></i>Candidates</span>
+        <span class="nav-item nav-link {{ $tab == 'Settings' ? 'active' : '' }}" href="#"
+          wire:click='toggle_tab("Settings")'><i class="fa fa-gear me-2"></i>Settings</span>
         {{-- 
             <span class="nav-item nav-link {{ $tab == 'Students' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Students")'><i class="fa fa-user-graduate me-2"></i>Students</span>

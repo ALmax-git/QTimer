@@ -1,4 +1,4 @@
-<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 15000);">
+<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 1500);">
   @php
     use Illuminate\Support\Facades\Auth;
   @endphp
@@ -236,21 +236,20 @@
             <div class="name">{{ Auth::user()->email }}</div>
             <br>
             @if ($exam->is_mock)
+              Score: {{ $score }}
               <br>
             @endif
-            Score: {{ $score }}
-            <br>
             Attempt: {{ $attempt_count }}
             <br>
             Question: {{ $question_count }}
             <br>
             {{ $exam->title }}
             <br>
-            {{-- @if ($exam->is_mock) --}}
-            <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
-            {{-- @else --}}
-            {{-- <button class="btn btn-success">Thanks you!</button> --}}
-            {{-- @endif --}}
+            @if ($exam->is_mock)
+              <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
+            @else
+              <button class="btn btn-success">Thanks you!</button>
+            @endif
           </div>
         </div>
       </div>
@@ -283,11 +282,12 @@
                             [Q:{{ count($subject->questions) }}]</button>
                         @endforeach
                       </p>
-                      <p class="text-sm">Duration:
+                      <p class="text-sm"><strong>Duration: </strong>
                         {{ floor((\Carbon\Carbon::parse($exam->finish_time)->timestamp - \Carbon\Carbon::parse($exam->start_time)->timestamp) / 60) }}
                         Minutes
                         {{-- {{ (\Carbon\Carbon::parse($exam->finish_time)->timestamp - \Carbon\Carbon::parse($exam->start_time)->timestamp) % 60 }} --}}
                       </p>
+                      <p><strong>Intruction: </strong> {{ $exam->description }}</p>
                       <button class="start_x" onclick="enterFullScreen()"
                         wire:click='start_x("{{ write($exam->id) }}")'>
                         S t a r t

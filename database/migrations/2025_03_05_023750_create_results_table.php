@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->string('status')->default('progress');
+            $table->time('started_at')->nullable();
+            $table->time('submitted_at')->nullable();
+            $table->time('last_seen_at')->nullable();
             $table->integer('result')->nullable()->index();
-            $table->integer('question_count')->default(0);
+            $table->integer('total_question_count')->default(0);
+            $table->integer('attempt_question_count')->default(0);
             $table->integer('time_spent')->nullable()->index();
             $table->foreignId('user_id')->nullable()->cascade();
             $table->foreignId('exam_id')->nullable()->cascade();

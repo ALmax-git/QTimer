@@ -19,6 +19,7 @@ class Exams extends Component
 
     public $exams = [];
     public ?Exam $exam = null;
+    public ?Result $student_result;
     public bool $start = false;
     public bool $can_start = false;
     public string $message = '';
@@ -51,6 +52,7 @@ class Exams extends Component
 
     public function next()
     {
+        dd($this->student_result);
         if ($this->currentQuestionIndex < count($this->questions) - 1) {
             $this->currentQuestionIndex++;
             $this->currentQuestion = $this->questions[$this->currentQuestionIndex];
@@ -130,9 +132,28 @@ class Exams extends Component
             return;
         }
 
-        $this->can_start = true;
-        $this->remainingTime = $this->exam->is_mock ? ($exam_finish_time - $exam_start_time) : ($exam_finish_time - $this->exam_start_time);
 
+        if (Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first()) {
+            $result = Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first();
+        } else {
+            $result = Result::create([
+                'user_id' => Auth::id(),
+                'exam_id' => $this->exam->id,
+                'total_question_count' => 0,
+                'attempt_question_count' => 0,
+                'status' => 'progress',
+                'result' => 0,
+                'time_spent' => null,
+                'started_at' => now()->timestamp,
+                'last_seen_at' => now()->timestamp,
+                'submitted_at' => null,
+            ]);
+        }
+        $this->student_result = $result;
+        $this->can_start = true;
+        $this->remainingTime = $this->exam->is_mock ? ($exam_finish_time - $exam_start_time) : (($exam_finish_time - $exam_start_time) + ($result->started_at - $result->last_seen_at));
+
+        // dd($exam_finish_time, $exam_start_time, $result->started_at, $result->last_seen_at);
         $this->exam->subjects = $this->exam->subjects->shuffle();
         foreach ($this->exam->subjects as $subject) {
             $subject->questions = $subject->questions->shuffle();
@@ -241,22 +262,24 @@ class Exams extends Component
         $this->question_count = 0;
         $this->start = false;
         $this->finished = true;
+        $this->student_result->last_seen_at = now()->timestamp;
 
         foreach ($this->exam->subjects as $subject) {
             $this->question_count += $subject->questions->count();
         }
 
-        if (Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first()) {
-            $Result = Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first();
-        } else {
-            $Result = Result::create([
-                'user_id' => Auth::id(),
-                'exam_id' => $this->exam->id,
-                'question_count' => $this->question_count,
-                'result' => 0,
-                'time_spent' => now()->timestamp - $this->startTimeSeconds
-            ]);
-        }
+        // if (Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first()) {
+        //     $Result = Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first();
+        // } else {
+        //     $Result = Result::create([
+        //         'user_id' => Auth::id(),
+        //         'exam_id' => $this->exam->id,
+        //         'question_count' => $this->question_count,
+        //         'result' => 0,
+        //         'time_spent' => now()->timestamp - $this->startTimeSeconds
+        //     ]);
+        // }
+
         $question_answers = QuestionAnswer::where('user_id', Auth::user()->id)->where('exam_id', $this->exam->id)->get();
 
         $this->attempt_count = 0;
@@ -266,9 +289,15 @@ class Exams extends Component
                 ++$result;
             }
         }
-        $this->score = $result;
 
-        $Result->update([
+        $this->score = $result;
+        $this->student_result->status = 'submitted';
+        $this->student_result->total_question_count = $this->question_count;
+        $this->student_result->attempt_question_count = $this->attempt_count;
+        $this->student_result->submitted_at = now()->timestamp;
+
+        $this->student_result->save();
+        $this->student_result->update([
             'result' => $result,
         ]);
         \App\helpers\RequestTracker::track();
@@ -311,7 +340,12 @@ class Exams extends Component
      */
     public function live_check()
     {
-
+        // $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 15;
+        if ($this->can_start) {
+            $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 15;
+            $this->student_result->save();
+            // dd($this->student_result);
+        }
         $this->server_is_live = Auth::user()->school->server_is_up;
         \App\helpers\RequestTracker::track();
     }
