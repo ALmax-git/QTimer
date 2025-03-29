@@ -233,11 +233,17 @@
             <br>
             {{ Auth::user()->name }}
             <br>
-            <div class="name">{{ Auth::user()->email }}</div>
-            <br>
+            {{-- <div class="name">{{ Auth::user()->email }}</div> --}}
             @if ($exam->is_mock)
-              Score: {{ $score }}
-              <br>
+              @if ($school->allow_mock_result)
+                Score: {{ $score }}
+                <br>
+              @endif
+            @else
+              @if ($school->allow_live_result)
+                Score: {{ $score }}
+                <br>
+              @endif
             @endif
             Attempt: {{ $attempt_count }}
             <br>
@@ -245,10 +251,11 @@
             <br>
             {{ $exam->title }}
             <br>
-            @if ($exam->is_mock)
+            @if ($exam->is_mock && $school->allow_mock_review)
               <button class="btn btn-success" wire:click='reveil'>View Answers!</button>
             @else
-              <button class="btn btn-success">Thanks you!</button>
+              <br>
+              <livewire:thanks />
             @endif
           </div>
         </div>

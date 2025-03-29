@@ -18,6 +18,9 @@ return new class extends Migration
             $table->enum('status', ['active', 'expired', 'revoked'])->default('active');
             $table->enum('type', ['School', 'Institution', 'Others'])->default('School');
             $table->boolean('allow_mock')->default(false);
+            $table->boolean('allow_mock_result')->default('true');
+            $table->boolean('allow_live_result')->default('false');
+            $table->boolean('allow_mock_review')->default(true);
             $table->boolean('server_is_up')->default(false);
             $table->text('lincense');
             $table->foreignId('user_id')->cascade()->onDelete('cascade');

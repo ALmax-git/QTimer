@@ -21,6 +21,9 @@ class School extends Model
         'status',
         'type',
         'server_is_up',
+        'allow_mock_result',
+        'allow_live_result',
+        'allow_mock_review',
     ];
 
     public function students()

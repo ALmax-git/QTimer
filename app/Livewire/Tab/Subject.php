@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\QuestionsImport;
 use App\Models\Question;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -19,12 +20,127 @@ class Subject extends Component
     public $main_model = false, $questions_upload = false, $new_question_model = false;
     public $questions_file, $subject, $subject_id;
     public $staff, $currentSubject, $question, $cormfirm_delete = false;
-    public function create_new_question()
+    public $new_question = false, $image, $new_question_text, $new_question_more_info_link, $new_question_answer_explanation, $new_question_code_snippet;
+    // public $school_name;
+    public array $questionOptions = [];
+    public function create_new_obj_question()
+    {
+        DB::beginTransaction();
+        // $this->validate([
+        //     'question.question_text' => [
+        //         'string',
+        //         'required',
+        //     ],
+        //     'question.code_snippet' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'question.answer_explanation' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'question.more_info_link' => [
+        //         'string',
+        //         'nullable',
+        //     ],
+        //     'questionOptions' => [
+        //         'required'
+        //     ],
+        //     'questionOptions.*.option' => [
+        //         'required'
+        //     ],
+        // ]);
+        $this->question = new Question();
+        $file_name = '';
+        if ($this->image) {
+            $file_name = $this->image->store('obj', 'public') ?? '';
+        }
+        $this->question->text = $this->new_question_text;
+        $this->question->code_snippet = $this->new_question_code_snippet;
+        $this->question->answer_explanation = $this->new_question_answer_explanation;
+        $this->question->more_info_link = $this->new_question_more_info_link;
+        $this->question->image = $file_name ?? '';
+        $this->question->subject_id = $this->subject->id;
+        $this->question->save();
+
+        foreach ($this->questionOptions as $option) {
+            $this->question->options()->create([
+                'option' => $option['option'],
+                'is_correct' => $option['is_correct']
+            ]);
+        }
+        DB::commit();  // Commit transaction if everything is successful
+        $this->alert('success', 'Question created successfully!', [
+            'position' => 'top-end',
+            'toast' => true,
+            'timer' => 5000,
+        ]);
+        $this->new_question = false;
+        // $this->new_model = false;
+        $this->mount();
+    }
+
+    public function addQuestionsOption()
+    {
+        $this->questionOptions[] = [
+            'option' => '',
+            'is_correct' => false
+        ];
+    }
+
+    public function removeQuestionsOption($index)
+    {
+        unset($this->questionOptions[$index]);
+        $this->questionOptions = array_values(($this->questionOptions));
+    }
+
+    protected function rules(): array
+    {
+        return [
+            'question.question_text' => [
+                'string',
+                'required',
+            ],
+            'question.code_snippet' => [
+                'string',
+                'nullable',
+            ],
+            'question.answer_explanation' => [
+                'string',
+                'nullable',
+            ],
+            'question.more_info_link' => [
+                'string',
+                'nullable',
+            ],
+            'questionOptions' => [
+                'required'
+            ],
+            'questionOptions.*.option' => [
+                'required'
+            ],
+        ];
+    }
+
+    public function new_objective()
     {
         $this->main_model = true;
         $this->questions_upload = false;
         $this->new_question_model = true;
+        $this->new_question = false;
     }
+    public function create_question()
+    {
+        $this->new_question = true;
+        // dd($this);
+        $this->subject = ModelsSubject::find($this->currentSubject->id);
+    }
+    // public function create_new_question()
+    // {
+    //     $this->main_model = true;
+    //     $this->questions_upload = false;
+    //     $this->new_question_model = true;
+    // }
     public function delete_question($id)
     {
         $this->question = Question::find($id);

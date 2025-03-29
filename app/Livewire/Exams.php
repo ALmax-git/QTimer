@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\QuestionAnswer;
 use App\Models\QuestionOption;
 use App\Models\Result;
+use App\Models\School;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class Exams extends Component
     public $exams = [];
     public ?Exam $exam = null;
     public ?Result $student_result;
+    public ?School $school;
     public bool $start = false;
     public bool $can_start = false;
     public string $message = '';
@@ -326,6 +328,7 @@ class Exams extends Component
             $this->exams = collect();
             return;
         }
+        $this->school = School::find(Auth::user()->school->id);
 
         $allowMock = $user->school->allow_mock;
 

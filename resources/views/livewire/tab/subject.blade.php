@@ -2,29 +2,25 @@
 
   @if (!$main_model)
     <div class="h-75 m-3 w-full bg-black"
-      style="border-left: 2px solid #02f417; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #02f417;">
-      <div class="cards flex flex-wrap">
-        <div class="card bg-black">
-          <div class="card-hearder row" style="justify-content: space-between;">
+      style="border-left: 2px solid #f40202; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #ff0000;">
+      <div class="cards bg-black">
+        <div class="bg-black">
+          <div class="row" style="justify-content: space-between;">
             <div class="col-3">
-              <h3 style="width: fit-content; border-bottom: 1px solid #02f417; color: whitesmoke ; margin-left: 10px;">
+              <h3 style="width: fit-content; border-bottom: 1px solid #f40202; color: whitesmoke ; margin-left: 10px;">
                 {{ \Illuminate\Support\Str::upper($currentSubject->title ?? 'No Subject asign') }}</h3>
             </div>
             <div class="col-9 text-right" style="justify-content: right;">
               <input class="mode" id="theme-mode" type="checkbox" hidden="" />
               <div class="btn_container"
                 style="justify-content: end !important; color: #fff !important; align-items: flex-end">
-                <div class="wrap float-right bg-black text-white" style="color: #fff !important;">
-
-                  @foreach ($staff->subjects as $subject)
-                    <input class="rd-{{ $subject->id }}" id="rd-{{ $subject->id }}" name="number-selector"
-                      type="radio" value="subject{{ $subject->id }}"
-                      {{ $currentSubject->id == $subject->id ? 'checked' : '' }} />
-                    <label class="label" for="rd-{{ $subject->id }}" style="--index: {{ $subject->id - 1 }};"
-                      wire:click='change_subject("{{ write($subject->id) }}")'><span
-                        style="color: #fff !important;">{{ \Illuminate\Support\Str::upper($subject->title) }}</span></label>
+                <div class="d-flex float-right bg-black text-white" style="color: #fff !important;">
+                  @foreach ($staff->subjects as $key => $subject)
+                    <button
+                      class="btn btn-sm btn-{{ $currentSubject->id == $subject->id ? 'primary' : 'outline-primary' }} m-1"
+                      wire:click='change_subject("{{ write($subject->id) }}")'>{{ \Illuminate\Support\Str::upper($subject->title) }}</button>
                   @endforeach
-                  <button class="btn btn-sm float-center container-btn-file m-2"
+                  <button class="btn btn-sm float-center container-btn-file me-4 ms-2"
                     style="height: 40px; margin: auto; text-align: center;"
                     wire:click='upload_questions("{{ $currentSubject->id }}")'>
                     <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -51,13 +47,13 @@
                     </svg>
                     Upload Questions
                   </button>
-                  <button class="c-button float-center" type="button" style="margin: auto; text-align: center;"
-                    wire:click='create_new_question'>
+                  {{-- <button class="c-button float-center" type="button" style="margin: auto; text-align: center;"
+                    wire:click='create_question'>
                     <span class="c-main">
                       <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
                       Create
                     </span>
-                  </button>
+                  </button> --}}
 
                   <div class="bar"></div>
                   <div class="slidebar"></div>
@@ -65,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <div class="bg-black">
 
             @if ($cormfirm_delete)
               <div class="d-flex h-full w-full"
@@ -82,6 +78,31 @@
                 </div>
               </div>
             @endif
+
+            @if ($new_question)
+              <div class="d-flex h-full w-full"
+                style="background-color: #000000; z-index: 1000;  justify-content: center;">
+                <div class="warning_card" style="color: #f7f7f7 !important; border: 2px solid #ff2600 !important;">
+                  <div class="button-ctl_container">
+                    <button class="button-3d" wire:click='new_objective'>
+                      <div class="button-top">
+                        <span class="material-icons" style="color: #f7f7f7 !important; ">Objective</span>
+                      </div>
+                      <div class="button-bottom"></div>
+                      <div class="button-base"></div>
+                    </button>
+                    <button class="button-3d" wire:click='new_easay'>
+                      <div class="button-top">
+                        <span class="material-icons" style="color: #f7f7f7 !important; ">Easay</span>
+                      </div>
+                      <div class="button-bottom"></div>
+                      <div class="button-base"></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            @endif
+
             <div class="cardh">
               <div class="cardi">
                 <strong>
@@ -124,9 +145,9 @@
     </div>
   @else
     <div class="h-75 m-3 w-full bg-black"
-      style="border-left: 2px solid #53f402; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #02f417;">
+      style="border-left: 2px solid #f40202; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #f40202;">
       <div class="cards flex flex-wrap">
-        <div class="card bg-black">
+        <div class="bg-black">
           @if ($questions_upload)
             <hr>
             <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
@@ -191,47 +212,111 @@
               </form>
             </div>
           @elseif ($new_question_model)
-            <hr>
-            <div style="margin: auto">
-              @csrf
-              <h4 style="margin: auto; text-align: center; color: #fff !important;">{{ $currentSubject->title }}
-                Questions</h4>
-              <button class="dismiss" type="button" wire:click='cancel_upload'><strong>X</strong></button>
-              <p><br></p>
-
+            <div class="m-4 p-4">
+              <h1 class="text-center text-white">{{ $subject->title }}</h1>
+              <style>
+                .input-group-text {
+                  border: 1px solid #ff0000;
+                }
+              </style>
               <div class="input-group input-group-lg mb-3">
-                <div class="input-group-text"
-                  style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
-                  <label for="new_question_text">Question Text</label>
+                <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                  <label for="new_question_text">Question text</label>
                 </div>
                 <input class="form-control" type="text" value=""
-                  style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
-                  wire:model.live='new_question_text' placeholder="Write Staff Name" autofocus autocomplete="name">
+                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                  wire:model.live='new_question_text' placeholder="Write Question test" autofocus
+                  autocomplete="question">
+              </div>
+              <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
+                <p class="required text-left" style="text-align: left !important; color: #f40202;">
+                  <strong>Question Options</strong>
+                </p>
+                @foreach ($questionOptions as $index => $questionOption)
+                  <div class="input-group input-group-lg mb-3">
+                    <input class="form-control" id="questions_options_{{ $index }}"
+                      name="questions_options_{{ $index }}" type="text"
+                      style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                      placeholder="Write Option" wire:model.live="questionOptions.{{ $index }}.option"
+                      autocomplete="off">
+                    <div
+                      class="flex items-center"style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);">
+                      <input class="ml-4 mr-1" id="questionOptions.{{ $index }}.correct"
+                        name="questionOptions.{{ $index }}.is_correct" type="checkbox"
+                        wire:model.live="questionOptions.{{ $index }}.is_correct">
+                      <label for="questionOptions.{{ $index }}.is_correct">Correct</label>
+                      <button class="btn btn-danger ml-4" type="button"
+                        wire:click="removeQuestionsOption({{ $index }})">
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                  @error('questionOptions.*')
+                    <div class="validation-message mt-2 text-sm">
+                      {{ $errors->first('questionOptions.*') }}
+                    </div>
+                  @enderror
+                @endforeach
+                @error('questionOptions')
+                  <div class="validation-message">
+                    {{ $errors->first('questionOptions') }}
+                  </div>
+                @enderror
+                <div class="align-left text-left">
+                  <button class="btn btn-success mb-2 mt-2" type="button" style="text-align: left !important;"
+                    wire:click="addQuestionsOption">
+                    Add Option
+                  </button>
+                </div>
               </div>
 
               <div class="input-group input-group-lg mb-3">
-                <div class="input-group-text"
-                  style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
-                  <label for="new_staff_name">A</label>
+                <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                  <label for="image">Question Image</label>
+                </div>
+                <input class="form-control" type="file"
+                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                  wire:model.live='image' placeholder="Select Question Image" autocomplete="question">
+              </div>
+
+              <div class="input-group input-group-lg mb-3">
+                <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                  <label for="new_question_code_snippet">Code Snippet</label>
                 </div>
                 <input class="form-control" type="text" value=""
-                  style="background-color: rgba(0, 0, 0, 0); color: #28f100 !important; border: 2px solid rgb(60, 255, 0);"
-                  wire:model.live='new_staff_name' placeholder="Write Staff Name" autofocus autocomplete="name">
-                <div class="input-group-text"
-                  style="background-color: rgba(0, 0, 0, 0); color: #24da00df !important; ">
-                  <input class="input-checkbox" id="" name="" type="checkbox">
-                </div>
-
+                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                  wire:model.live='new_question_code_snippet' placeholder="Write Code snippet if any"
+                  autocomplete="question">
               </div>
-              <button class="c-button float-center" type="button" style="margin: auto; text-align: center"
-                wire:click='confirm_upload'>
+
+              <div class="input-group input-group-lg mb-3">
+                <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                  <label for="new_question_answer_explanation">Answer Explanation</label>
+                </div>
+                <input class="form-control" type="text" value=""
+                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                  wire:model.live='new_question_answer_explanation' placeholder="Write Answer Explanation if any"
+                  autocomplete="question">
+              </div>
+
+              <div class="input-group input-group-lg mb-3">
+                <div class="input-group-text" style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                  <label for="new_question_more_info_link">Usefull Link</label>
+                </div>
+                <input class="form-control" type="text" value=""
+                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                  wire:model.live='new_question_more_info_link' placeholder="Write more info link if any"
+                  autocomplete="question">
+              </div>
+
+              <br>
+
+              <button class="c-button" style="margin: auto;" wire:click='create_new_obj_question'>
                 <span class="c-main">
                   <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
-                  Submit File
+                  Create Question
                 </span>
               </button>
-              <br>
-              <br>
             </div>
           @endif
         </div>

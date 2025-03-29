@@ -38,6 +38,8 @@
           wire:click='toggle_tab("Candidates")'><i class="fa fa-users me-2"></i>Candidates</span>
         <span class="nav-item nav-link {{ $tab == 'Settings' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Settings")'><i class="fa fa-gear me-2"></i>Settings</span>
+        <span class="nav-item nav-link {{ $tab == 'Teacher' ? 'active' : '' }}" href="#"
+          wire:click='toggle_tab("Teacher")'><i class="fa fa-gear me-2"></i>Teacher</span>
         {{-- 
             <span class="nav-item nav-link {{ $tab == 'Students' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Students")'><i class="fa fa-user-graduate me-2"></i>Students</span>
@@ -214,21 +216,29 @@
         <livewire:tab.student />
       @break
 
+      @case('Settings')
+        <livewire:tab.settings />
+      @break
+
+      @case('Teacher')
+        <livewire:tab.subject />
+      @break
+
       @default
     @endswitch
 
     <!-- Footer Start -->
-    <div class="container-fluid px-4 pt-4">
-      <div class="bg-secondary rounded-top p-4">
-        <div class="row">
-          <div class="col-12 col-sm-6 text-sm-start text-center">
-            <center>
-              <p>&copy; <strong>ALmax</strong>, All Right Reserved.</p>
-            </center>
-          </div>
+    {{-- <div class="container-fluid px-4 pt-4"> --}}
+    <div class="row">
+      <div class="bg-secondary rounded-top mt-2 p-4">
+        <div class="col-12 col-sm-6 text-sm-start text-center">
+          <center>
+            <p>&copy; <strong>ALmax</strong>, All Right Reserved.</p>
+          </center>
         </div>
       </div>
     </div>
+    {{-- </div> --}}
     <!-- Footer End -->
   </div>
   <!-- Content End -->
