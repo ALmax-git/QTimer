@@ -139,7 +139,7 @@
                       </button>
                     @break
 
-                    @case('Subjets')
+                    @case('Subjects')
                       <div class="input-group input-group-lg mb-3">
                         <div class="input-group-text"
                           style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
@@ -383,8 +383,11 @@
                           <div class="cardi">
                             <strong>
                               <div class="row h5" style="padding: 5px !important; text-align: left;">
-                                <div class="col-5"># Question [{{ count($subject->questions) }}]</div>
-                                <div class="col-2"></div>
+                                <div class="col-5"># Question [{{ count($subject->questions_all) }}]
+                                  &nbsp;&nbsp;|&nbsp;&nbsp; Active Questions [{{ count($subject->questions_all_active) }}]
+                                </div>
+                                <div class="col-1">Type</div>
+                                <div class="col-1">Response</div>
                                 <div class="col-1">Option A</div>
                                 <div class="col-1">Option B</div>
                                 <div class="col-1">Option C</div>
@@ -397,20 +400,35 @@
                         @php
                           $count = 0;
                         @endphp
-                        @foreach ($subject->questions as $question)
+                        @foreach ($subject->questions_all as $question)
                           <div class="cardh">
                             <div class="cardi">
                               <div class="row" style="padding: 5px !important; text-align: left;">
-                                <div class="col-5"><strong>{{ ++$count }} - </strong>{{ $question->text }}</div>
-                                <div class="col-2"></div>
-                                @foreach ($question->options as $option)
-                                  <div class="col-1 {{ $option->is_correct == 1 ? 'text-primary fw-bolder' : '' }}">
+                                <div class="col-5">
+                                  @if ($question->status == 'in-active')
+                                    <strong>{{ ++$count }} - </strong><strike><i>{{ $question->text }}</i></strike>
+                                  @else
+                                    <strong>{{ ++$count }} - </strong>{{ $question->text }}
+                                  @endif
+                                </div>
+                                <div class="col-1">{{ $question->type }}</div>
+                                <div class="col-1">{{ $question->max_response }}</div>
+                                <div class="col-4">
+                                  <div class="row">
+                                    @foreach ($question->options as $option)
+                                      <div class="col-3 {{ $option->is_correct == 1 ? 'text-primary fw-bolder' : '' }}">
 
-                                    {{ $option->option }}</div>
-                                @endforeach
+                                        {{ $option->option }}</div>
+                                    @endforeach
+                                  </div>
+                                </div>
                                 <div class="col-1">
 
-                                  <button class="btn btn-sm btn-outline-danger ms-2"
+                                  <button
+                                    class="btn btn-sm btn-{{ $question->status == 'active' ? 'success' : 'primary' }} ms-1"
+                                    wire:click='toggle_question_status("{{ $question->id }}")'><i
+                                      class="bi bi-eye"></i></button>
+                                  <button class="btn btn-sm btn-outline-danger"
                                     wire:click='delete_question("{{ $question->id }}")'><i
                                       class="bi bi-trash"></i></button>
                                 </div>
@@ -541,7 +559,7 @@
                           </span>
                         </button>
                       @else
-                        <button class="c-button" style="margin: auto;" wire:click='create_new_obj_question'>
+                        <button class="c-button" style="margin: auto;" wire:click='create_new_question'>
                           <span class="c-main">
                             <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
                             Create {{ $model }}
@@ -774,11 +792,17 @@
                   <div class="cardh">
                     <div class="cardi">
                       <div class="d-flex p-1" style="justify-content: space-between;">
-                        <div class="d-flex" style="justify-content: space-between; width: 66%;">
-                          <div class="text-left">
+                        <div class="d-flex row"
+                          style="justify-content: space-between; width: 66%; text-align: left !important;">
+                          <div class="col-7">
                             <b>{{ $subject->title }}</b>
                           </div>
-                          <div class="text-center">Questions: {{ count($subject->questions) }}</div>
+                          <div class="col-5">
+                            <div class="row">
+                              <div class="col-6">Questions: {{ count($subject->questions_all) }}</div>
+                              <div class="col-6">Active: {{ count($subject->questions_all_active) }}</div>
+                            </div>
+                          </div>
                         </div>
                         <div class="d-flex" style="justify-content: space-between;">
                           <button class="btn btn-sm container-btn-file"
@@ -913,9 +937,9 @@
                   {{-- working here --}}
                   <div class="cardh">
                     <div class="cardi">
-                      <div class="row" style="padding: 5px !important;">
+                      <div class="row" style="padding: 5px !important; text-align: left !important;">
                         <div class="col-3">{{ $exam->title }} </div>
-                        <div class="col-2">{{ $exam->start_time }} To {{ $exam->finish_time }}</div>
+                        <div class="col-1">{{ $exam->start_time }} To {{ $exam->finish_time }}</div>
                         <div class="d-flex col-3 scrollable"
                           style="justify-content: space-between;padding: 5px !important; width: 200px; height: 40px; border-right: 1px solid #ff2600; border-left: 1px solid #ff2600; border-radius: 10px; overflow-y: scroll; overflow: scroll;">
                           <div class="d-flex">
@@ -930,21 +954,27 @@
                             @endforeach
                           </div>
                         </div>
-                        <div class="col-4" style="display: flex; justify-content: space-between;">
-                          <div></div>
-                          <div>
-                            <button class="btn btn-sm btn-outline-primary"
-                              wire:click='add_subject("{{ $exam->id }}")'>Add Subject</button>
-                            <button class="btn btn-sm btn-outline-primary"
-                              wire:click='add_five_minute("{{ $exam->id }}")'> +5
-                              Min</button>
-                            <button class="btn btn-sm btn-{{ $exam->is_visible ? 'info' : 'secondary' }}"
-                              wire:click='toggle_exam_visibility("{{ $exam->id }}")'>
-                              <i class="bi bi-eye"></i>
-                            </button>
-                            <button class="btn btn-sm btn-danger" wire:click='delete_exam("{{ $exam->id }}")'>
-                              <i class="bi bi-trash"></i>
-                            </button>
+                        <div class="col-5">
+                          <div class="row">
+                            <div class="col-5">
+                              @foreach ($exam->sets as $set)
+                                <small>{{ $set->name }}</small>
+                              @endforeach
+                            </div>
+                            <div class="col-7 align-end float-end">
+                              <button class="btn btn-sm btn-outline-primary"
+                                wire:click='add_subject("{{ $exam->id }}")'>Add Subject</button>
+                              <button class="btn btn-sm btn-outline-primary"
+                                wire:click='add_five_minute("{{ $exam->id }}")'> +5
+                                Min</button>
+                              <button class="btn btn-sm btn-{{ $exam->is_visible ? 'info' : 'secondary' }}"
+                                wire:click='toggle_exam_visibility("{{ $exam->id }}")'>
+                                <i class="bi bi-eye"></i>
+                              </button>
+                              <button class="btn btn-sm btn-danger" wire:click='delete_exam("{{ $exam->id }}")'>
+                                <i class="bi bi-trash"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -970,8 +1000,8 @@
             <button class="card1" style="color: #ffffff !important;" wire:click='open_main_model("Staffs")'>
               Staffs
             </button>
-            <button class="card2" style="color: #ffffff !important;" wire:click='open_main_model("Subjets")'>
-              Subjets
+            <button class="card2" style="color: #ffffff !important;" wire:click='open_main_model("Subjects")'>
+              Subjects
             </button>
           </div>
           <div class="down">

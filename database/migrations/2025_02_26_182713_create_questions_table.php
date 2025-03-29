@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('more_info_link')->nullable()->index();
             $table->foreignId('subject_id')->nullable()->cascade();
             $table->enum('status', ['active', 'in-active'])->default('active');
+            $table->enum('type', ['objective', 'essay'])->default('objective');
+            $table->integer('max_response')->default(1);
             $table->timestamps();
         });
     }

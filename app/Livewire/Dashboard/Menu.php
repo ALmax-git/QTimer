@@ -59,7 +59,12 @@ class Menu extends Component
         $this->new_question = false;
         $this->model = 'New Essay Question';
     }
-
+    public function toggle_question_status($id)
+    {
+        $this->question = Question::find($id);
+        $this->question->status = $this->question->status == 'active' ? 'in-active' : 'active';
+        $this->question->save();
+    }
 
     public function update_school_name()
     {
@@ -68,7 +73,7 @@ class Menu extends Component
         ]);
         $this->mount();
     }
-    public function create_new_question($type)
+    public function create_new_question()
     {
         DB::beginTransaction();
         // $this->validate([
@@ -106,16 +111,17 @@ class Menu extends Component
         $this->question->more_info_link = $this->new_question_more_info_link;
         $this->question->image = $file_name ?? '';
         $this->question->subject_id = $this->subject->id;
-        $this->question->max_response = $this->max_response ?? 1;
         $this->question->type = $this->model == "New Essay Question" ? 'essay' : 'objective';
         $this->question->save();
-
+        $response = 0;
         foreach ($this->questionOptions as $option) {
             $this->question->options()->create([
                 'option' => $option['option'],
                 'is_correct' => $option['is_correct']
             ]);
+            $response += $option['is_correct'] == true ? 1 : 0;
         }
+        $this->question->max_response = $this->max_response ?? $response;
         DB::commit();  // Commit transaction if everything is successful
         $this->alert('success', 'Question created successfully!', [
             'position' => 'top-end',
@@ -124,6 +130,7 @@ class Menu extends Component
         ]);
         $this->new_question = false;
         $this->new_model = false;
+        $this->reset();
         $this->load_subjects();
     }
 
@@ -657,7 +664,7 @@ class Menu extends Component
             $this->model = 'Set';
         } elseif ($this->model == 'Asign Subject') {
             $this->model = 'Staff';
-        } elseif ($this->model == 'View Questions' || $this->model == 'New Objective Question') {
+        } elseif ($this->model == 'View Questions' || $this->model == 'New Objective Question' || $this->model == 'New Essay Question') {
             $this->model = 'Subject';
         }
         $this->new_model = false;
@@ -676,8 +683,8 @@ class Menu extends Component
                 $this->model = 'Staff';
                 $this->load_staffs();
                 break;
-            case 'Subjets':
-                $this->model = 'Subjets';
+            case 'Subjects':
+                $this->model = 'Subjects';
                 $this->load_subjects();
                 break;
             case 'Exams':
@@ -702,8 +709,8 @@ class Menu extends Component
                 $this->model = 'Staff';
                 $this->load_staffs();
                 break;
-            case 'Subjets':
-                $this->model = 'Subjets';
+            case 'Subjects':
+                $this->model = 'Subjects';
                 $this->load_subjects();
                 break;
             case 'Exams':
@@ -756,6 +763,7 @@ class Menu extends Component
         $this->exams = false;
         $this->sets = false;
         $this->subjects = Auth::user()->school->subjects()->orderBy('id', 'desc')->get();
+        $this->main_model = true;
     }
     public function load_exams()
     {
@@ -763,6 +771,7 @@ class Menu extends Component
         $this->staffs = false;
         $this->sets = false;
         $this->exams = Exam::orderBy('id', 'desc')->get();
+        $this->main_model = true;
     }
     public function load_sets()
     {
@@ -770,6 +779,7 @@ class Menu extends Component
         $this->staffs = false;
         $this->exams = false;
         $this->sets = Set::orderBy('id', 'desc')->get();
+        $this->main_model = true;
     }
 
     public function render()
