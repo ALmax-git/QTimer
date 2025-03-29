@@ -1,31 +1,29 @@
 <div>
 
   @if (!$main_model)
-    <div class="h-75 m-3 w-full bg-black"
-      style="border-left: 2px solid #f40202; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #ff0000;">
+    <div class="h-75 m-3 w-full bg-black" style="border-left: 2px solid #f40202; border-right: 2px solid #ff0000;">
       <div class="cards bg-black">
-        <div class="bg-black">
-          <div class="row" style="justify-content: space-between;">
-            <div class="col-3">
-              <h3 style="width: fit-content; border-bottom: 1px solid #f40202; color: whitesmoke ; margin-left: 10px;">
-                {{ \Illuminate\Support\Str::upper($currentSubject->title ?? 'No Subject asign') }}</h3>
-            </div>
-            <div class="col-9 text-right" style="justify-content: right;">
-              <input class="mode" id="theme-mode" type="checkbox" hidden="" />
-              <div class="btn_container"
-                style="justify-content: end !important; color: #fff !important; align-items: flex-end">
-                <div class="d-flex float-right bg-black text-white" style="color: #fff !important;">
-                  @foreach ($staff->subjects as $key => $subject)
-                    <button
-                      class="btn btn-sm btn-{{ $currentSubject->id == $subject->id ? 'primary' : 'outline-primary' }} m-1"
-                      wire:click='change_subject("{{ write($subject->id) }}")'>{{ \Illuminate\Support\Str::upper($subject->title) }}</button>
-                  @endforeach
-                  <button class="btn btn-sm float-center container-btn-file me-4 ms-2"
-                    style="height: 40px; margin: auto; text-align: center;"
-                    wire:click='upload_questions("{{ $currentSubject->id }}")'>
-                    <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                      viewBox="0 0 50 50">
-                      <path d="M28.8125 .03125L.8125 5.34375C.339844
+        <div class="row" style="justify-content: space-between;">
+          <div class="col-3">
+            <h5 style="width: fit-content; border-bottom: 1px solid #f40202; color: whitesmoke ;">
+              {{ \Illuminate\Support\Str::upper($currentSubject->title ?? 'No Subject asign') }}</h5>
+          </div>
+          <div class="col-9 text-right" style="justify-content: right;">
+            <input class="mode" id="theme-mode" type="checkbox" hidden="" />
+            <div class="btn_container"
+              style="justify-content: end !important; color: #fff !important; align-items: flex-end">
+              <div class="d-flex float-right bg-black text-white" style="color: #fff !important;">
+                @foreach ($staff->subjects as $key => $subject)
+                  <button
+                    class="btn btn-sm btn-{{ $currentSubject->id == $subject->id ? 'primary' : 'outline-primary' }} m-1"
+                    wire:click='change_subject("{{ write($subject->id) }}")'>{{ \Illuminate\Support\Str::upper($subject->title) }}</button>
+                @endforeach
+                <button class="btn btn-sm float-center container-btn-file me-4 ms-2"
+                  style="height: 40px; margin: auto; text-align: center;"
+                  wire:click='upload_questions("{{ $currentSubject->id }}")'>
+                  <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 0 50 50">
+                    <path d="M28.8125 .03125L.8125 5.34375C.339844
                                 5.433594 0 5.863281 0 6.34375L0 43.65625C0
                                 44.136719 .339844 44.566406 .8125 44.65625L28.8125
                                 49.96875C28.875 49.980469 28.9375 50 29 50C29.230469
@@ -43,11 +41,11 @@
                                 27.03125L14.875 27.03125C14.8125 27.316406 14.664063 27.761719
                                 14.4375 28.34375L11.1875 34.375L6.1875 34.375L12.15625 25.03125ZM36
                                 20L44 20L44 22L36 22ZM36 27L44 27L44 29L36 29ZM36 35L44 35L44 37L36 37Z">
-                      </path>
-                    </svg>
-                    Upload Questions
-                  </button>
-                  {{-- <button class="c-button float-center" type="button" style="margin: auto; text-align: center;"
+                    </path>
+                  </svg>
+                  Upload Questions
+                </button>
+                {{-- <button class="c-button float-center" type="button" style="margin: auto; text-align: center;"
                     wire:click='create_question'>
                     <span class="c-main">
                       <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
@@ -55,96 +53,98 @@
                     </span>
                   </button> --}}
 
-                  <div class="bar"></div>
-                  <div class="slidebar"></div>
-                </div>
+                <div class="bar"></div>
+                <div class="slidebar"></div>
               </div>
             </div>
           </div>
-          <div class="bg-black">
+        </div>
+        <hr>
+        <div class="mt-2 bg-black pt-2" style=" overflow-x: scroll; height: 65vh !important;">
 
-            @if ($cormfirm_delete)
-              <div class="d-flex h-full w-full"
-                style="background-color: #000000a1; z-index: 1000;  justify-content: center;">
-                <div class="warning_card">
-                  <span>Are you Sure you want to Delete
-                    <br>
-                    <strong>{{ $question->text }}</strong>
-                  </span>
-                  <div class="d-flex justify-content-between">
-                    <button class="btn btn-warning warning" wire:click='cancel_delete'>Cancel</button>
-                    <button class="btn btn-success delete" wire:click='cormfirm_delete_question'>Delete</button>
-                  </div>
+          @if ($cormfirm_delete)
+            <div class="d-flex h-full w-full"
+              style="background-color: #000000a1; z-index: 1000;  justify-content: center;">
+              <div class="warning_card">
+                <span>Are you Sure you want to Delete
+                  <br>
+                  <strong>{{ $question->text }}</strong>
+                </span>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-warning warning" wire:click='cancel_delete'>Cancel</button>
+                  <button class="btn btn-success delete" wire:click='cormfirm_delete_question'>Delete</button>
                 </div>
               </div>
-            @endif
+            </div>
+          @endif
 
-            @if ($new_question)
-              <div class="d-flex h-full w-full"
-                style="background-color: #000000; z-index: 1000;  justify-content: center;">
-                <div class="warning_card" style="color: #f7f7f7 !important; border: 2px solid #ff2600 !important;">
-                  <div class="button-ctl_container">
-                    <button class="button-3d" wire:click='new_objective'>
-                      <div class="button-top">
-                        <span class="material-icons" style="color: #f7f7f7 !important; ">Objective</span>
-                      </div>
-                      <div class="button-bottom"></div>
-                      <div class="button-base"></div>
-                    </button>
-                    <button class="button-3d" wire:click='new_easay'>
-                      <div class="button-top">
-                        <span class="material-icons" style="color: #f7f7f7 !important; ">Easay</span>
-                      </div>
-                      <div class="button-bottom"></div>
-                      <div class="button-base"></div>
-                    </button>
-                  </div>
+          @if ($new_question)
+            <div class="d-flex h-full w-full"
+              style="background-color: #000000; z-index: 1000;  justify-content: center;">
+              <div class="warning_card" style="color: #f7f7f7 !important; border: 2px solid #ff2600 !important;">
+                <div class="button-ctl_container">
+                  <button class="button-3d" wire:click='new_objective'>
+                    <div class="button-top">
+                      <span class="material-icons" style="color: #f7f7f7 !important; ">Objective</span>
+                    </div>
+                    <div class="button-bottom"></div>
+                    <div class="button-base"></div>
+                  </button>
+                  <button class="button-3d" wire:click='new_easay'>
+                    <div class="button-top">
+                      <span class="material-icons" style="color: #f7f7f7 !important; ">Easay</span>
+                    </div>
+                    <div class="button-bottom"></div>
+                    <div class="button-base"></div>
+                  </button>
                 </div>
               </div>
-            @endif
+            </div>
+          @endif
 
+          <div class="cardh">
+            <div class="cardi">
+              <strong>
+                <div class="row h5" style="padding: 5px !important; text-align: left;">
+                  <div class="col-5"># Question [{{ count($currentSubject->questions) }}]</div>
+                  <div class="col-2"></div>
+                  <div class="col-1">Option A</div>
+                  <div class="col-1">Option B</div>
+                  <div class="col-1">Option C</div>
+                  <div class="col-1">Option D</div>
+                  <div class="col-1">Action</div>
+                </div>
+              </strong>
+            </div>
+          </div>
+          @php
+            $count = 0;
+          @endphp
+          @foreach ($currentSubject->questions as $question)
             <div class="cardh">
               <div class="cardi">
-                <strong>
-                  <div class="row h5" style="padding: 5px !important; text-align: left;">
-                    <div class="col-5"># Question [{{ count($currentSubject->questions) }}]</div>
-                    <div class="col-2"></div>
-                    <div class="col-1">Option A</div>
-                    <div class="col-1">Option B</div>
-                    <div class="col-1">Option C</div>
-                    <div class="col-1">Option D</div>
-                    <div class="col-1">Action</div>
-                  </div>
-                </strong>
-              </div>
-            </div>
-            @php
-              $count = 0;
-            @endphp
-            @foreach ($currentSubject->questions as $question)
-              <div class="cardh">
-                <div class="cardi">
-                  <div class="row" style="padding: 5px !important; text-align: left;">
-                    <div class="col-5"><strong>{{ ++$count }} - </strong>{{ $question->text }}</div>
-                    <div class="col-2"></div>
-                    @foreach ($question->options as $option)
-                      <div class="col-1">{{ $option->option }}</div>
-                    @endforeach
-                    <div class="col-1">
+                <div class="row" style="padding: 5px !important; text-align: left;">
+                  <div class="col-5"><strong>{{ ++$count }} - </strong>{{ $question->text }}</div>
+                  <div class="col-2"></div>
+                  @foreach ($question->options as $option)
+                    <div class="col-1">{{ $option->option }}</div>
+                  @endforeach
+                  <div class="col-1">
 
-                      <button class="btn btn-sm btn-outline-danger ms-2"
-                        wire:click='delete_question("{{ $question->id }}")'><i class="bi bi-trash"></i></button>
-                    </div>
+                    <button class="btn btn-sm btn-outline-danger ms-2"
+                      wire:click='delete_question("{{ $question->id }}")'><i class="bi bi-trash"></i></button>
                   </div>
                 </div>
               </div>
-            @endforeach
-          </div>
+            </div>
+          @endforeach
+          <hr>
+          <br>
         </div>
       </div>
     </div>
   @else
-    <div class="h-75 m-3 w-full bg-black"
+    <div class="m-3 bg-black"
       style="border-left: 2px solid #f40202; overflow-x: scroll; height: 65vh !important; border-right: 2px solid #f40202;">
       <div class="cards flex flex-wrap">
         <div class="bg-black">

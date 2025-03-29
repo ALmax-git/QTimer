@@ -48,11 +48,17 @@ class Menu extends Component
     public $result_exam_id;
     public $student_id;
     public Question $question;
-    public $new_question = false, $image, $new_question_text, $new_question_more_info_link, $new_question_answer_explanation, $new_question_code_snippet;
+    public $new_question = false, $image, $new_question_text, $max_response, $new_question_more_info_link, $new_question_answer_explanation, $new_question_code_snippet;
     public $school_name;
     public array $questionOptions = [];
 
-    public function new_easay() {}
+    public function new_easay()
+    {
+
+        $this->new_model = true;
+        $this->new_question = false;
+        $this->model = 'New Essay Question';
+    }
 
 
     public function update_school_name()
@@ -62,7 +68,7 @@ class Menu extends Component
         ]);
         $this->mount();
     }
-    public function create_new_obj_question()
+    public function create_new_question($type)
     {
         DB::beginTransaction();
         // $this->validate([
@@ -100,6 +106,8 @@ class Menu extends Component
         $this->question->more_info_link = $this->new_question_more_info_link;
         $this->question->image = $file_name ?? '';
         $this->question->subject_id = $this->subject->id;
+        $this->question->max_response = $this->max_response ?? 1;
+        $this->question->type = $this->model == "New Essay Question" ? 'essay' : 'objective';
         $this->question->save();
 
         foreach ($this->questionOptions as $option) {

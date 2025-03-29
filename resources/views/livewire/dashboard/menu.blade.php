@@ -421,7 +421,7 @@
                       </div>
                     @break
 
-                    @case('New Objective Question')
+                    @case('New Objective Question' || 'New Essay Question')
                       <h1 class="text-center text-white">{{ $subject->title }}</h1>
 
                       <div class="input-group input-group-lg mb-3">
@@ -434,6 +434,19 @@
                           wire:model.live='new_question_text' placeholder="Write Question test" autofocus
                           autocomplete="question">
                       </div>
+
+                      @if ($model == 'New Essay Question')
+                        <div class="input-group input-group-lg mb-3">
+                          <div class="input-group-text"
+                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            <label for="max_response">Response Size in Characters</label>
+                          </div>
+                          <input class="form-control" type="number"
+                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            wire:model.live='max_response' placeholder="Write Response Size in Characters eg 80">
+                        </div>
+                      @endif
+
                       <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
                         <p class="required text-left" style="text-align: left !important; color: #f40202;">
                           <strong>Question Options</strong>
@@ -491,10 +504,9 @@
                           style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
                           <label for="new_question_code_snippet">Code Snippet</label>
                         </div>
-                        <input class="form-control" type="text" value=""
+                        <textarea class="form-control"
                           style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
-                          wire:model.live='new_question_code_snippet' placeholder="Write Code snippet if any"
-                          autocomplete="question">
+                          wire:model.live='new_question_code_snippet' placeholder="Write Code snippet if any" autocomplete="question"></textarea>
                       </div>
 
                       <div class="input-group input-group-lg mb-3">
@@ -521,12 +533,21 @@
 
                       <br>
 
-                      <button class="c-button" style="margin: auto;" wire:click='create_new_obj_question'>
-                        <span class="c-main">
-                          <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
-                          Create Question
-                        </span>
-                      </button>
+                      @if ($model == 'New Essay Question')
+                        <button class="c-button" style="margin: auto;" wire:click='create_new_question'>
+                          <span class="c-main">
+                            <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
+                            Create {{ $model }}
+                          </span>
+                        </button>
+                      @else
+                        <button class="c-button" style="margin: auto;" wire:click='create_new_obj_question'>
+                          <span class="c-main">
+                            <span class="c-ico"><span class="c-blur"></span> <span class="ico-text">+</span></span>
+                            Create {{ $model }}
+                          </span>
+                        </button>
+                      @endif
                     @break
 
                     @default
