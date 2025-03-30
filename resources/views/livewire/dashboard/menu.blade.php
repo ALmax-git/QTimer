@@ -960,6 +960,7 @@
                               @foreach ($exam->sets as $set)
                                 <small>{{ $set->name }}</small>
                               @endforeach
+                               
                             </div>
                             <div class="col-7 align-end float-end">
                               <button class="btn btn-sm btn-outline-primary"
