@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
 
             $table->string('id_number')->unique()->nullable();
+            $table->string('profile_photo_path')->nullable();
 
             $table->boolean('is_staff')->default(false);
             $table->boolean('is_set_master')->default(false);

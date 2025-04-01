@@ -18,8 +18,8 @@
       <div class="d-flex align-items-center mb-4 ms-4">
         <div class="position-relative">
           <img class="rounded-circle"
-            src="{{ Auth::user()->profile_photo_path ? Auth::user()->profile_photo_path : 'default.png' }}"
-            alt="" style="width: 40px; height: 40px;">
+            src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : 'default.png' }}" alt=""
+            style="width: 40px; height: 40px;">
           <div class="bg-success rounded-circle position-absolute bottom-0 end-0 border border-2 border-white p-1">
           </div>
         </div>
@@ -190,7 +190,7 @@
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
             <img class="rounded-circle me-lg-2"
-              src="{{ Auth::user()->profile_photo_path ? Auth::user()->profile_photo_path : 'default.png' }}"
+              src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : 'default.png' }}"
               alt="" style="width: 40px; height: 40px;">
             <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
           </a>
