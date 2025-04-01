@@ -20,7 +20,8 @@
           <img class="rounded-circle"
             src="{{ Auth::user()->profile_photo_url ? Auth::user()->profile_photo_url : 'default.png' }}" alt=""
             style="width: 40px; height: 40px;">
-          <div class="bg-success rounded-circle position-absolute bottom-0 end-0 border border-2 border-white p-1">
+          <div class="bg-success rounded-circle position-absolute bottom-0 end-0 border border-2 border-white p-1"
+            wire:offline.class="bg-danger">
           </div>
         </div>
         <div class="ms-3">
@@ -39,7 +40,9 @@
         <span class="nav-item nav-link {{ $tab == 'Settings' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Settings")'><i class="fa fa-gear me-2"></i>Settings</span>
         <span class="nav-item nav-link {{ $tab == 'Teacher' ? 'active' : '' }}" href="#"
-          wire:click='toggle_tab("Teacher")'><i class="fa fa-gear me-2"></i>Teacher</span>
+          wire:click='toggle_tab("Teacher")'><i class="fa bi-person-badge me-2"></i>Teacher</span>
+        <span class="nav-item nav-link" href="#" wire:click='exit_qtimer'><i
+            class="fa fa-power-off me-2"></i>Exit</span>
         {{-- 
             <span class="nav-item nav-link {{ $tab == 'Students' ? 'active' : '' }}" href="#"
               wire:click='toggle_tab("Students")'><i class="fa fa-user-graduate me-2"></i>Students</span>

@@ -18,3 +18,6 @@ Route::get('license', [PaymentController::class, 'set_license'])->name('set_lice
 Route::get('/{all}', function () {
     return redirect()->route('app');
 });
+Route::get('/user/profile', function () {
+    return redirect()->route('app');
+});

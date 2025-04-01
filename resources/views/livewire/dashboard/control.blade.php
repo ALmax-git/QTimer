@@ -7,7 +7,7 @@
   <div class="row g-4">
     <div class="col-sm-6 col-xl-3">
       <div class="bg-secondary d-flex align-items-center justify-content-between rounded p-4">
-        <i class="fa fa-users fa-3x text-primary"></i>
+        <i class="fa bi-mortarboard fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Total Students</p>
           <h6 class="mb-0">{{ count($school->students) }}</h6>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-6 col-xl-3">
       <div class="bg-secondary d-flex align-items-center justify-content-between rounded p-4">
-        <i class="fa bi-files fa-3x text-primary"></i>
+        <i class="fa bi-card-checklist fa-3x text-primary"></i>
         <div class="ms-3">
           <p class="mb-2">Total Exams</p>
           <h6 class="mb-0">{{ count(\App\Models\Exam::get()) }}</h6>
@@ -38,7 +38,7 @@
         <div class="ms-3">
           <p class="mb-2">Connected</p>
           <h6 class="mb-0">{{ count(\App\Models\Session::get()) }} &nbsp;&nbsp;<i class="fa fa-refresh text-primary"
-              style="cursor: pointer;" wire:click='sync_all'></i>
+              style="cursor: pointer;" wire:loading.class="fa-spin" wire:click='sync_all'></i>
           </h6>
         </div>
       </div>
@@ -110,9 +110,10 @@
                 <td>{{ $student->id_number }}</td>
                 <td>{{ $student->email }}</td>
                 <td>
-                  <button class="btn btn-sm btn-primary float-end ms-1"
+                  <button class="btn btn-sm btn-primary float-end ms-1" data-bs-toggle="modal"
+                    {{ $student->id == Auth::user()->id ? 'disabled' : '' }}
                     wire:confirm="Are you sure you want to Delete this Student, THIS ACTION CAN NOT BE UNDONE!!!"
-                    wire:loading.attr="disabled" wire:target="submitExam({{ $student->id }})"
+                    wire:loading.attr="disabled" wire:target="deleteStudent({{ $student->id }})"
                     wire:click="deleteStudent({{ $student->id }})">
                     <i class="bi bi-trash"></i>
                   </button>
