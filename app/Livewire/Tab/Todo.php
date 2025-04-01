@@ -6,12 +6,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Todo as ModelsTodo;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 // use WireUi\Traits\Actions;
-use WireUi\Traits\WireUiActions;
+// use WireUi\Traits\WireUiActions;
 
 class Todo extends Component
 {
-    use WithPagination, WireUiActions;
+    use WithPagination, LivewireAlert;
 
     public $model = false;
 
@@ -65,7 +66,7 @@ class Todo extends Component
         ]);
 
         $this->reset(['task', 'description', 'due_date', 'priority']);
-        $this->notification()->success('Task Added', 'Your task has been added successfully!');
+        $this->alert('success', 'Your task has been added successfully!');
         $this->model = false;
     }
 
@@ -104,7 +105,7 @@ class Todo extends Component
         }
 
         $this->reset(['editId', 'task', 'description', 'due_date', 'priority']);
-        $this->notification()->success('Task Updated', 'Your task has been updated successfully!');
+        $this->alert('success', 'Your task has been updated successfully!');
         $this->model = false;
     }
 
@@ -113,7 +114,7 @@ class Todo extends Component
         $todo = ModelsTodo::findOrFail($id);
         if ($todo->user_id == Auth::id()) {
             $todo->delete();
-            $this->notification()->success('Task Deleted', 'Task has been removed!');
+            $this->alert('success', 'Task has been removed!');
         }
     }
 
