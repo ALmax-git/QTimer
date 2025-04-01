@@ -79,6 +79,8 @@
     @yield('content')
 
     @livewireScripts
+    @wireUIScripts
+
     <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
     <script src="{{ asset('node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
