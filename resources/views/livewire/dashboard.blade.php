@@ -41,6 +41,8 @@
           wire:click='toggle_tab("Settings")'><i class="fa fa-gear me-2"></i>Settings</span>
         <span class="nav-item nav-link {{ $tab == 'Teacher' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Teacher")'><i class="fa bi-person-badge me-2"></i>Teacher</span>
+        <span class="nav-item nav-link {{ $tab == 'Todo' ? 'active' : '' }}" href="#"
+          wire:click='toggle_tab("Todo")'><i class="fa fa-list me-2"></i>Todo</span>
         <span class="nav-item nav-link" href="#" wire:click='exit_qtimer'><i
             class="fa fa-power-off me-2"></i>Exit</span>
         {{-- 
@@ -225,6 +227,10 @@
 
       @case('Teacher')
         <livewire:tab.subject />
+      @break
+
+      @case('Todo')
+        @livewire('tab.todo')
       @break
 
       @default
