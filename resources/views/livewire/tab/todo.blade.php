@@ -5,52 +5,48 @@
       <a href="#">Show All</a>
     </div>
 
-    <!-- Search and Per Page Selection -->
     <div class="d-flex mb-2">
-      <input class="form-control me-2 bg-transparent" type="text" wire:model.debounce.500ms="search"
-        placeholder="Search tasks...">
-      <select class="form-control w-auto bg-transparent" wire:model="perPage">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
+      <input class="form-control me-2 bg-transparent" type="text" wire:model="search" placeholder="Search task">
+      <select class="form-select me-2 bg-transparent" wire:model="priority">
+        <option value="">All Priorities</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
       </select>
     </div>
 
-    <!-- Add Task -->
-    <div class="d-flex mb-2">
-      <input class="form-control bg-transparent" type="text" wire:model="task" placeholder="Enter task">
-      <button class="btn btn-primary ms-2" wire:click="addTask">Add</button>
+    <div class="mb-3">
+      <input class="form-control bg-transparent" type="text" wire:model="task" placeholder="Task title">
+      <textarea class="form-control mt-2 bg-transparent" wire:model="description" placeholder="Task description"></textarea>
+      <input class="form-control mt-2 bg-transparent" type="date" wire:model="due_date">
+      <select class="form-select mt-2 bg-transparent" wire:model="priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button class="btn btn-primary mt-2" wire:click="{{ $editId ? 'updateTask' : 'addTask' }}">
+        {{ $editId ? 'Update Task' : 'Add Task' }}
+      </button>
     </div>
 
-    <!-- Table Headers with Sorting -->
-    <div class="d-flex justify-content-between fw-bold bg-dark rounded p-2 text-white">
-      <span class="cursor-pointer" wire:click="setSort('title')">Title</span>
-      <span class="cursor-pointer" wire:click="setSort('priority')">Priority</span>
-      <span class="cursor-pointer" wire:click="setSort('status')">Status</span>
-      <span class="cursor-pointer" wire:click="setSort('due_date')">Due Date</span>
-      <span>Action</span>
-    </div>
-
-    @foreach ($todos as $task)
+    @foreach ($tasks as $task)
       <div class="d-flex align-items-center border-bottom py-2">
-        <input class="form-check-input m-0" type="checkbox" wire:click="toggleStatus({{ $task->id }})"
-          {{ $task->status === 'completed' ? 'checked' : '' }}>
         <div class="w-100 ms-3">
           <div class="d-flex w-100 align-items-center justify-content-between">
             <span class="{{ $task->status === 'completed' ? 'text-decoration-line-through' : '' }}">
-              {{ $task->title }} - <small class="text-muted">{{ ucfirst($task->priority) }}</small>
+              {{ $task->title }} - <small class="text-info">{{ ucfirst($task->priority) }}</small>
             </span>
-            <button class="btn btn-sm text-danger" wire:click="deleteTask({{ $task->id }})">
-              <i class="fa fa-times"></i>
-            </button>
+            <button class="btn btn-sm text-primary" wire:click="editTask({{ $task->id }})"><i
+                class="fa fa-edit"></i></button>
+            <button class="btn btn-sm text-danger" wire:click="deleteTask({{ $task->id }})"><i
+                class="fa fa-trash"></i></button>
           </div>
         </div>
       </div>
     @endforeach
 
-    <!-- Pagination -->
     <div class="mt-3">
-      {{ $todos->links() }}
+      {{ $tasks->links() }}
     </div>
   </div>
 </div>
