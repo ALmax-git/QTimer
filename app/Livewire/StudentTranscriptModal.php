@@ -8,23 +8,27 @@ use App\Models\Exam;
 use App\Models\Result;
 use App\Models\School;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithPagination;
 
 // use Illuminate\Container\Attributes\Auth;
 
 class StudentTranscriptModal extends Component
 {
+    use WithPagination, LivewireAlert;
     public $student_id;
     public $student;
-    public $students;
+    // public $students;
     public $school_name;
     public $examCount;
     public $subjectCount;
     public $examDetails = [];
+    public $search;
 
-
+    protected $paginationTheme = 'bootstrap';
     public function mount()
     {
-        $this->students = Auth::user()->school->students()->get();
+        // $this->
         // dd($this->students);
     }
     public function dismiss()
@@ -96,6 +100,18 @@ class StudentTranscriptModal extends Component
 
     public function render()
     {
-        return view('livewire.student-transcript-modal');
+        $students = Auth::user()->school->students()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('id_number', 'like', '%' . $this->search . '%')
+            ->orWhere('email', 'like', '%' . $this->search . '%')
+            ->latest()
+            ->paginate(10);
+        return view(
+            'livewire.student-transcript-modal',
+            [
+                'students' => $students,
+
+            ]
+        );
     }
 }

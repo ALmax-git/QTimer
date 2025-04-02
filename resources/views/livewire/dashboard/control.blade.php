@@ -190,7 +190,6 @@
     </div>
     {{-- <livewire:tab.student /> --}}
 
-    <livewire:tab.todo lazy />
     @push('scripts')
       <script>
         window.addEventListener('show-view-modal', event => {
@@ -209,6 +208,7 @@
         });
       </script>
     @endpush
+    <livewire:tab.todo lazy />
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -25,6 +25,7 @@
         <textarea class="form-control mt-2 bg-transparent" wire:model="description" placeholder="Task description"></textarea>
         <input class="form-control mt-2 bg-transparent" type="date" wire:model="due_date">
         <select class="form-select mt-2 bg-transparent" wire:model.live="priority">
+          <option value="">Choose</option>
           <option value="low">Low</option>
           <option value="medium" selected>Medium</option>
           <option value="high">High</option>
@@ -89,7 +90,7 @@
           </tr>
         @empty
           <tr>
-            <td class="text-muted text-center" colspan="5">No tasks found.</td>
+            <td class="text-muted text-center" colspan="7">No tasks found.</td>
           </tr>
         @endforelse
       </tbody>

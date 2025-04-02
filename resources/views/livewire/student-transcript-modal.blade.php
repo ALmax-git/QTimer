@@ -82,6 +82,9 @@
     @endif
     {{-- All Student Table with the View LoadTranscript Button --}}
     <div class="overflow-x-auto">
+
+      <input class="form-control mb-3" type="text" wire:model.live="search"
+        placeholder="Search students... eg. Basma">
       <table class="table-striped table-hover table-sm table">
         <thead>
           <tr class="bg-gray-100">
@@ -105,6 +108,7 @@
         </tbody>
       </table>
     </div>
+    {{ $students->links() }}
   </div>
 
   <script>
