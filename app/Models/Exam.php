@@ -19,6 +19,10 @@ class Exam extends Model
     {
         return $this->belongsToMany(Subject::class, 'exam_subjects');
     }
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 
 
     public function sets()

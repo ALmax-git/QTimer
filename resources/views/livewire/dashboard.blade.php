@@ -37,6 +37,8 @@
           wire:click='toggle_tab("Profile")'><i class="fa bi-person me-2"></i>Profile</span>
         <span class="nav-item nav-link {{ $tab == 'Candidates' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Candidates")'><i class="fa fa-users me-2"></i>Candidates</span>
+        <span class="nav-item nav-link {{ $tab == 'Transcript' ? 'active' : '' }}" href="#"
+          wire:click='toggle_tab("Transcript")'><i class="fa fa-file me-2"></i>Transcript</span>
         <span class="nav-item nav-link {{ $tab == 'Settings' ? 'active' : '' }}" href="#"
           wire:click='toggle_tab("Settings")'><i class="fa fa-gear me-2"></i>Settings</span>
         <span class="nav-item nav-link {{ $tab == 'Teacher' ? 'active' : '' }}" href="#"
@@ -219,6 +221,10 @@
 
       @case('Candidates')
         <livewire:tab.student />
+      @break
+
+      @case('Transcript')
+        <livewire:student-transcript-modal />
       @break
 
       @case('Settings')
