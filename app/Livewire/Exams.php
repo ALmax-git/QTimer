@@ -345,7 +345,7 @@ class Exams extends Component
     {
         // $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 15;
         if ($this->can_start) {
-            $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 15;
+            $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 10;
             $this->student_result->save();
             // dd($this->student_result);
         }

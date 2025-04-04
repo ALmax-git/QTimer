@@ -1,4 +1,4 @@
-<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 1500);">
+<div class="m-4 p-4" x-init="setInterval(() => { $wire.live_check(); }, 10000);">
   @php
     use Illuminate\Support\Facades\Auth;
   @endphp
