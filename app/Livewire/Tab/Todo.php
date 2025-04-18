@@ -20,16 +20,6 @@ class Todo extends Component
 
     public function open_model()
     {
-        // $process = new Process(['cd .. && php artisan storage:link']);
-        $process = new Process(['php', 'artisan', 'storage:link']);
-        $process->setWorkingDirectory("../"); // Set the working directory to the base path of your Laravel application
-        try {
-            $process->mustRun();
-
-            dd($process->getOutput());
-        } catch (ProcessFailedException $exception) {
-            dd($exception->getMessage());
-        }
         $this->model = true;
     }
     public function close_model()
