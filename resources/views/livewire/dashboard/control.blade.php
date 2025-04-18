@@ -210,6 +210,26 @@
     @endpush
     <livewire:tab.todo lazy />
   </div>
+  @if ($renew_modal)
+    <div class="modal" style="display: block;">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark border-1 border-danger text-white">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Renew License</h5>
+            <p>{{ $msg_status }}</p>
+            {{-- <button class="btn-close" wire:click='$set("renew_modal", "false")'></button> --}}
+          </div>
+          <div class="modal-body">
+            @livewire('setup')
+          </div>
+          {{-- <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" wire:click='$set("renew_modal", "false")'>Close</button>
+            <button class="btn btn-primary" type="button" wire:click='renew_license'>Renew</button>
+          </div> --}}
+        </div>
+      </div>
+    </div>
+  @endif
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const success_sound = new Audio("success.mp3");

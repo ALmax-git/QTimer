@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Models\License;
 use App\Models\School;
 use App\Models\Set;
 use App\Models\User;
@@ -19,7 +20,7 @@ class Control extends Component
     public $showViewModal = false;
     public $showEditModal = false;
     public $studentData = [];
-    // public $recent_students;
+    public $msg_status = '';
     public $search = '';
 
     protected $paginationTheme = 'bootstrap';
@@ -30,6 +31,7 @@ class Control extends Component
         \App\helpers\RequestTracker::track();
         $this->school = School::find(Auth::user()->school->id);
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;
+        $this->license_status();
     }
 
     public function dismiss()
@@ -42,8 +44,50 @@ class Control extends Component
     {
         $this->resetPage(); // Reset pagination when searching
     }
+    public bool $renew_modal = false;
+
+    public function license_status()
+    {
+        $license = License::where('user_id', $this->school->admin->id)->orderBy('created_at', 'desc')->first();
+
+        if (!$license) {
+            $this->alert('error', 'No license found. Please contact support.');
+            $this->msg_status = 'No license found. Please contact support.';
+            $this->renew_modal = true;
+            return;
+        }
+        if (!$license->is_active || $license->status != 'active') {
+            // Check if the license is inactive or suspended
+            // You can also check for other statuses like 'suspended' or 'revoked'
+            // and handle them accordingly
+            // For example:
+            // $this->alert('error', 'Your license is suspended. Please contact support.');
+            // or
+            // $this->alert('error', 'Your license is revoked. Please contact support.');
+            // For now, let's just show a generic error message
+            // You can also check for other statuses like 'suspended' or 'revoked'
+            // and handle them accordingly
+            // For example:
+            $this->alert('error', 'Your license is inactive. Please contact support.');
+            $this->msg_status = 'Your license is inactive. Please contact support.';
+            $this->renew_modal = true;
+            return;
+        }
+
+        if ($license->isExpired()) {
+            $this->alert('warning', 'Your license has expired. Please renew to continue.');
+            $this->msg_status = 'Your license has expired. Please renew to continue.';
+            $this->renew_modal = true;
+            return;
+        }
+
+        // Valid license – do nothing
+    }
+
     public function toggle_server()
     {
+        //let check for LICENSE before toggling the server
+
         // Toggle the boolean state
         $this->server_is_up = !$this->server_is_up;
 

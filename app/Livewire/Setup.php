@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\License;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,15 +15,19 @@ class Setup extends Component
     public $school_name, $school_type = 'School', $school_email;
     public $school;
     public $license;
+    public $renew_modal = false;
     public function mount()
     {
-        if (system_license_check()) {
-            return redirect()->route('app');
-        }
+        // if (system_license_check()) {
+        //     return redirect()->route('app');
+        // }
         if (School::find(Auth::user()->school_id)) {
             $this->school = School::find(Auth::user()->school_id);
+        } else {
+            $this->school = new School();
         }
     }
+
     public function save()
     {
         if (!School::find(Auth::user()->school_id)) {

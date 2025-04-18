@@ -63,8 +63,8 @@ if (!function_exists('system_license_check')) {
                 return false;
             }
 
-            // Retrieve the license for the admin user
-            $license = License::where('user_id', $adminId)->first();
+            // Retrieve the latest license for the admin user
+            $license = License::where('user_id', $adminId)->orderBy('created_at', 'desc')->first();
 
             // Check if license exists
             if (!$license) {
