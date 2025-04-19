@@ -80,8 +80,9 @@
   @livewire('dashboard.menu')
   <div class="row">
     <div class="h-100 bg-secondary mt-3 rounded p-4">
-      <div class="h2">
+      <div class="h2 d-flex justify-content-between align-items-center">
         <h4>Recent Students</h4>
+        <button class="btn btn-sm btn-warning" wire:click='open_license_modal'>License</button>
       </div>
 
       <input class="form-control mb-3" type="text" wire:model.live="search"
@@ -210,6 +211,81 @@
     @endpush
     <livewire:tab.todo lazy />
   </div>
+  @if ($license_modal)
+    <div class="modal" style="display: block;">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark border-1 border-danger text-white">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">License</h5>
+            <p>{{ $msg_status }}</p>
+            {{-- <button class="btn-close" wire:click='$set("license_modal", "false")'></button> --}}
+          </div>
+          <div class="modal-body">
+            <h5 class="modal-title fw-bold text-primary mb-3">
+              <i class="bi bi-patch-check-fill"></i> License Overview
+            </h5>
+
+            <ul class="list-group list-group-flush text-primary mb-3" style="background-color: black !important;">
+              <li class="list-group-item d-flex justify-content-between" style="background-color: black !important;">
+                <span class="fw-semibold">License Type:</span>
+                <span class="text-capitalize">{{ $license->license_type ?? 'N/A' }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between" style="background-color: black !important;">
+                <span class="fw-semibold">License Key:</span>
+                <span class="text-monospace">{{ $license->key ?? 'N/A' }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between" style="background-color: black !important;">
+                <span class="fw-semibold">Status:</span>
+                <span class="{{ $license->is_active ? 'text-success' : 'text-danger' }}">
+                  {{ $license->is_active ? 'Active' : 'Inactive' }}
+                </span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between" style="background-color: black !important;">
+                <span class="fw-semibold">Created At:</span>
+                <span class="{{ $license->isExpired() ? 'text-danger' : 'text-muted' }}">
+                  {{ $license->created_at ? $license->created_at->format('F j, Y') : 'Never (Lifetime)' }}
+                </span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between" style="background-color: black !important;">
+                <span class="fw-semibold">Expires At:</span>
+                <span class="{{ $license->isExpired() ? 'text-danger' : 'text-muted' }}">
+                  {{ $license->expires_at ? $license->expires_at->format('F j, Y') : 'Never (Lifetime)' }}
+                </span>
+              </li>
+
+            </ul>
+            <textarea class="form-control" style="color: #ff0000; background-color: black;" readonly cols="30"
+              rows="10">{{ $license->certificate }}</textarea>
+
+            @if ($license->isExpired())
+              <div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Your license has expired. Please renew to continue using full features.
+              </div>
+            @elseif(!$license->is_active)
+              <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                <i class="bi bi-slash-circle-fill"></i>
+                Your license is inactive. Contact support.
+              </div>
+            @endif
+            <br>
+            <div class="text-end">
+              <button class="btn btn-outline-primary btn-sm" wire:click='open_renew_modal'>
+                <i class="bi bi-arrow-repeat"></i> Renew License
+              </button>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            @if ($is_renew)
+              <button class="btn btn-success" type="button" wire:click='close_license_modal'>Renew License</button>
+            @endif
+          </div>
+        </div>
+      </div>
+    </div>
+
+  @endif
   @if ($renew_modal)
     <div class="modal" style="display: block;">
       <div class="modal-dialog modal-xl modal-dialog-centered">

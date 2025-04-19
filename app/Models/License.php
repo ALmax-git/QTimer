@@ -22,6 +22,7 @@ class License extends Model
         'activated_at',
         'expires_at',
         'is_active',
+        'certificate'
     ];
 
     // Cast the JSON field to an array and timestamps to Carbon instances.

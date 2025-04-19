@@ -22,6 +22,11 @@ class Control extends Component
     public $studentData = [];
     public $msg_status = '';
     public $search = '';
+    public $license;
+    public $license_modal = false;
+    public $is_renew = false;
+
+
 
     protected $paginationTheme = 'bootstrap';
     public $school, $server_is_up;
@@ -33,7 +38,17 @@ class Control extends Component
         $this->server_is_up = $this->school->server_is_up == 1 ? true : false;
         $this->license_status();
     }
-
+    public function open_license_modal()
+    {
+        $this->license = License::where('user_id', $this->school->admin->id)->orderBy('created_at', 'desc')->first();
+        $this->license_modal = true;
+        // dd($this->license);
+    }
+    public function close_license_modal()
+    {
+        $this->license_modal = false;
+        $this->license = null;
+    }
     public function dismiss()
     {
         $this->showViewModal = false;
@@ -45,7 +60,13 @@ class Control extends Component
         $this->resetPage(); // Reset pagination when searching
     }
     public bool $renew_modal = false;
-
+    public function open_renew_modal()
+    {
+        $this->renew_modal = true;
+        $this->msg_status = '';
+        $this->license_modal = false;
+        $this->is_renew = true;
+    }
     public function license_status()
     {
         $license = License::where('user_id', $this->school->admin->id)->orderBy('created_at', 'desc')->first();
@@ -54,6 +75,7 @@ class Control extends Component
             $this->alert('error', 'No license found. Please contact support.');
             $this->msg_status = 'No license found. Please contact support.';
             $this->renew_modal = true;
+            $this->is_renew = false;
             return;
         }
         if (!$license->is_active || $license->status != 'active') {
@@ -71,6 +93,7 @@ class Control extends Component
             $this->alert('error', 'Your license is inactive. Please contact support.');
             $this->msg_status = 'Your license is inactive. Please contact support.';
             $this->renew_modal = true;
+            $this->is_renew = false;
             return;
         }
 
@@ -78,9 +101,11 @@ class Control extends Component
             $this->alert('warning', 'Your license has expired. Please renew to continue.');
             $this->msg_status = 'Your license has expired. Please renew to continue.';
             $this->renew_modal = true;
+            $this->is_renew = false;
             return;
         }
 
+        $this->is_renew = false;
         // Valid license – do nothing
     }
 

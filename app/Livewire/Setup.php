@@ -23,8 +23,6 @@ class Setup extends Component
         // }
         if (School::find(Auth::user()->school_id)) {
             $this->school = School::find(Auth::user()->school_id);
-        } else {
-            $this->school = new School();
         }
     }
 
