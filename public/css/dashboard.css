@@ -22,7 +22,7 @@
     border-radius: 20px;
     transition: 700ms;
     background: linear-gradient(45deg, #000000, #262626);
-    border: 2px solid rgba(248, 29, 0, 0.956);
+    border: 2px solid rgba(8, 0, 248, 0.956);
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.2);
 }
@@ -530,8 +530,8 @@
 }
 
 #card:hover .corner-elements span {
-    border-color: rgba(255, 3, 3, 0.8);
-    box-shadow: 0 0 10px rgba(255, 92, 92, 0.5);
+    border-color: rgba(1, 9, 114, 0.8);
+    box-shadow: 0 0 10px rgba(1, 36, 132, 0.5);
 }
 
 /* plus sign */
@@ -613,7 +613,7 @@
     justify-content: center;
     padding: 8px;
     transition: all 0.1s linear;
-    border-top: 1px solid #f50000;
+    border-top: 1px solid #0014f5;
     background-color: #333333;
     position: relative;
     cursor: pointer;
@@ -661,7 +661,7 @@
 }
 
 .menu-lebel .menu-text {
-    color: rgb(240, 0, 0);
+    color: rgb(0, 12, 240);
     font-size: 15px;
     line-height: 12px;
     padding: 0px;
@@ -784,18 +784,18 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 2px solid rgb(252, 1, 1);
+    border: 2px solid rgb(1, 26, 252);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    box-shadow: 0px 0px 100px rgb(252, 1, 1),
-        inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
+    box-shadow: 0px 0px 100px rgb(1, 114, 252),
+        inset 0px 0px 10px rgb(1, 30, 252), 0px 0px 5px rgb(10, 22, 255);
     animation: flicker 2s linear infinite;
 }
 
 .icon {
-    color: rgb(252, 1, 1);
+    color: rgb(1, 43, 252);
     font-size: 2rem;
     cursor: pointer;
     animation: iconflicker 2s linear infinite;
@@ -811,9 +811,9 @@
 
 @keyframes flicker {
     0% {
-        border: 2px solid rgb(252, 1, 1);
-        box-shadow: 0px 0px 100px rgb(252, 1, 1),
-            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
+        border: 2px solid rgb(18, 1, 252);
+        box-shadow: 0px 0px 100px rgb(1, 18, 252),
+            inset 0px 0px 10px rgb(1, 22, 252), 0px 0px 5px rgb(1, 16, 21);
     }
 
     /* 5% {
@@ -822,9 +822,9 @@
     } */
 
     10% {
-        border: 2px solid rgb(252, 1, 1);
-        box-shadow: 0px 0px 100px rgb(252, 1, 1),
-            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
+        border: 2px solid rgb(1, 18, 252);
+        box-shadow: 0px 0px 100px rgb(1, 64, 252),
+            inset 0px 0px 10px rgb(22, 1, 252), 0px 0px 5px rgb(10, 190, 255);
     }
 
     /* 25% {
@@ -833,15 +833,15 @@
     } */
 
     30% {
-        border: 2px solid rgb(252, 1, 1);
-        box-shadow: 0px 0px 100px rgb(252, 1, 1),
-            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
+        border: 2px solid rgb(1, 34, 252);
+        box-shadow: 0px 0px 100px rgb(1, 22, 252),
+            inset 0px 0px 10px rgb(1, 39, 252), 0px 0px 5px rgb(10, 47, 255);
     }
 
     100% {
-        border: 2px solid rgb(252, 1, 1);
-        box-shadow: 0px 0px 100px rgb(252, 1, 1),
-            inset 0px 0px 10px rgb(252, 1, 1), 0px 0px 5px rgb(255, 104, 10);
+        border: 2px solid rgb(1, 110, 252);
+        box-shadow: 0px 0px 100px rgb(1, 55, 252),
+            inset 0px 0px 10px rgb(1, 55, 252), 0px 0px 5px rgb(10, 194, 255);
     }
 }
 
@@ -902,19 +902,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgb(178, 1, 1);
+    color: rgb(1, 19, 178);
     cursor: pointer;
 }
 
 .sm_span_btn .trash:hover {
-    color: #ff0909;
+    color: #00f;
 }
 
 .neon-checkbox-wrapper {
     --checkbox-size: 25px;
-    --checkbox-color: #ff0000;
-    --checkbox-shadow: rgba(255, 0, 0, 0.3);
-    --checkbox-border: rgba(255, 0, 0, 0.7);
+    --checkbox-color: #00f;
+    --checkbox-shadow: rgba(25, 0, 255, 0.3);
+    --checkbox-border: rgba(0, 38, 255, 0.7);
     display: flex;
     align-items: center;
     position: relative;
@@ -950,7 +950,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--checkbox-color), #ff0000);
+    background: linear-gradient(45deg, var(--checkbox-color), #1100ff);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform: scale(0) rotate(-45deg);
@@ -1093,11 +1093,11 @@
 }
 
 input:checked+.slider {
-    background-color: #f40202;
+    background-color: #00f;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #f32121;
+    box-shadow: 0 0 1px #00f;
 }
 
 input:checked+.slider:before {
@@ -1174,18 +1174,18 @@ input:checked+.slider:after {
 
 .live_container input:checked+.button {
     box-shadow: inset -2px -2px 0 #5e5e5e, inset 2px 2px 0 #1c1c1c;
-    border: 4px solid rgba(250, 14, 14, 0.786);
+    border: 4px solid rgba(14, 22, 250, 0.786);
     animation: animeBorder .3s linear alternate-reverse infinite;
 }
 
 .live_container input:checked+.button .icon svg {
-    fill: rgb(248, 13, 13);
+    fill: rgb(48, 13, 248);
     animation: animeFill .3s linear alternate-reverse infinite;
 }
 
 @keyframes animeFill {
     to {
-        fill: rgba(238, 0, 0, 0.642);
+        fill: rgba(0, 24, 238, 0.642);
     }
 }
 
@@ -1263,8 +1263,8 @@ input:checked+.slider:after {
 .card1:hover {
     cursor: pointer;
     scale: 1.1;
-    background-color: #400101;
-    border: 2px solid rgb(240, 7, 7);
+    background-color: #010a40;
+    border: 2px solid rgb(11, 7, 240);
 }
 
 .card1:hover .instagram {
@@ -1274,8 +1274,8 @@ input:checked+.slider:after {
 .card2:hover {
     cursor: pointer;
     scale: 1.1;
-    background-color: #400101;
-    border: 2px solid rgb(240, 7, 7);
+    background-color: #010a40;
+    border: 2px solid rgb(11, 7, 240);
 }
 
 .card2:hover .twitter {
@@ -1285,8 +1285,8 @@ input:checked+.slider:after {
 .card3:hover {
     cursor: pointer;
     scale: 1.1;
-    background-color: #400101;
-    border: 2px solid rgb(240, 7, 7);
+    background-color: #010a40;
+    border: 2px solid rgb(11, 7, 240);
 }
 
 .card3:hover .github {
@@ -1296,8 +1296,8 @@ input:checked+.slider:after {
 .card4:hover {
     cursor: pointer;
     scale: 1.1;
-    background-color: #400101;
-    border: 2px solid rgb(240, 7, 7);
+    background-color: #010740;
+    border: 2px solid rgb(7, 73, 240);
 }
 
 .card4:hover .discord {
@@ -1443,7 +1443,7 @@ input:checked+.slider:after {
 }
 
 .c-button {
-    background: linear-gradient(140deg, rgb(0, 0, 0) 0%, rgb(54, 1, 1) 100%);
+    background: linear-gradient(140deg, rgb(0, 0, 0) 0%, rgb(1, 2, 54) 100%);
     border-radius: 45px;
     text-align: left;
     padding: 11px 0px 11px 0px;
@@ -1463,7 +1463,7 @@ input:checked+.slider:after {
 }
 
 .c-ico .c-blur {
-    background: linear-gradient(318deg, rgb(200, 75, 75) 0%, rgb(77, 13, 11) 100%);
+    background: linear-gradient(318deg, rgb(75, 83, 200) 0%, rgb(11, 15, 77) 100%);
     border-radius: 100%;
     margin-left: 0;
     padding: 8px 23px;
@@ -1488,7 +1488,7 @@ input:checked+.slider:after {
 .c-button .c-main:hover {
     box-shadow: inset 0px 0px 5px rgba(17, 17, 17, 0.6);
     border: 1px solid rgba(26, 26, 26, 0.5);
-    color: rgb(255, 0, 0);
+    color: rgb(0, 0, 255);
 }
 
 .upload_questions {
@@ -1497,11 +1497,11 @@ input:checked+.slider:after {
     text-align: left;
     border-radius: 0.5rem;
     max-width: 96%;
-    border-top: 2px solid #f40202;
-    border-bottom: 2px solid #f40202;
+    border-top: 2px solid #0000ff;
+    border-bottom: 2px solid #0202f4;
     border-radius: 10px;
-    box-shadow: 0 10px 5px -5px rgba(255, 0, 0, 0.398), 0 10px 10px -5px rgba(17, 18, 7, 0.735);
-    background-color: #0b0101b7;
+    box-shadow: 0 10px 5px -5px rgba(0, 21, 255, 0.398), 0 10px 10px -5px rgba(17, 18, 7, 0.735);
+    background-color: #01030bb7;
 }
 
 .dismiss {
@@ -2107,8 +2107,8 @@ transform: scale(0.9, 0.9);
     background-color: #a6252521;
     width: 95%;
     border-radius: 10px;
-    border-top: 2px double rgb(255, 0, 0);
-    border-bottom: 2px double rgb(255, 0, 0);
+    border-top: 2px double rgb(0, 34, 255);
+    border-bottom: 2px double rgb(0, 51, 255);
     color: white;
     margin-top: 2px
 }

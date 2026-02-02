@@ -104,7 +104,7 @@
         }
 
         .clock .container h2#seconds {
-          color: #ff0000;
+          color: #0000ff;
         }
 
         .clock .container span {

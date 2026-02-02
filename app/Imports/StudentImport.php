@@ -29,13 +29,13 @@ class StudentImport implements ToModel
     {
 
 
-        // Validate question text
+        // Validate ID text
         if (empty(trim($row[0]))) {
             $this->logError("Student ID Number cannot be empty", $row);
             return null;
         }
 
-        // Validate question text
+        // Validate Name text
         if (empty(trim($row[1]))) {
             $this->logError("Student Name cannot be empty", $row);
             return null;

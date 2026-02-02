@@ -7,11 +7,11 @@
           <div class="modal-header d-flex justify-content-between">
             <div class="logo d-flex">
               <h3
-                style="color: white; border: 1px solid red; border-radius: 15px; margin-right: 5px; background-color: rgb(81, 0, 0); width: 30px; height: 30px; text-align: center;"
+                style="color: white; border: 1px solid #00f; border-radius: 15px; margin-right: 5px; background-color: rgb(15, 0, 81); width: 30px; height: 30px; text-align: center;"
                 wire:click='close_main_model'>
                 <strong>X</strong>
               </h3>
-              <h2 style="border-left: 1px solid rgb(128, 0, 0); padding-left: 3px; height: 33px;">{{ $model }}
+              <h2 style="border-left: 1px solid rgb(0, 0, 255); padding-left: 3px; height: 33px;">{{ $model }}
               </h2>
             </div>
             <div class="social-media">
@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="modal-body bg-black p-3"
-            style="border-left: 2px solid #f40202; overflow-x: scroll; border-right: 2px solid #f40202; border-bottom: 4px solid  #f40202; height: 65vh; padding-bottom: 10px;">
+            style="border-left: 2px solid #00f; overflow-x: scroll; border-right: 2px solid #00f; border-bottom: 4px solid  #00f; height: 65vh; padding-bottom: 10px;">
 
             @if ($new_model)
 
@@ -44,30 +44,30 @@
                       @case('Staff')
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_staff_name">Staff Name</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_staff_name' placeholder="Write Staff Name" autofocus autocomplete="name">
                         </div>
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_staff_email">Staff Email</label>
                           </div>
                           <input class="form-control" type="email" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_staff_email' placeholder="Write Staff Email" autocomplete="email">
                         </div>
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_staff_subject">Staff Subject</label>
                           </div>
                           <select class="form-control" type="email" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_staff_subject' placeholder="Write Staff Subject">
                             <option value="">Select Subject</option>
                             @foreach (Auth::user()->school->subjects as $subject)
@@ -90,11 +90,11 @@
                         <h2>{{ $staff->name }}</h2>
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_staff_subject">Staff Subject</label>
                           </div>
                           <select class="form-control"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_staff_subject' placeholder="Write Staff Subject">
                             <option value="">Select Subject</option>
                             @foreach (Auth::user()->school->subjects as $subject)
@@ -117,11 +117,11 @@
                         <h2>{{ $exam->title }}</h2>
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_exam_subject">Exam Subject</label>
                           </div>
                           <select class="form-control"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_exam_subject'>
                             <option value="">Select Subject</option>
                             @foreach (Auth::user()->school->subjects as $subject)
@@ -143,11 +143,11 @@
                       @case('Subjects')
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_subject_name">Subject Name</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_subject_name' placeholder="Write Subject Name" autofocus
                             autocomplete="subject">
                         </div>
@@ -163,18 +163,18 @@
 
                       @case('Exams')
                         @if (count(Auth::user()->school->sets) < 1)
-                          <h1 style="color: red;">Ops! you need to create at least one set</h1>
+                          <h1 style="color: rgb(0, 47, 255);">Ops! you need to create at least one set</h1>
                         @else
                           <div class="container" style="width: 90%; margin: auto; margin-block: 10px;">
                             <div class="col-12">
 
                               <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-text"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                                   <label for="new_exam_title">Exam Title</label>
                                 </div>
                                 <input class="form-control" type="text" value=""
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                   wire:model.live='new_exam_title'
                                   placeholder="Write Exam Title e.g (End of Frist Term Examination)" autofocus
                                   autocomplete="title">
@@ -184,11 +184,11 @@
 
                               <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-text"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                                   <label for="new_exam_description">Exam Intruction</label>
                                 </div>
                                 <textarea class="form-control" type="text" value=""
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                   wire:model.live='new_exam_description' placeholder="Write Exam Intruction in full" autocomplete="Intruction"></textarea>
                               </div>
                             </div>
@@ -208,18 +208,18 @@
                             <div class="col-12">
                               <label class="neon-checkbox-wrapper">
                                 <span class="label">Exam Duration:
-                                  {!! $duration ? $duration : '<span style="color: red !important;"> Invalide Time</span>' !!}</span>
+                                  {!! $duration ? $duration : '<span style="color: #00f !important;"> Invalide Time</span>' !!}</span>
                               </label>
                             </div>
                             <div class="col-12">
 
                               <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-text"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                                   <label for="new_exam_start_time">Start Time</label>
                                 </div>
                                 <input class="form-control" type="time" value="{{ now() }}"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                   wire:input='calculateDuration' wire:model.live='new_exam_start_time'>
                               </div>
                             </div>
@@ -227,11 +227,11 @@
 
                               <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-text"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                                   <label for="new_exam_end_time">End Time</label>
                                 </div>
                                 <input class="form-control" type="time" value=""
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                   wire:input='calculateDuration' wire:model.live='new_exam_end_time'>
                               </div>
                             </div>
@@ -239,11 +239,11 @@
 
                               <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-text"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                                   <label for="new_exam_set">Exam Set</label>
                                 </div>
                                 <select class="form-control"
-                                  style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                  style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                   wire:model.live='new_exam_set'>
                                   <option>Select Set</option>
                                   @foreach (Auth::user()->school->sets as $set)
@@ -267,11 +267,11 @@
                       @case('Set')
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_set_name">Set Name</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_set_name' placeholder="Write Set Name" autofocus autocomplete="subject">
                         </div>
                         <br>
@@ -288,11 +288,11 @@
                         <h1 class="text-center text-white">{{ $set->name }}</h1>
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="result_exam_id">Select Exam</label>
                           </div>
                           <select class="form-control" type="email" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='result_exam_id'>
                             <option value="">Select Exam</option>
                             @foreach ($set->exams as $exam)
@@ -338,11 +338,11 @@
                         <h1 class="text-center text-white">{{ $set->name }}</h1>
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="student_id">Students</label>
                           </div>
                           <select class="form-control" type="email" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='student_id'>
                             <option value="">Select Student</option>
                             @foreach (Auth::user()->school->students as $student)
@@ -446,11 +446,11 @@
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_question_text">Question text</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_question_text' placeholder="Write Question test" autofocus
                             autocomplete="question">
                         </div>
@@ -458,28 +458,28 @@
                         @if ($model == 'New Essay Question')
                           <div class="input-group input-group-lg mb-3">
                             <div class="input-group-text"
-                              style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                              style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                               <label for="max_response">Response Size in Characters</label>
                             </div>
                             <input class="form-control" type="number"
-                              style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                              style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                               wire:model.live='max_response' placeholder="Write Response Size in Characters eg 80">
                           </div>
                         @endif
 
                         <div class="form-group {{ $errors->has('questionOptions.*') ? 'invalid' : '' }}">
-                          <p class="required text-left" style="text-align: left !important; color: #f40202;">
+                          <p class="requi#00f text-left" style="text-align: left !important; color: #00f;">
                             <strong>Question Options</strong>
                           </p>
                           @foreach ($questionOptions as $index => $questionOption)
                             <div class="input-group input-group-lg mb-3">
                               <input class="form-control" id="questions_options_{{ $index }}"
                                 name="questions_options_{{ $index }}" type="text"
-                                style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                                style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                                 placeholder="Write Option" wire:model.live="questionOptions.{{ $index }}.option"
                                 autocomplete="off">
                               <div
-                                class="flex items-center"style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);">
+                                class="flex items-center"style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);">
                                 <input class="ml-4 mr-1" id="questionOptions.{{ $index }}.correct"
                                   name="questionOptions.{{ $index }}.is_correct" type="checkbox"
                                   wire:model.live="questionOptions.{{ $index }}.is_correct">
@@ -511,42 +511,42 @@
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="image">Question Image</label>
                           </div>
                           <input class="form-control" type="file"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='image' placeholder="Select Question Image" autocomplete="question">
                         </div>
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_question_code_snippet">Code Snippet</label>
                           </div>
                           <textarea class="form-control"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_question_code_snippet' placeholder="Write Code snippet if any" autocomplete="question"></textarea>
                         </div>
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_question_answer_explanation">Answer Explanation</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_question_answer_explanation'
                             placeholder="Write Answer Explanation if any" autocomplete="question">
                         </div>
 
                         <div class="input-group input-group-lg mb-3">
                           <div class="input-group-text"
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; ">
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; ">
                             <label for="new_question_more_info_link">Usefull Link</label>
                           </div>
                           <input class="form-control" type="text" value=""
-                            style="background-color: rgba(0, 0, 0, 0); color: #f40202 !important; border: 2px solid rgb(255, 0, 0);"
+                            style="background-color: rgba(0, 0, 0, 0); color: #00f !important; border: 2px solid rgb(0, 0, 255);"
                             wire:model.live='new_question_more_info_link' placeholder="Write more info link if any"
                             autocomplete="question">
                         </div>
@@ -611,7 +611,7 @@
                   @if ($questions_file)
                     <br>
                     @error('questions_file')
-                      <h3 style="color: red; text-align: center;">
+                      <h3 style="color: #00f; text-align: center;">
                         {{ $questions_file->getClientOriginalName() }}
                         <br>
                         {{ $message }}
@@ -671,7 +671,7 @@
                   @if ($students_file)
                     <br>
                     @error('questions_file')
-                      <h3 style="color: red; text-align: center;">
+                      <h3 style="color: #00f; text-align: center;">
                         {{ $students_file->getClientOriginalName() }}
                         <br>
                         {{ $message }}
@@ -1000,7 +1000,7 @@
     <div class="col-12 bg-secondary p-2">
 
       <div class="d-flex" style="justify-content: center;">
-        <div class="main_center" style="border: 1px solid #ee0d0d;">
+        <div class="main_center" style="border: 1px solid #0b0072;">
           <div class="up">
             <button class="card1" style="color: #ffffff !important;" wire:click='open_main_model("Staffs")'>
               Staffs
