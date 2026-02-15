@@ -17,7 +17,7 @@ Route::get('/log_out', function () {
 })->name('log_out');
 Route::get('/', function () {
     if (!auth()->check()) {
-        return redirect()->route('login');
+        return view('dashboard');
     }
     if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master) {
         return view('dashboard');
