@@ -14,7 +14,7 @@ Route::get('/test', function () {
 Route::get('/log_out', function () {
     Auth::logout();
     return redirect()->route('app');
-})->name('logout');
+})->name('log_out');
 Route::get('/', function () {
     if (Auth::user()->is_staff || Auth::user()->is_set_master || Auth::user()->is_subject_master) {
         return view('dashboard');
