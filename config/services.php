@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'READ_AND_WRITE'            => 'xyz',
+    'SECRET_KEY'                => '',
+    'PUBLIC_KEY'                => 'FLWPUBK_TEST-1f276b3fa6fe86c2385fffbb9c15a982-X',
+    'SECRET_KEY'                => 'FLWSECK_TEST-1663808b5b0b352dee2d3f71e154cfcc-X',
+    'ENCRYPTION_KEY'            => 'FLWSECK_TEST0dd29d3d5e6e',
+    'ENV'                       => 'staging/production',
+    'GOOGLE_GEMINI_API_KEY'     => 'AIzaSyAEM0YQsrxzMPgBuH-AKdL4ZQPGk2y69-0',
+
 ];

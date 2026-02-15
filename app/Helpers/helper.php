@@ -93,6 +93,9 @@ if (!function_exists('system_license_check')) {
     }
 }
 
+/**
+ * Encrypts  values using a key from the environment variables.
+ */
 if (!function_exists('write')) {
     /**
      * Encrypts the given value.
@@ -100,17 +103,22 @@ if (!function_exists('write')) {
      * @param mixed $value The value to be encrypted.
      * @return string The encrypted string.
      */
-    function write($value)
+    function write($value): string
     {
-        $key = env('READ_AND_WRITE', null);
+        $key = config('services.READ_AND_WRITE');
         if (!$key) {
-            throw new Exception('Encryption key not set in .env');
+            Log::error('Encryption key not set in .env');
+            return "There is Error on our end";
+            die;
         }
 
         $keyHash = hash('sha256', $key);
         return Crypt::encrypt($value, $keyHash);
     }
 }
+/**
+ * Decrypts values using a key from the environment variables.
+ */
 if (!function_exists('read')) {
     /**
      * Decrypts the given encrypted value.
@@ -118,11 +126,13 @@ if (!function_exists('read')) {
      * @param string $value The encrypted string.
      * @return mixed The decrypted value.
      */
-    function read($value)
+    function read(string $value): mixed
     {
-        $key = env('READ_AND_WRITE', null);
+        $key = config('services.READ_AND_WRITE');
         if (!$key) {
-            throw new Exception('Decryption key not set in .env');
+            Log::error('Decryption key not set in .env');
+            return "There is Error on our end";
+            die;
         }
 
         $keyHash = hash('sha256', $key);
