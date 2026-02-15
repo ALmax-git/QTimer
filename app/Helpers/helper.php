@@ -158,7 +158,7 @@ if (!function_exists('varify_payment')) {
 
         // API configuration
         $url = "https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref=$tx_ref";
-        $apiKey = 'FLWSECK_TEST-cc73c6958426b626bf55189bbf9bb477-X';
+        $apiKey = 'FLWSECK_TEST-8bd0c580d1c77b4e4b381bcc09c3609c-X';
         $maxRetries = 5; // Maximum retry attempts
         $retryDelay = 2; // Delay between retries in seconds
 

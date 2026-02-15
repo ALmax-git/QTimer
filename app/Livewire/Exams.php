@@ -321,8 +321,8 @@ class Exams extends Component
      */
     public function mount()
     {
-        \App\helpers\RequestTracker::track();
         $user = Auth::user();
+        \App\helpers\RequestTracker::track();
 
         if (!$user || !$user->sets) {
             $this->exams = collect();
@@ -346,8 +346,7 @@ class Exams extends Component
         // $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 15;
         if ($this->can_start) {
             $this->student_result->last_seen_at =  $this->student_result->last_seen_at + 10;
-            $this->student_result->save();
-            // dd($this->student_result);
+            $this->student_result->save(); 
         }
         $this->server_is_live = Auth::user()->school->server_is_up;
         \App\helpers\RequestTracker::track();
