@@ -904,6 +904,7 @@
                             this.currentScreen = 'result';
 
                         } catch (error) {
+                            console.error('Submission failed:', error);
                             this.showToast('Failed to submit exam. Please try again.', 'error');
                         } finally {
                             this.submitting = false;
