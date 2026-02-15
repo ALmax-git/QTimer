@@ -54,7 +54,6 @@ class Exams extends Component
 
     public function next()
     {
-        dd($this->student_result);
         if ($this->currentQuestionIndex < count($this->questions) - 1) {
             $this->currentQuestionIndex++;
             $this->currentQuestion = $this->questions[$this->currentQuestionIndex];
@@ -111,7 +110,7 @@ class Exams extends Component
 
         // Set current question safely
         $this->currentQuestion = $this->questions[$this->currentQuestionIndex] ?? null;
-        // dd($this);
+        
         $this->check_option();
     }
 
@@ -154,8 +153,7 @@ class Exams extends Component
         $this->student_result = $result;
         $this->can_start = true;
         $this->remainingTime = $this->exam->is_mock ? ($exam_finish_time - $exam_start_time) : (($exam_finish_time - $exam_start_time) + ($result->started_at - $result->last_seen_at));
-
-        // dd($exam_finish_time, $exam_start_time, $result->started_at, $result->last_seen_at);
+ 
         $this->exam->subjects = $this->exam->subjects->shuffle();
         foreach ($this->exam->subjects as $subject) {
             $subject->questions = $subject->questions->shuffle();
@@ -225,8 +223,7 @@ class Exams extends Component
     {
         $id = read($id);
 
-        $option = (int)$id;
-        // dd($option);
+        $option = (int)$id; 
         $is_correct = QuestionOption::find($option)?->is_correct ? 1 : 0;
         $x = QuestionAnswer::updateOrCreate([
             'user_id' => Auth::user()->id,
@@ -311,8 +308,7 @@ class Exams extends Component
             $this->remainingTime--;
             $this->minutes_left = floor($this->remainingTime / 60);
             $this->seconds_left = $this->remainingTime % 60;
-        } else {
-            // dd($this);
+        } else { 
             $this->submit(); // Auto-submit when time's up
         }
     }
