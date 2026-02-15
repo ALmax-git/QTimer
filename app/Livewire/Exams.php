@@ -266,18 +266,7 @@ class Exams extends Component
         foreach ($this->exam->subjects as $subject) {
             $this->question_count += $subject->questions->count();
         }
-
-        // if (Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first()) {
-        //     $Result = Result::where('user_id', Auth::id())->where('exam_id', $this->exam->id)->first();
-        // } else {
-        //     $Result = Result::create([
-        //         'user_id' => Auth::id(),
-        //         'exam_id' => $this->exam->id,
-        //         'question_count' => $this->question_count,
-        //         'result' => 0,
-        //         'time_spent' => now()->timestamp - $this->startTimeSeconds
-        //     ]);
-        // }
+ 
 
         $question_answers = QuestionAnswer::where('user_id', Auth::user()->id)->where('exam_id', $this->exam->id)->get();
 
