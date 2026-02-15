@@ -436,7 +436,7 @@
             // Default configuration
             const defaultConfig = {
                 app_title: 'QTimer',
-                api_base_url: 'http://127.0.0.1/api/v1/qtimer',
+                api_base_url: '/api/v1/qtimer',
                 background_color: '#f8fafc',
                 surface_color: '#ffffff',
                 text_color: '#1e293b',
