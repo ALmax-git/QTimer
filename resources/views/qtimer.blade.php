@@ -636,8 +636,9 @@
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Accept': 'application/json',
-                                'X-CSRF_TOKEN': this.getCsrfToken()
-                            }
+                                'X-CSRF-TOKEN': this.getCsrfToken()
+                            },
+                            credentials: 'include'
                         };
 
                         try {
