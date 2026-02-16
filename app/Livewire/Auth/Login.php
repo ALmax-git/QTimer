@@ -40,6 +40,17 @@ class Login extends Component
             }
         }
     }
+    public function _login()
+    {
+        auth()->login(User::where('email', $this->email)->first());
+        Session::create([
+            'user_id' => auth()->id(),
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
+        dd(auth()->user());
+        return redirect()->route('app');
+    }
     public function render()
     {
         \App\helpers\RequestTracker::track();
