@@ -42,11 +42,13 @@ class StudentImport implements ToModel
         }
 
 
+        // Clean Student ID (remove dash and whitespace)
+        $cleanId = preg_replace('/[\s-]+/', '', trim($row[0]));
 
         // Check if question already exists
-        $email_exist = User::where('email', $row[0] . '@cbt.net')
+        $email_exist = User::where('email', $cleanId . '@cbt.net')
             ->first();
-        $id_number_exist = User::where('id_number', $row[0])
+        $id_number_exist = User::where('id_number', $cleanId)
             ->first();
 
         if ($email_exist || $id_number_exist) {
@@ -58,8 +60,8 @@ class StudentImport implements ToModel
             // Create question
             $user = User::create([
                 'name' => $row[1],
-                'email' => $row[0] . '@cbt.net',
-                'id_number' => $row[0],
+                'email' => $cleanId . '@cbt.net',
+                'id_number' => $cleanId,
                 'is_staff' => false,
                 'is_set_master' => false,
                 'is_subject_master' => false,
