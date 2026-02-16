@@ -612,7 +612,7 @@
                             this.remainingTime = 0;
                             this.serverTimeOffset = 0;
                             // redirect to /log_out to clear session
-                            window.location.href = '/logout';
+                            window.location.href = '/log_out';
                         }
                     },
 
