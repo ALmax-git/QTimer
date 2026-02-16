@@ -148,7 +148,7 @@
                         </div>
                         <div>
                             <h1 class="text-lg font-semibold text-slate-800 dark:text-white" x-text="appTitle">QTimer</h1>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Computer Based Test</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">{{ auth()->user()->name }}</p>
                         </div>
                     </div><!-- Status & Controls -->
                     <div class="flex items-center gap-4"><!-- Server Status -->
