@@ -1,7 +1,7 @@
 <section>
     <div class="form-box">
         <div class="form-value">
-            <form>
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="inputbox relative mb-3 w-full" style="border: none !important;">
                     <span style="color: red;">{{ $user_log }}</span>
@@ -30,7 +30,7 @@
                 </div>
                 <br>
                 <div class="mt-6 text-center">
-                    <button wire:click="_login" {{ $username_email_or_phone_is_valid ? '' : 'disabled' }}>
+                    <button {{ $username_email_or_phone_is_valid ? '' : 'disabled' }}>
                         {{ $username_email_or_phone_is_valid ? __('Login') : '...' }}
                     </button>
                 </div>
