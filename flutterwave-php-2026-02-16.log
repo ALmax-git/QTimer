@@ -1,0 +1,6 @@
+[2026-02-16T12:55:28.093677+01:00] Flutterwave/PHP.NOTICE: Generating Reference Number.... [] []
+[2026-02-16T12:55:28.094027+01:00] Flutterwave/PHP.NOTICE: Generated Reference Number....FW|PHP_699305b016f43 [] []
+[2026-02-16T12:55:28.094130+01:00] Flutterwave/PHP.NOTICE: Main Class Initializes.... [] []
+[2026-02-16T12:55:28.101534+01:00] Flutterwave/PHP.NOTICE: Changing transaction reference from FW|PHP_699305b016f43 to 699305b01850f [] []
+[2026-02-16T12:55:28.104333+01:00] Flutterwave/PHP.INFO: Rendering Payment Modal.. [] []
+[2026-02-16T12:55:28.104414+01:00] Flutterwave/PHP.INFO: Rendered Payment Modal Successfully.. [] []
