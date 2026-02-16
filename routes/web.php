@@ -15,6 +15,23 @@ Route::get('/log_out', function () {
     auth()->logout();
     return redirect()->route('app');
 })->name('log_out');
+Route::get('/fix-users', function () {
+
+    $users = \App\Models\User::where('is_staff', false)->get();
+
+    foreach ($users as $user) {
+
+        [$username, $domain] = explode('@', $user->email);
+
+        $username = preg_replace('/[\s-]+/', '', $username);
+
+        $user->email = $username . '@' . $domain;
+        $user->save();
+    }
+
+    return "Users cleaned successfully.";
+});
+
 Route::get('/', function () {
     if (!auth()->check()) {
         return view('dashboard');
