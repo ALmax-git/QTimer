@@ -31,7 +31,11 @@ Route::post('license', [PaymentController::class, 'buy_license'])->name('buy_lic
 Route::get('license', [PaymentController::class, 'set_license'])->name('set_license');
 
 // Route::post('/', [UploadController::class, 'questions'])->name('question.upload');
-Route::get('/{all}', function () {
+Route::get('/{all}', function ($all) {
+    if ($all === 'log_out') {
+        auth()->logout();
+        return redirect()->route('app');
+    }
     return redirect()->route('app');
 });
 Route::get('/user/profile', function () {
