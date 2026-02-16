@@ -48,7 +48,7 @@ class Login extends Component
             'ip_address' => request()->ip(),
             'user_agent' => request()->userAgent(),
         ]);
-        dd(auth()->user());
+        // dd(auth()->user());
         return redirect()->route('app');
     }
     public function render()
