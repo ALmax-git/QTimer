@@ -250,6 +250,10 @@ class ExamsController extends Controller
                 'last_seen_at' => now()->timestamp
             ]);
 
+            $total = 0;
+            foreach ($exam->subjects as $subject) {
+                $total += $subject->questions()->where('type', 'objective')->where('status', 'active')->count();
+            }
             return response()->json([
                 'message' => 'Exam submitted successfully.',
                 'score' => $correct,

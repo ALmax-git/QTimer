@@ -457,6 +457,7 @@
 
                     // Theme
                     darkMode: false,
+                    tempFix: null,
 
                     // Screens: 'list', 'exam', 'result'
                     currentScreen: 'list',
@@ -682,7 +683,8 @@
                                 title: data.title,
                                 status: data.status
                             };
-                            console.log('Exam status:', data.status, );
+                            this.tempFix = this.exam;
+                            console.log(this.exam == null, data.status, data.exam_id, data.title);
                             if (data.status === 'submitted') {
 
                                 this.exam = {
@@ -694,7 +696,7 @@
                                 this.score = data.score || null;
                                 this.totalQuestions = data.total || null;
 
-                                this.currentScreen = 'result';
+                                this.currentScreen = 'list';
 
                                 this.showToast('This exam has already been submitted.', 'info');
 
@@ -725,6 +727,9 @@
                             // Restore previously attempted answers
                             if (data.attempted && Array.isArray(data.attempted)) {
                                 // Mark attempted questions (actual answers would need separate endpoint)
+                                data.attempted.forEach(qId => {
+                                    this.selectedAnswers[qId] = true; // Mark as attempted (option ID not known)
+                                });
                             }
 
                             // Switch screen
@@ -741,8 +746,9 @@
                             this.saveState();
                             console.log([this.currentScreen, this.exam, this.subjects]);
                             this.showToast('Exam started successfully. Good luck!', 'success');
-                            this.restoreState();
+                            // this.restoreState();
                         } catch (error) {
+                            console.error('Failed to start exam:', error);
                             this.showToast('Failed to start exam. Please try again.', 'error');
                         } finally {
                             this.examLoading[examId] = false;
@@ -866,6 +872,16 @@
 
                     // Submit exam
                     async submitExam() {
+                        // console.log(this.exam)
+                        this.exam = this.exam || this.tempFix;
+
+                        if (!this.exam || !this.exam.id) {
+                            console.log(["Exam data is missing:", this.exam, "Temp", this.tempFix]);
+                            // alert('Exam data is missing.');
+                            return;
+                        }
+                        console.log(["Exam :", this.exam, "Temp", this.tempFix]);
+                        // return; // Temporary return to prevent submission during testing
                         if (this.submitting) return;
 
                         this.submitting = true;
