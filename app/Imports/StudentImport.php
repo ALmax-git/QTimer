@@ -55,12 +55,20 @@ class StudentImport implements ToModel
             $this->logError("Duplicate User: User already exists", $row);
             return null;
         }
+        //unique email 4 char randow
+        $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
+        $uniqueEmail = $cleanId . '_' . $randomString . '@cbt.net';
 
+        if (User::where('email', $uniqueEmail)->exists()) {
+            $this->logError("Generated email already exists, please try again", $row);
+            $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
+            $uniqueEmail = $cleanId . '_' . $randomString . '@cbt.net';
+        }
         try {
             // Create question
             $user = User::create([
                 'name' => $row[1],
-                'email' => $cleanId . '@cbt.net',
+                'email' => $uniqueEmail,
                 'id_number' => $cleanId,
                 'is_staff' => false,
                 'is_set_master' => false,
