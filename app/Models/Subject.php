@@ -14,7 +14,7 @@ class Subject extends Model
 
     public function school()
     {
-        $this->belongsTo(School::class, 'school_id');
+        return $this->belongsTo(School::class, 'school_id');
     }
     public function questions()
     {

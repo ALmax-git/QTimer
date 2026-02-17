@@ -6,6 +6,57 @@ use App\Http\Controllers\RequestController;
 use App\Http\Middleware\QTimerRequestCounter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Subject;
+use App\Exports\QuestionsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+Route::get('/subjects/export/all', function () {
+
+    $subjects = Subject::get();
+
+    if ($subjects->isEmpty()) {
+        abort(404, 'No subjects found');
+    }
+
+    $zipFileName = 'All_Subjects_Questions_' . now()->timestamp . '.zip';
+    $zipPath = storage_path('app/private/' . $zipFileName);
+
+    $zip = new \ZipArchive;
+
+    if ($zip->open($zipPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== TRUE) {
+        abort(500, 'Could not create zip file.');
+    }
+
+    foreach ($subjects as $subject) {
+
+        $fileName = str_replace(' ', '_', $subject->title) . '_questions.xlsx';
+
+        Excel::store(
+            new QuestionsExport($subject->id),
+            $fileName,
+            'local'
+        );
+
+        $tempPath = storage_path('app/private/' . $fileName);
+
+        if (file_exists($tempPath)) {
+            $zip->addFile($tempPath, $fileName);
+
+            // delete temp excel after adding
+            // unlink($tempPath);
+        }
+    }
+
+    $zip->close();
+
+    if (!file_exists($zipPath)) {
+        abort(500, 'Zip file was not created.');
+    }
+
+    return response()->download($zipPath)->deleteFileAfterSend(true);
+});
+
+
 
 Route::get('/test', function () {
     return view('test');

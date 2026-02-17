@@ -7,7 +7,7 @@
                     <span style="color: red;">{{ $user_log }}</span>
                 </div>
                 <div class="relative mb-3 w-full">
-                    <input id="email" name="email" type="email" value="{{ old('email') }}" style="display: hidden;" wire:model='email' hidden />
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" style="display: hidden;" wire:model.live='email' hidden />
                 </div>
                 <div class="inputbox relative mb-3 w-full">
                     <input type="text" value="{{ old('email') }}" wire:change='chech_for_email' required autocomplete="email" autofocus wire:model.live='username_email_or_phone' />

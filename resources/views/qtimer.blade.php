@@ -402,9 +402,9 @@
                     </div>
                 </div>
             </div>
-        </template><!-- Server Disconnected Overlay --><template x-if="!serverIsLive && currentScreen === 'exam'">
+        </template><!-- Server Disconnected Overlay -->
+        <template x-if="!serverIsLive">
 
-            <h1> CBT </h1>
             <div class="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-sm" x-cloak>
                 <div class="glass-card w-full max-w-sm rounded-2xl p-8 text-center shadow-2xl">
                     <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-100 dark:bg-amber-900/30">
@@ -486,7 +486,7 @@
                     heartbeatInterval: null,
 
                     // Server status
-                    serverIsLive: true,
+                    serverIsLive: false,
 
                     // Result
                     result: {},
@@ -580,9 +580,11 @@
                         if (this.currentScreen === 'list') {
                             await this.fetchExams();
                         }
+                        await this.sendHeartbeat(); // Initial heartbeat to set serverIsLive
 
                         // Save state periodically
                         setInterval(() => this.saveState(), 5000);
+                        // setInterval(() => this.sendHeartbeat(), 30000); // Heartbeat every 30 seconds
                     },
 
                     // Theme toggle

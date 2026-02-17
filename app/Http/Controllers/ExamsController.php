@@ -145,8 +145,18 @@ class ExamsController extends Controller
     public function heartbeat(Request $request, Exam $exam)
     {
         $user = auth()->user();
+        $now = now()->timestamp;
+        $examStart = Carbon::parse($exam->start_time)->timestamp;
+        $examFinish = Carbon::parse($exam->finish_time)->timestamp;
+
+
+        $remainingTime = $exam->is_mock
+            ? ($examFinish - $examStart)
+            : ($examFinish - $now);
         if (Result::where('user_id', Auth::id())->where('exam_id', $exam->id)->first()) {
             $result = Result::where('user_id', Auth::id())->where('exam_id', $exam->id)->first();
+            // user already start his/her exam 
+            $remainingTime = $examFinish - $now;
         } else {
             $result = Result::create([
                 'user_id' => Auth::id(),
@@ -165,14 +175,6 @@ class ExamsController extends Controller
         $result->update([
             'last_seen_at' => now()->timestamp
         ]);
-        $now = now()->timestamp;
-        $examStart = Carbon::parse($exam->start_time)->timestamp;
-        $examFinish = Carbon::parse($exam->finish_time)->timestamp;
-
-
-        $remainingTime = $exam->is_mock
-            ? ($examFinish - $examStart)
-            : ($examFinish - $now);
 
         return response()->json([
             'server_time' => now()->timestamp,

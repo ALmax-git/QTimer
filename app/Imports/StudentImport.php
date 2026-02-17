@@ -7,6 +7,7 @@ use App\Models\UserSet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class StudentImport implements ToModel
@@ -56,20 +57,20 @@ class StudentImport implements ToModel
             return null;
         }
         //unique email 4 char randow
-        $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
-        $uniqueEmail = $cleanId . '_' . $randomString . '@cbt.net';
+        $randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+        $uniqueEmail = $randomString . '@cbt.net';
 
         if (User::where('email', $uniqueEmail)->exists()) {
             $this->logError("Generated email already exists, please try again", $row);
-            $randomString = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
-            $uniqueEmail = $cleanId . '_' . $randomString . '@cbt.net';
+            $randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+            $uniqueEmail = $randomString . '@cbt.net';
         }
         try {
             // Create question
             $user = User::create([
                 'name' => $row[1],
-                'email' => $uniqueEmail,
-                'id_number' => $cleanId,
+                'email' => Str::lower($uniqueEmail),
+                'id_number' => trim($row[0]),
                 'is_staff' => false,
                 'is_set_master' => false,
                 'is_subject_master' => false,
