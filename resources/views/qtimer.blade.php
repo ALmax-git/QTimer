@@ -486,7 +486,7 @@
                     heartbeatInterval: null,
 
                     // Server status
-                    serverIsLive: false,
+                    serverIsLive: true,
 
                     // Result
                     result: {},
