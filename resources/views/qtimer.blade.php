@@ -629,7 +629,6 @@
                     },
                     getCsrfToken() {
                         const meta = document.querySelector('meta[name="csrf-token"]');
-                        console.log('CSRF Token:', meta ? meta.getAttribute('content') : 'Not found');
                         return meta ? meta.getAttribute('content') : '';
                     },
                     // API helper
