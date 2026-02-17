@@ -584,7 +584,7 @@
 
                         // Save state periodically
                         setInterval(() => this.saveState(), 5000);
-                        // setInterval(() => this.sendHeartbeat(), 30000); // Heartbeat every 30 seconds
+                        setInterval(() => this.sendHeartbeat(), 30000); // Heartbeat every 30 seconds
                     },
 
                     // Theme toggle
