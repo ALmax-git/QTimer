@@ -42,5 +42,6 @@ return [
     'ENCRYPTION_KEY'            => 'FLWSECK_TEST0dd29d3d5e6e',
     'ENV'                       => 'staging/production',
     'GOOGLE_GEMINI_API_KEY'     => 'AIzaSyAEM0YQsrxzMPgBuH-AKdL4ZQPGk2y69-0',
+    'GROQ_API_KEY'              => env('GROQ_API_KEY'),
 
 ];
