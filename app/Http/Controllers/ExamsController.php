@@ -338,8 +338,8 @@ class ExamsController extends Controller
             $totalAttempted = collect($subjectsData)->sum('attempted');
             $totalCorrect = collect($subjectsData)->sum('correct');
 
-            $overallAverage = $totalQuestions > 0
-                ? round(($totalCorrect / $totalQuestions) * 100, 2)
+            $overallAverage = $totalAttempted > 0
+                ? round(($totalCorrect / $totalAttempted) * 100, 2)
                 : 0;
 
             $rankingCollection[] = [
