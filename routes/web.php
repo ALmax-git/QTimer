@@ -83,6 +83,9 @@ Route::get('/fix-users', function () {
     return "Users cleaned successfully.";
 });
 
+Route::get('results', function () {
+    return view('results');
+})->name('results');
 Route::get('/', function () {
     if (!auth()->check()) {
         return view('dashboard');
@@ -112,11 +115,14 @@ Route::get('/user/profile', function () {
 Route::prefix('/api/v1/qtimer')
     ->middleware(['auth:sanctum'])
     ->group(function () {
+        Route::get('/exams/{exam}/results', [ExamsController::class, 'full']);
         // Heartbeat (lightweight keep-alive)
         Route::post('/exams/{exam}/heartbeat', [ExamsController::class, 'heartbeat']);
 
         // List available exams
         Route::get('/exams', [ExamsController::class, 'index']);
+    Route::get('/exams/all', [ExamsController::class, 'all_exams']);
+
 
         // Start or Resume exam
         Route::post('/exams/{exam}/start', [ExamsController::class, 'start']);
