@@ -614,7 +614,7 @@
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.attempted"></td>
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.correct"></td>
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.average.toFixed(1)"></td>
-                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.attempted > 0 ? (subject.correct / subject.total_questions * 100).toFixed(1) : '0.0'"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.attempted > 0 ? (subject.correct / subject.attempted * 100).toFixed(1) : '0.0'"></td>
                                                 <td style="padding: 0.5rem; text-align: center;">
                                                     <span class="grade-badge" :class="'grade-' + subject.grade.toLowerCase()" x-text="subject.grade"></span>
                                                 </td>
