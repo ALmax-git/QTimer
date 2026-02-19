@@ -363,6 +363,13 @@ class Menu extends Component
         $exam->save();
         $this->load_exams();
     }
+    public function _add_five_minute($id)
+    {
+        $exam = Exam::find($id);
+        $exam->start_time = Carbon::parse($exam->finish_time)->subMinutes(10)->format('H:i');
+        $exam->save();
+        $this->load_exams();
+    }
     public function create_new_exam()
     {
         $this->exam = new Exam();
