@@ -577,7 +577,7 @@
                                             <td style="text-align: right; font-weight: 600; color: #374151;" x-text="student.summary.average.toFixed(1)"></td>
                                             <td style="text-align: right; font-weight: 600; color: #374151;" x-text="
     student.summary.attempted > 0 
-      ? ((student.summary.correct / student.summary.total_questions) * 100 * 400).toFixed(1)
+      ? ((student.summary.correct / student.summary.total_questions) * 400).toFixed(1)
       : '0'
   ">
                                             </td>
