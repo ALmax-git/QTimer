@@ -558,7 +558,8 @@
                                         <th style="width: 12%;">Total Q</th>
                                         <th style="width: 12%;">Attempted</th>
                                         <th style="width: 12%;">Correct</th>
-                                        <th style="width: 15%;">Average (%)</th>
+                                        <th style="width: 15%;">Average (Rate)</th>
+                                        <th style="width: 15%;">Average (Accuracy)</th>
                                         <th style="width: 8%;">Grade</th>
                                         <th style="width: 8%; text-align: center;">Details</th>
                                     </tr>
@@ -571,6 +572,7 @@
                                             <td x-text="student.summary.total_questions"></td>
                                             <td x-text="student.summary.attempted"></td>
                                             <td x-text="student.summary.correct"></td>
+                                            <td style="text-align: right; font-weight: 600; color: #374151;" x-text="student.summary.attempted > 0 ? (student.summary.correct / student.summary.total_questions * 100).toFixed(1) + '%' : '0.0%'"></td>
                                             <td style="text-align: right; font-weight: 600; color: #374151;" x-text="student.summary.average.toFixed(1)"></td>
                                             <td>
                                                 <span class="grade-badge" :class="'grade-' + student.summary.grade.toLowerCase()" x-text="student.summary.grade"></span>
