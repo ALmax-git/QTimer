@@ -575,12 +575,13 @@
                                             <td x-text="student.summary.correct"></td>
                                             <td style="text-align: right; font-weight: 600; color: #374151;" x-text="student.summary.attempted > 0 ? (student.summary.correct / student.summary.total_questions * 100).toFixed(1) + '%' : '0.0%'"></td>
                                             <td style="text-align: right; font-weight: 600; color: #374151;" x-text="student.summary.average.toFixed(1)"></td>
-                                            <td style="text-align: right; font-weight: 600; color: #374151;" x-text="
+                                            <td style="text-align: right; font-weight: 600; color: #000000;" x-text="
                                                 student.summary.attempted > 0 
-                                                ? ((student.summary.correct / student.summary.attempted) * 400).toFixed(1)
+                                                ? Math.round((student.summary.correct / student.summary.attempted) * 400)
                                                 : '0'
                                             ">
                                             </td>
+
                                             <td>
                                                 <span class="grade-badge" :class="'grade-' + student.summary.grade.toLowerCase()" x-text="student.summary.grade"></span>
                                             </td>
