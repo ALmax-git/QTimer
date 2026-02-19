@@ -1,67 +1,316 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # QTimer
+
+### Official Examination Engine of ALmax Core-X
+
+---
+
+## 1. Introduction
+
+**QTimer** is a secure Computer-Based Testing (CBT) and examination management software developed, owned, and maintained by **ALmax** under the **Core-X Ecosystem**.
+
+QTimer is designed for:
+
+- Schools
+- Examination centers
+- Training institutions
+- Certification bodies
+- Academic organizations
+
+QTimer provides a structured, template-based examination system with automated timing, candidate management, and scoring mechanisms.
+
+Official Deployment:
+https://qtimer.almaxcloud.com
+
+QTimer operates as a controlled package within the Core-X infrastructure.
+
+---
+
+## 2. Ownership & Intellectual Property
+
+QTimer is proprietary software.
+
+All components including but not limited to:
+
+- Source code
+- Compiled builds
+- System architecture
+- Database design
+- Scoring algorithms
+- Security mechanisms
+- Communication protocols
+- UI/UX design
+- Documentation
+
+Are the exclusive intellectual property of **ALmax**.
+
+QTimer is a protected package under **Core-X**.
+
+All rights reserved.
+
+Unauthorized use, duplication, reverse engineering, decompilation, modification, resale, sublicensing, redistribution, rebranding, or public distribution is strictly prohibited.
+
+---
+
+## 3. Strict Distribution Policy
+
+NO INDIVIDUAL OR ORGANIZATION IS PERMITTED TO:
+
+- Distribute QTimer in any form
+- Share full or partial source code
+- Share compiled builds
+- Deploy QTimer independently
+- Host QTimer outside authorized infrastructure
+- Repackage or rebrand QTimer
+- Resell QTimer
+
+EXCEPT WITH EXPLICIT WRITTEN CONSENT FROM ALmax.
+
+Any violation of this policy may result in:
+
+- Immediate termination of access
+- License revocation
+- Legal proceedings
+- Financial claims for damages
+- Permanent restriction from ALmax ecosystem services
+
+Possession of source code does NOT grant redistribution rights.
+
+---
+
+## 4. Core-X Security & Validation
+
+QTimer is integrated with Core-X security infrastructure.
+
+While in operation, QTimer may communicate with:
+
+https://core-x.almaxcloud.com
+
+This communication may include:
+
+- License validation
+- Security verification
+- Integrity checks
+- Anti-tampering verification
+- Activation confirmation
+- Usage validation
+
+Blocking, intercepting, manipulating, or disabling this communication may result in:
+
+- Restricted system functionality
+- License suspension
+- Immediate service termination
+
+Security communication is mandatory for authorized operation.
+
+---
+
+## 5. Examination Content Responsibility Disclaimer
+
+QTimer provides:
+
+- Examination templates
+- Timing engine
+- Automated scoring engine
+- Result computation system
+- Structured assessment framework
+
+However:
+
+ALmax and QTimer SHALL NOT be held responsible for:
+
+- Questions uploaded by institutions
+- Incorrect answer keys
+- Academic errors
+- Misconfigured scoring templates
+- Incorrect grading setup
+- Improper exam configuration
+- Candidate data entry errors
+- Administrative misuse
+
+Each institution bears FULL RESPONSIBILITY for:
+
+- Validating examination content
+- Verifying answer keys
+- Confirming template accuracy
+- Reviewing grading configuration
+- Ensuring academic compliance
+
+QTimer computes results strictly according to the template and answer keys provided by the institution.
+
+---
+
+## 6. Limitation of Liability
+
+ALmax shall not be liable for:
+
+- Academic disputes
+- Candidate complaints
+- Institutional misconfiguration
+- Data loss due to local hardware failure
+- Internet connectivity issues
+- Power failure during examinations
+- Administrative misuse
+- Security compromise caused by local infrastructure
+
+Use of QTimer constitutes acceptance of this limitation.
+
+---
+
+## 7. License Model
+
+QTimer may operate under one or more of the following license models:
+
+- Institutional License
+- Per-Center License
+- Subscription-Based License
+- Time-Limited License
+- Controlled Deployment License
+
+Licenses may be tied to:
+
+- Domain name
+- IP address
+- Hardware fingerprint
+- Secure license key
+- Server validation handshake
+
+ALmax reserves the right to:
+
+- Validate licenses periodically
+- Monitor system integrity
+- Suspend or revoke licenses upon violation
+- Modify licensing structure when necessary
+
+Unauthorized deployment will result in automatic license invalidation.
+
+---
+
+## 8. Developer Access & Collaboration
+
+Developer collaboration does NOT imply ownership transfer.
+
+Access may be limited to:
+
+- Controlled builds
+- Restricted repositories
+- Partial system modules
+- Staging environments
+
+Full source code access is granted strictly at ALmax’s discretion.
+
+All collaborators must operate under:
+
+- Non-Disclosure Agreement (NDA)
+- Contributor Agreement
+- Intellectual Property Assignment Agreement (where applicable)
+
+Unauthorized disclosure by collaborators will result in legal action.
+
+---
+
+## 9. Confidentiality & NDA Requirement
+
+Any individual granted internal access to:
+
+- Source code
+- Security logic
+- License system
+- Deployment scripts
+- Server infrastructure
+- System architecture
+
+Must sign a legally binding Non-Disclosure Agreement (NDA).
+
+Confidential information includes:
+
+- Source code
+- Security handshake mechanisms
+- License verification methods
+- Server endpoints
+- Internal documentation
+- Proprietary algorithms
+
+Disclosure to third parties is strictly prohibited.
+
+---
+
+## 10. Anti-Tampering & Integrity Protection
+
+QTimer may include integrity mechanisms such as:
+
+- Server validation pings
+- License verification tokens
+- Hash validation
+- Digital signature checks
+- Usage monitoring
+
+Any attempt to:
+
+- Bypass licensing
+- Disable security communication
+- Modify scoring logic
+- Alter validation mechanisms
+- Inject malicious modifications
+
+Will be treated as intentional violation.
+
+ALmax reserves the right to permanently deactivate compromised instances.
+
+---
+
+## 11. Termination Clause
+
+ALmax reserves the right to suspend or terminate:
+
+- Licenses
+- Access privileges
+- Developer collaboration
+- Deployment authorization
+
+Without prior notice if violation is detected.
+
+Termination does not remove liability for past violations.
+
+---
+
+## 12. Governing Law
+
+This agreement shall be governed and interpreted under the laws of:
+
+NIGERIA
+
+Any disputes shall be resolved under the jurisdiction of the appropriate courts within that region.
+
+---
+
+## 13. Enforcement & Legal Action
+
+Unauthorized use, distribution, or modification may result in:
+
+- Civil legal action
+- Contract enforcement
+- Financial damages claim
+- Service blacklisting
+- Permanent restriction from ALmax services
+
+ALmax actively protects its intellectual property.
+
+---
+
+## 14. Official Author & Owner
+
+QTimer is developed and maintained by:
+
+ALmax  
+Core-X Ecosystem  
+https://almaxcloud.com
+
+All Rights Reserved.
+
+---
+
+## 15. Acceptance of Terms
+
+Use, deployment, access, or interaction with QTimer constitutes full acceptance of these terms and conditions.
+
+If you do not agree, do not use or access QTimer.
