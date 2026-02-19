@@ -577,48 +577,52 @@
                                             <td>
                                                 <span class="grade-badge" :class="'grade-' + student.summary.grade.toLowerCase()" x-text="student.summary.grade"></span>
                                             </td>
-                                            <td style="text-align: center; cursor: pointer; color: #4F46E5;" x-text="expandedStudents[student.student_id] ? '−' : '+'"></td>
+                                            <td style="text-align: center; cursor: pointer; color: #4F46E5;">
+
+                                            </td>
                                         </tr>
 
-                                        <!-- Subject Breakdown -->
-                                        <template x-if="expandedStudents[student.student_id]">
-                                            <tr class="no-page-break">
-                                                <td style="padding: 0; border: none;" colspan="8">
-                                                    <div class="subject-breakdown">
-                                                        <table style="margin-top: 0.5rem;">
-                                                            <thead>
-                                                                <tr style="background: white;">
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem;">Subject</th>
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Total Q</th>
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Attempted</th>
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Correct</th>
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 12%;">Average (%)</th>
-                                                                    <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 8%;">Grade</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <template x-for="subject in student.subjects" :key="subject.subject_id">
-                                                                    <tr>
-                                                                        <td style="font-size: 0.875rem; font-weight: 500; padding: 0.5rem;" x-text="subject.title"></td>
-                                                                        <td style="font-size: 0.875rem; padding: 0.5rem;" x-text="subject.total_questions"></td>
-                                                                        <td style="font-size: 0.875rem; padding: 0.5rem;" x-text="subject.attempted"></td>
-                                                                        <td style="font-size: 0.875rem; padding: 0.5rem;" x-text="subject.correct"></td>
-                                                                        <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600;" x-text="subject.average.toFixed(1)"></td>
-                                                                        <td style="padding: 0.5rem;">
-                                                                            <span class="grade-badge" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; min-width: auto;" :class="'grade-' + subject.grade.toLowerCase()" x-text="subject.grade"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </template>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </template>
                                     </template>
                                 </tbody>
                             </table>
 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; text-align: left;">Subject</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Total Q</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Attempted</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 10%;">Correct</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 12%;">Average (%)</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 12%;">Accuracy (%)</th>
+                                        <th style="background: white; font-size: 0.8rem; padding: 0.5rem; width: 8%;">Grade</th>
+                                    </tr>
+                                </thead>
+
+                                <template x-for="student in pageStudents" :key="student.student_id">
+                                    <tbody style="border-top: 2px solid #e5e7eb;">
+                                        <tr class="expandable-row no-page-break" style="background-color: #f9fafb;">
+                                            <td style="padding: 0.75rem 0.5rem; font-weight: 700; color: #111827;" colspan="6">
+                                                Student: <span x-text="student.name"></span>
+                                            </td>
+                                        </tr>
+
+                                        <template x-for="subject in student.subjects" :key="subject.subject_id">
+                                            <tr class="expandable-row no-page-break" style="border-bottom: 1px solid #f3f4f6;">
+                                                <td style="font-size: 0.875rem; font-weight: 500; padding: 0.5rem;" x-text="subject.title"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.total_questions"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.attempted"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.correct"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.average.toFixed(1)"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.attempted > 0 ? (subject.correct / subject.total_questions * 100).toFixed(1) : '0.0'"></td>
+                                                <td style="padding: 0.5rem; text-align: center;">
+                                                    <span class="grade-badge" :class="'grade-' + subject.grade.toLowerCase()" x-text="subject.grade"></span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </template>
+                            </table>
                             <!-- Page Footer -->
                             <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; font-size: 0.75rem; color: #6b7280;">
                                 <div>
@@ -631,7 +635,6 @@
                             </div>
                         </div>
                     </template>
-
                     <!-- Final Page: Signatures -->
                     <div class="print-page">
                         <div style="margin-top: 5rem; page-break-before: always;">
@@ -654,7 +657,7 @@
 
                             <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #d1d5db; text-align: center; font-size: 0.75rem; color: #9ca3af;">
                                 <p x-text="'This is an official record generated by QTimer on ' + currentDate"></p>
-                                <p style="margin-top: 0.5rem;">Document ID: ' + documentId"></p>
+                                <p style="margin-top: 0.5rem;" x-text="'Document ID: ' + documentId"></p>
                             </div>
                         </div>
                     </div>
@@ -920,7 +923,9 @@
 
                     // Toggle expand
                     toggleExpand(studentId) {
-                        this.expandedStudents[studentId] = !this.expandedStudents[studentId];
+                        console.log('Toggling expand for student ID:', studentId, 'Current state:', this.expandedStudents[studentId]);
+                        this.expandedStudents[studentId] = this.expandedStudents[studentId] ? false : true;
+                        console.log('Toggling expand for student ID:', studentId, 'Current state:', this.expandedStudents[studentId]);
                     },
 
                     // Print
