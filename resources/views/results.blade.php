@@ -614,7 +614,21 @@
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.attempted"></td>
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; text-align: center;" x-text="subject.correct"></td>
                                                 <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.average.toFixed(1)"></td>
-                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;" x-text="subject.attempted > 0 ? (subject.correct / subject.attempted * 100).toFixed(1) : '0.0'"></td>
+                                                <td style="font-size: 0.875rem; padding: 0.5rem; font-weight: 600; text-align: center;">
+                                                    <span style="font-weight: 700; badge" x-data="{
+                                                        get accuracy() {
+                                                            return this.subject.attempted > 0 ?
+                                                                (this.subject.correct / this.subject.attempted * 100) :
+                                                                0
+                                                        }
+                                                    }" x-text="accuracy.toFixed(1) + '%'" :style="{
+                                                        color: accuracy >= 90 ? '#22c55e' : // Green
+                                                            accuracy >= 75 ? '#3b82f6' : // Blue
+                                                            accuracy >= 50 ? '#eab308' : // Yellow
+                                                            accuracy >= 30 ? '#f97316' : // Orange
+                                                            '#ef4444' // Red
+                                                    }"></span>
+                                                </td>
                                                 <td style="padding: 0.5rem; text-align: center;">
                                                     <span class="grade-badge" :class="'grade-' + subject.grade.toLowerCase()" x-text="subject.grade"></span>
                                                 </td>
