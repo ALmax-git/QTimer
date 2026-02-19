@@ -841,7 +841,7 @@
                                                                 <button class="btn btn-sm btn-outline-primary" wire:click='add_five_minute("{{ $exam->id }}")'> +5
                                                                     < Min</button>
                                                                         <button class="btn btn-sm btn-outline-primary" wire:click='_add_five_minute("{{ $exam->id }}")'> +5
-                                                                            > Min</button>
+                                                                            > sub</button>
                                                                         <button class="btn btn-sm btn-{{ $exam->is_visible ? 'info' : 'secondary' }}" wire:click='toggle_exam_visibility("{{ $exam->id }}")'>
                                                                             <i class="bi bi-eye"></i>
                                                                         </button>
